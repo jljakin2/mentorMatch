@@ -1,0 +1,17 @@
+{
+  "name": "mentormatch",
+  "version": "1.0.0",
+  "description": "app that allows a mentor and mentee user to set up profiles and get paired up with either a mentor or mentee",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeff Jakinovich",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.27"
+  }
+}

@@ -16,8 +16,24 @@ app.set("view engine", "ejs");
 
 app.get("/", function (req, res) {
     res.render("home");
+});
+
+app.get("/profile", function (req, res) {
+    res.render("profile");
+})
+
+app.get("/menteeForm", function (req, res) {
+    res.render("menteeForm");
+});
+
+app.get("/mentorForm", function (req, res) {
+    res.render("mentorForm");
+});
+
+app.get("/combinedForm", function (req, res) {
+    res.render("combinedForm");
 })
 
 app.listen(3000, function () {
     console.log("Server running on port 3000.");
-})
+});

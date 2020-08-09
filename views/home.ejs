@@ -1,34 +1,45 @@
 <%- include('partials/header') %>
 
-<div class="container">
-    <div class="jumbotron mt-4">
-        <h1 class="display-4">Welcome to Mentor Match</h1>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Welcome to Mentor Match</h1>
+            <p class="second-tier-text">This is a template for a simple marketing or informational website. It includes
+                a large callout called a
+                jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+                unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Login</a></p>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Become a mentee</h5>
-                    <p class="card-text">Want to take your career to the next level? Sign up to get paired with a
-                        mentor.</p>
-                    <a href="#" class="btn btn-primary">Find a Mentor</a>
-                </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 signUpFlex box-shadow">
+                <h2>Find a Mentor</h2>
+                <p class="second-tier-text">Want to take your career to the next level? Sign up to get paired with a
+                    mentor.</p>
+                <p class="flex-button"><a class="btn btn-outline-dark" href="/menteeForm" role="button">Sign Up</a></p>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Become a mentor</h5>
-                    <p class="card-text">Want to give back and lead someone through their career questions? Sign up to
-                        become a mentor.</p>
-                    <a href="#" class="btn btn-primary">Become a Mentor</a>
-                </div>
+
+            <div class="col-lg-4 signUpFlex">
+                <h2>Become a Mentor</h2>
+                <p class="second-tier-text">Want to give back and lead someone through their career questions? Sign up
+                    to become a mentor.
+                </p>
+                <p><a class="btn btn-outline-dark" href="/mentorForm" role="button">Sign Up</a></p>
+            </div>
+            <div class="col-lg-4 signUpFlex">
+                <h2>Do Both!</h2>
+                <p class="second-tier-text">Get the best of both worlds. Advance your career and give back at the same
+                    time.</p>
+                <p><a class="btn btn-outline-dark" href="/combinedForm" role="button">Sign Up</a></p>
             </div>
         </div>
     </div>
-</div>
+
+    </div> <!-- /container -->
+
+</main>
 
 <%- include('partials/footer') %>

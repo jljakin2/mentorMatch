@@ -1,4 +1,36 @@
 .jumbotron {
-    background: grey;
+    background: #fff;
     text-align: center;
+}
+
+.second-tier-text {
+    color: #999;
+}
+
+.signUpFlex {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column wrap;
+    text-align: center;
+}
+
+
+/* === Profile page === */
+.profilepic {
+    border-radius: 50%;
+}
+
+.profilecard {
+    flex-grow: 1.02;
+    padding: 4rem;
+    text-align: center;
+}
+
+.profileinfo {
+    flex-grow: 7;
+    padding: 4rem;
+}
+
+.profileFlex {
+    display: flex;
 }

@@ -127,8 +127,8 @@ body {
 }
 
 .command-nav-item:hover {
-  box-shadow: 0 0 11px rgba(189, 188, 188, 0.2);
-  color: #fff;
+  background: #f8f9fa;
+  color: #343a40;
   text-decoration: none;
 }
 
@@ -264,12 +264,12 @@ body {
 }
 
 /* ========== Command Center ========== */
-/* Command Center */
+/* COMMAND CENTER */
 .command-content-wrapper {
   margin: 1rem 2rem 0 18%;
 }
 
-/* Personal Info */
+/* PERSONAL INFO */
 .profile-section {
   margin-bottom: 3.5rem;
 }
@@ -284,20 +284,64 @@ body {
   border-radius: 1%;
 }
 
-/* Profile View */
+/* PROFILE VIEW */
+.profile-view-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "header "
+    "personal"
+    "answer";
+  row-gap: 2rem;
+}
 
-/* Matches */
+.contact-card {
+  background: #fff;
+  display: flex;
+  grid-area: header;
+  margin-top: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2.5rem;
+  text-align: left;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+}
+
+.contact-card h2 {
+  font-size: 3rem;
+}
+
+.contact-card h4 {
+  font-size: 1.3rem;
+}
+
+.personal-card {
+  background: #fff;
+  grid-area: personal;
+  padding: 2rem;
+}
+
+.open-card {
+  background: #fff;
+  grid-area: answer;
+  padding: 2rem;
+}
+
+/* MATCHES */
 .match-level {
   margin-bottom: 2rem;
-}
-
-.match-level-header {
-  align-items: center;
-  display: flex;
-}
-
-.match-level-header i {
-  font-size: 1.5rem;
 }
 
 .match-level h2 {
@@ -327,3 +371,5 @@ body {
 .thumbnail-profile-buttons {
   margin: 0;
 }
+
+/* SEARCH */

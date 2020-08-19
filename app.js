@@ -75,6 +75,10 @@ app.get("/profile-view", function (req, res) {
   res.render("profile_view");
 });
 
+app.get("/search", function (req, res) {
+  res.render("search");
+});
+
 app.get("/profile/:userId", function (req, res) {
   const requestedUserId = req.params.userId;
 

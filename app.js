@@ -71,45 +71,57 @@ app.get("/matches", function (req, res) {
   res.render("matches");
 });
 
-app.get("/profile-view", function (req, res) {
-  res.render("profile_view");
+app.get("/match-profile-view", function (req, res) {
+  res.render("match_profile_view");
 });
 
 app.get("/search", function (req, res) {
   res.render("search");
 });
 
-app.get("/profile/:userId", function (req, res) {
-  const requestedUserId = req.params.userId;
-
-  Mentee.findOne({ _id: requestedUserId }, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("profile", {
-        firstName: result.firstName,
-        lastName: result.lastName,
-        email: result.email,
-        phone: result.phone,
-        location: result.location,
-        country: result.country,
-        division: result.division,
-        department: result.department,
-        level: result.level,
-        yearsWithCompany: result.yearsWithCompany,
-        yearsCurrentPosition: result.yearsCurrentPosition,
-        areasForDev: result.areasForDev,
-        languages: result.languages,
-        education: result.education,
-        certifications: result.certifications,
-        communityService: result.communityService,
-        whyMentee: result.whyMentee,
-        mentorshipProcess: result.mentorshipProcess,
-        goals: result.goals,
-      });
-    }
-  });
+app.get("/search-results", function (req, res) {
+  res.render("search_results");
 });
+
+app.get("/search-profile-view", function (req, res) {
+  res.render("search_profile_view");
+});
+
+app.post("/search", function (req, res) {
+  res.redirect("/search-results");
+});
+
+// app.get("/profile/:userId", function (req, res) {
+//   const requestedUserId = req.params.userId;
+
+//   Mentee.findOne({ _id: requestedUserId }, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.render("profile", {
+//         firstName: result.firstName,
+//         lastName: result.lastName,
+//         email: result.email,
+//         phone: result.phone,
+//         location: result.location,
+//         country: result.country,
+//         division: result.division,
+//         department: result.department,
+//         level: result.level,
+//         yearsWithCompany: result.yearsWithCompany,
+//         yearsCurrentPosition: result.yearsCurrentPosition,
+//         areasForDev: result.areasForDev,
+//         languages: result.languages,
+//         education: result.education,
+//         certifications: result.certifications,
+//         communityService: result.communityService,
+//         whyMentee: result.whyMentee,
+//         mentorshipProcess: result.mentorshipProcess,
+//         goals: result.goals,
+//       });
+//     }
+//   });
+// });
 
 app.get("/menteeForm", function (req, res) {
   res.render("menteeForm");
@@ -123,42 +135,42 @@ app.get("/combinedForm", function (req, res) {
   res.render("combinedForm");
 });
 
-app.post("/menteeForm", function (req, res) {
-  const newMentee = new Mentee({
-    username: req.body.username,
-    password: req.body.password,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    phone: req.body.phone,
-    location: req.body.location,
-    country: req.body.country,
-    division: req.body.division,
-    department: req.body.department,
-    level: req.body.level,
-    yearsWithCompany: req.body.yearsWithCompany,
-    yearsCurrentPosition: req.body.yearsCurrentPosition,
-    areasForDev: req.body.areasForDevelopment,
-    languages: req.body.languages,
-    education: req.body.education,
-    certifications: req.body.certifications,
-    communityService: req.body.communityService,
-    linkedin: req.body.linkedin,
-    whyMentee: req.body.whyMentee,
-    mentorshipProcess: req.body.communicationMethod,
-    goals: req.body.goals,
-    terms: req.body.terms,
-  });
+// app.post("/menteeForm", function (req, res) {
+//   const newMentee = new Mentee({
+//     username: req.body.username,
+//     password: req.body.password,
+//     firstName: req.body.firstName,
+//     lastName: req.body.lastName,
+//     email: req.body.email,
+//     phone: req.body.phone,
+//     location: req.body.location,
+//     country: req.body.country,
+//     division: req.body.division,
+//     department: req.body.department,
+//     level: req.body.level,
+//     yearsWithCompany: req.body.yearsWithCompany,
+//     yearsCurrentPosition: req.body.yearsCurrentPosition,
+//     areasForDev: req.body.areasForDevelopment,
+//     languages: req.body.languages,
+//     education: req.body.education,
+//     certifications: req.body.certifications,
+//     communityService: req.body.communityService,
+//     linkedin: req.body.linkedin,
+//     whyMentee: req.body.whyMentee,
+//     mentorshipProcess: req.body.communicationMethod,
+//     goals: req.body.goals,
+//     terms: req.body.terms,
+//   });
 
-  newMentee.save(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/profile");
-      console.log("New mentee was saved successfully.");
-    }
-  });
-});
+//   newMentee.save(function (err) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.redirect("/profile");
+//       console.log("New mentee was saved successfully.");
+//     }
+//   });
+// });
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server running on port 3000.");

@@ -6,10 +6,10 @@
         <div class="contact-card shadow-sm">
             <img class="profile-picture" src="https://picsum.photos/200" alt="profile picture">
             <div class="contact-info">
-                <h2 class="display-4 contact-name">Michael Scott <span class="lead"><span
+                <h2 class="display-4 contact-name"><%= firstName %> <%= lastName %> <span class="lead"><span
                             class="badge badge-pill badge-success">Available</span></span></h2>
-                <h4 class="display-4 second-tier-header contact-email">michael.scott@dundermifflin.com</h4>
-                <h4 class="display-4 second-tier-header contact-phone">(248) 835-9379</h4>
+                <h4 class="display-4 second-tier-header contact-email"><%= username %></h4>
+                <h4 class="display-4 second-tier-header contact-phone"><%= phone %></h4>
             </div>
             <div class="profile-view-buttons">
                 <button class="btn btn-large btn-outline-secondary">Edit Profile</button>
@@ -22,62 +22,71 @@
                 <tbody>
                     <tr>
                         <th>Location:</th>
-                        <td>Scranton, PA</td>
+                        <td><%= location %></td>
                     </tr>
                     <tr>
                         <th>Country:</th>
-                        <td>USA</td>
+                        <td><%= country %></td>
                     </tr>
                     <tr>
                         <th>Division:</th>
-                        <td>Scranton</td>
+                        <td><%= division %></td>
                     </tr>
                     <tr>
                         <th>Department/Function:</th>
-                        <td>Sales Manager</td>
+                        <td><%= department %></td>
                     </tr>
                     <tr>
                         <th>Job Level:</th>
-                        <td>SL1 - Manager</td>
+                        <td><%= level %></td>
                     </tr>
                     <tr>
                         <th>Years with Company:</th>
-                        <td>5-10 years</td>
+                        <td><%= yearsWithCompany %></td>
                     </tr>
                     <tr>
                         <th>Years in Current Position:</th>
-                        <td>1-3 years</td>
+                        <td><%= yearsCurrentPosition %></td>
                     </tr>
                     <tr>
                         <th>Areas for Development:</th>
-                        <td>Budgeting / Cost Control<br>
-                            Compliance<br>
-                            Computer Skills<br>
-                            Investigations<br>
-                            Negotiation<br>
-                            Networking<br>
-                            Strategic Planning
+                        <td>
+                            <% areasForDev.forEach(function(dev){ %>
+                            <%= dev %><br>
+                            <% }); %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Areas of Expertise:</th>
+                        <td>
+                            <% areasOfExp.forEach(function(exp){ %>
+                            <%= exp %><br>
+                            <% }); %>
                         </td>
                     </tr>
                     <tr>
                         <th>Languages:</th>
-                        <td>English</td>
+                        <td>
+                            <% languages.forEach(function(language){ %>
+                            <%= language %><br>
+                            <% }); %>
+                        </td>
                     </tr>
                     <tr>
                         <th>Education Level:</th>
-                        <td>High School</td>
+                        <td><%= education %></td>
                     </tr>
                     <tr>
                         <th>Certifications/Memberships:</th>
-                        <td></td>
+                        <td><%= certifications %></td>
                     </tr>
                     <tr>
                         <th>Community Service:</th>
-                        <td></td>
+                        <td><%= communityService %></td>
                     </tr>
                     <tr>
                         <th>LinkedIn Profile URL:</th>
-                        <td>https://www.linkedin.com/in/jeff-jakinovich-b6b14943/</td>
+                        <td><a href=<%= linkedin %> target="_blank">Go to profile</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -87,23 +96,17 @@
             <table class="table table-borderless">
                 <tbody>
                     <tr>
-                        <th>Why do you want to be a mentee?:</th>
-                        <td>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta amet iusto vero at harum
-                            itaque atque consequatur placeat voluptate reiciendis, illum, neque, quaerat numquam
-                            quisquam velit. Tempora dolores similique unde.</td>
+                        <th>Why do you want to join the program as a Mentee or Mentor?:</th>
+                        <td><%= whyJoin %></td>
                     </tr>
                     <tr>
                         <th>What process would you like to use for the mentorship (email, phone, in person, etc.)?:
                         </th>
-                        <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</td>
+                        <td><%= mentorshipProcess %></td>
                     </tr>
                     <tr>
-                        <th>What specific goals are you looking to work on during the 6 month partnership?:</th>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eius mollitia, quam
-                            labore
-                            alias eveniet nesciunt aliquam, eaque sapiente explicabo deleniti enim sed atque
-                            quibusdam
-                            maiores! Deserunt voluptas dolorum assumenda.</td>
+                        <th>What specific goals are you looking to accomplish during your time in this program?:</th>
+                        <td><%= goals %></td>
                     </tr>
                 </tbody>
             </table>

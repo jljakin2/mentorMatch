@@ -4,6 +4,28 @@
     <form action="/search" method="POST">
         <h2 class="display-4">Search</h2>
         <p class="lead">Search by name or use the "Advanced Search" button to search specific criteria.</p>
+        <div class="row mb-4 mt-2">
+            <div class="col">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="classification" id="mentee" value="mentee">
+                    <label class="form-check-label" for="mentee">
+                        Mentee
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="classification" id="mentor" value="mentor">
+                    <label class="form-check-label" for="mentor">
+                        Mentor
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="classification" id="both" value="" checked>
+                    <label class="form-check-label" for="both">
+                        Both
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="form-group col-lg-6">
                 <label for="firstName">First Name</label>
@@ -15,6 +37,7 @@
                 <input type="text" class="form-control" id="lastName" name="lastName">
             </div>
         </div>
+
         <div class="row">
             <div class="col">
                 <p>
@@ -108,15 +131,18 @@
                             <div class="form-group col-lg-6">
                                 <label for="division">Division</label>
                                 <select multiple class="form-control selectpicker" id="division" name="division">
-                                    <option value="Corporate Information Systems & Services (CI)">Corporate Information
+                                    <option value="Corporate Information Systems & Services (CI)">Corporate
+                                        Information
                                         Systems &
                                         Services (CI)</option>
                                     <option value="Akustica (AKUS)">Akustica (AKUS)</option>
                                     <option value="Automotive Aftermarket (AA)">Automotive Aftermarket (AA)</option>
                                     <option value="Automotive Electronics (AE)">Automotive Electronics (AE)</option>
                                     <option value="Automotive Steering (AS)">Automotive Steering (AS)</option>
-                                    <option value="Bosch Battery Systems (BBSN)">Bosch Battery Systems (BBSN)</option>
-                                    <option value="Bosch Engineering Group (BEG)">Bosch Engineering Group (BEG)</option>
+                                    <option value="Bosch Battery Systems (BBSN)">Bosch Battery Systems (BBSN)
+                                    </option>
+                                    <option value="Bosch Engineering Group (BEG)">Bosch Engineering Group (BEG)
+                                    </option>
                                     <option value="Building Technology (BT)">Building Technology (BT)</option>
                                     <option value="Car Multimedia (CM)">Car Multimedia (CM)</option>
                                     <option value="Chassis Controls (CC)">Chassis Controls (CC)</option>
@@ -129,7 +155,8 @@
                                     <option value="Packaging Technology (PA)">Packaging Technology (PA)</option>
                                     <option value="Power Tools (PT)">Power Tools (PT)</option>
                                     <option value="Powertrain Solutions (PS)">Powertrain Solutions (PS)</option>
-                                    <option value="Robert Bosch North America (RBNA)">Robert Bosch North America (RBNA)
+                                    <option value="Robert Bosch North America (RBNA)">Robert Bosch North America
+                                        (RBNA)
                                     </option>
                                     <option value="Service Solutions (SO)">Service Solutions (SO)</option>
                                     <option value="Thermo Technology (TT)">Thermo Technology (TT)</option>
@@ -145,14 +172,16 @@
                                     <option value="Business Development">Business Development</option>
                                     <option value="Business Unit Leader">Business Unit Leader</option>
                                     <option value="Communications">Communications</option>
-                                    <option value="Continuous Improvement (CIP)">Continuous Improvement (CIP)</option>
+                                    <option value="Continuous Improvement (CIP)">Continuous Improvement (CIP)
+                                    </option>
                                     <option value="Engineering">Engineering</option>
                                     <option value="Facilities Management">Facilities Management</option>
                                     <option value="Finance/Controlling">Finance/Controlling</option>
                                     <option value="General Manager">General Manager</option>
                                     <option value="HS&E">HS&E</option>
                                     <option value="Human Resources">Human Resources</option>
-                                    <option value="Information Systems / Technology">Information Systems / Technology
+                                    <option value="Information Systems / Technology">Information Systems /
+                                        Technology
                                     </option>
                                     <option value="Legal">Legal</option>
                                     <option value="Logistics / Supply Chain">Logistics / Supply Chain</option>
@@ -175,7 +204,8 @@
                             <div class="form-group col-lg-4">
                                 <label for="jobLevel">Job Level</label>
                                 <select multiple class="form-control selectpicker" id="jobLevel" name="level">
-                                    <option value="SL5 - Exec. Vice-President / President">SL5 - Exec. Vice-President /
+                                    <option value="SL5 - Exec. Vice-President / President">SL5 - Exec.
+                                        Vice-President /
                                         President
                                     </option>
                                     <option value="SL4 - Sr. Vice-President">SL4 - Sr. Vice-President</option>
@@ -220,11 +250,11 @@
 
                         <div class="row">
                             <div class="form-group col">
-                                <label for="areasForDevelopment">Areas for Development</label>
-                                <select multiple class="form-control selectpicker" id="areasForDevelopment"
-                                    name="areasForDevelopment">
+                                <label for="areasForDev">Areas for Development</label>
+                                <select multiple class="form-control selectpicker" id="areasForDev" name="areasForDev">
                                     <option value="Advertising">Advertising</option>
-                                    <option value="Assertiveness and Confidence">Assertiveness and Confidence</option>
+                                    <option value="Assertiveness and Confidence">Assertiveness and Confidence
+                                    </option>
                                     <option value="Budgeting / Cost Control">Budgeting / Cost Control</option>
                                     <option value="Change Management">Change Management</option>
                                     <option value="Communication">Communication</option>
@@ -237,7 +267,63 @@
                                     <option value="Customer Service">Customer Service</option>
                                     <option value="Diversity & Inclusion">Diversity & Inclusion</option>
                                     <option value="Employee Relations">Employee Relations</option>
-                                    <option value="Giving and Receiving Feedback">Giving and Receiving Feedback</option>
+                                    <option value="Giving and Receiving Feedback">Giving and Receiving Feedback
+                                    </option>
+                                    <option value="Innovation">Innovation</option>
+                                    <option value="Interviewing / Hiring">Interviewing / Hiring</option>
+                                    <option value="Investigations">Investigations</option>
+                                    <option value="Leading Self and Others">Leading Self and Others</option>
+                                    <option value="Learning from Mistakes">Learning from Mistakes</option>
+                                    <option value="Listening">Listening</option>
+                                    <option value="Management">Management</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Motivation">Motivation</option>
+                                    <option value="Navigating Organizational Politics">Navigating Organizational
+                                        Politics</option>
+                                    <option value="Negotiation">Negotiation</option>
+                                    <option value="Networking">Networking</option>
+                                    <option value="Organizational Culture">Organizational Culture</option>
+                                    <option value="People Development">People Development</option>
+                                    <option value="Performance Management">Performance Management</option>
+                                    <option value="Persuasion">Persuasion</option>
+                                    <option value="Problem-solving">Problem-solving</option>
+                                    <option value="Project Management">Project Management</option>
+                                    <option value="Relationship Building">Relationship Building</option>
+                                    <option value="Resolving Conflict">Resolving Conflict</option>
+                                    <option value="Safety">Safety</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Security">Security</option>
+                                    <option value="Servant Leadership">Servant Leadership</option>
+                                    <option value="Strategic Planning">Strategic Planning</option>
+                                    <option value="Team Building">Team Building</option>
+                                    <option value="Time Management">Time Management</option>
+                                    <option value="Training">Training</option>
+                                    <option value="Transformational Leadership">Transformational Leadership</option>
+                                    <option value="Work/Life Balance">Work/Life Balance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="areasOfExp">Areas of Experience</label>
+                                <select multiple class="form-control selectpicker" id="areasOfExp" name="areasOfExp">
+                                    <option value="Advertising">Advertising</option>
+                                    <option value="Assertiveness and Confidence">Assertiveness and Confidence
+                                    </option>
+                                    <option value="Budgeting / Cost Control">Budgeting / Cost Control</option>
+                                    <option value="Change Management">Change Management</option>
+                                    <option value="Communication">Communication</option>
+                                    <option value="Compliance">Compliance</option>
+                                    <option value="Computer Skills">Computer Skills</option>
+                                    <option value="Continuous Improvement">Continuous Improvement</option>
+                                    <option value="Counseling / Advice">Counseling / Advice</option>
+                                    <option value="Cross-Functional Expertise">Cross-Functional Expertise</option>
+                                    <option value="Cross-selling">Cross-selling</option>
+                                    <option value="Customer Service">Customer Service</option>
+                                    <option value="Diversity & Inclusion">Diversity & Inclusion</option>
+                                    <option value="Employee Relations">Employee Relations</option>
+                                    <option value="Giving and Receiving Feedback">Giving and Receiving Feedback
+                                    </option>
                                     <option value="Innovation">Innovation</option>
                                     <option value="Interviewing / Hiring">Interviewing / Hiring</option>
                                     <option value="Investigations">Investigations</option>
@@ -276,7 +362,8 @@
                             <div class="form-group col-lg-6">
                                 <label for="languages">Languages</label>
                                 <select multiple class="form-control selectpicker" id="languages" name="languages">
-                                    <option value="American Sign Language (ASL)">American Sign Language (ASL)</option>
+                                    <option value="American Sign Language (ASL)">American Sign Language (ASL)
+                                    </option>
                                     <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
                                     <option value="Dutch">Dutch</option>
                                     <option value="English">English</option>
@@ -315,7 +402,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-primary mb-4">Search</button>
+        <button type="submit" class="btn btn-primary mb-4 mt-2">Search</button>
     </form>
 </div>
 

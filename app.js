@@ -1,11 +1,18 @@
+// App requirements
 const express = require("express");
+require("dotenv").config();
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 
+// Define app using express
 const app = express();
 
+// Connect use of bodyParser, ejs, and mongoose
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -14,17 +21,30 @@ app.use(
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-mongoose.connect("mongodb://localhost:27017/menteeDB", {
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect("mongodb://localhost:27017/mentorMatchDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+mongoose.set("useCreateIndex", true);
 
-const menteeSchema = {
-  username: String,
+// User database set up
+const userSchema = new mongoose.Schema({
+  classification: String,
   password: String,
   firstName: String,
   lastName: String,
-  email: String,
+  username: String,
   phone: String,
   location: String,
   country: String,
@@ -34,37 +54,135 @@ const menteeSchema = {
   yearsWithCompany: String,
   yearsCurrentPosition: String,
   areasForDev: Array,
+  areasOfExp: Array,
   languages: Array,
   education: String,
   certifications: String,
   communityService: String,
   linkedin: String,
-  whyMentee: String,
+  whyJoin: String,
   mentorshipProcess: String,
   goals: String,
   terms: String,
-};
+});
 
-const Mentee = new mongoose.model("Mentee", menteeSchema);
+userSchema.plugin(passportLocalMongoose);
 
+const User = new mongoose.model("User", userSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// ======= Routes ========
+// Home route
 app.get("/", function (req, res) {
   res.render("home");
 });
 
 app.get("/register", function (req, res) {
-  res.render("register");
+  res.render("form");
+});
+
+app.post("/register", function (req, res) {
+  User.register(
+    {
+      classification: req.body.classification,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      phone: req.body.phone,
+      location: req.body.location,
+      country: req.body.country,
+      division: req.body.division,
+      department: req.body.department,
+      level: req.body.level,
+      yearsWithCompany: req.body.yearsWithCompany,
+      yearsCurrentPosition: req.body.yearsCurrentPosition,
+      areasForDev: req.body.areasForDevelopment,
+      areasOfExp: req.body.areasOfExpertise,
+      languages: req.body.languages,
+      education: req.body.education,
+      certifications: req.body.certifications,
+      communityService: req.body.communityService,
+      linkedin: req.body.linkedin,
+      whyJoin: req.body.whyJoin,
+      mentorshipProcess: req.body.communicationMethod,
+      goals: req.body.goals,
+      terms: req.body.terms,
+    },
+    req.body.password,
+    function (err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect("/register");
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/personal-info");
+        });
+      }
+    }
+  );
 });
 
 app.get("/login", function (req, res) {
   res.render("login");
 });
 
-app.get("/command-center", function (req, res) {
-  res.render("command_home");
+app.post("/login", function (req, res) {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+  });
+
+  req.login(user, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/personal-info");
+      });
+    }
+  });
+});
+
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 app.get("/personal-info", function (req, res) {
-  res.render("personal_info");
+  if (req.isAuthenticated()) {
+    User.findById(req.user.id, function (err, foundUser) {
+      res.render("personal_info", {
+        classification: foundUser.classification,
+        firstName: foundUser.firstName,
+        lastName: foundUser.lastName,
+        username: foundUser.username,
+        phone: foundUser.phone,
+        location: foundUser.location,
+        country: foundUser.country,
+        division: foundUser.division,
+        department: foundUser.department,
+        level: foundUser.level,
+        yearsWithCompany: foundUser.yearsWithCompany,
+        yearsCurrentPosition: foundUser.yearsCurrentPosition,
+        areasForDev: foundUser.areasForDev,
+        areasOfExp: foundUser.areasOfExp,
+        languages: foundUser.languages,
+        education: foundUser.education,
+        certifications: foundUser.certifications,
+        communityService: foundUser.communityService,
+        linkedin: foundUser.linkedin,
+        whyJoin: foundUser.whyJoin,
+        mentorshipProcess: foundUser.mentorshipProcess,
+        goals: foundUser.goals,
+      });
+    });
+  } else {
+    res.redirect("/login");
+  }
 });
 
 app.get("/matches", function (req, res) {
@@ -76,19 +194,105 @@ app.get("/match-profile-view", function (req, res) {
 });
 
 app.get("/search", function (req, res) {
-  res.render("search");
-});
-
-app.get("/search-results", function (req, res) {
-  res.render("search_results");
-});
-
-app.get("/search-profile-view", function (req, res) {
-  res.render("search_profile_view");
+  if (req.isAuthenticated()) {
+    res.render("search");
+  } else {
+    res.redirect("/login");
+  }
 });
 
 app.post("/search", function (req, res) {
-  res.redirect("/search-results");
+  const query = {};
+  if (req.body.classification) {
+    query.classification = req.body.classification;
+  }
+
+  if (req.body.firstName) {
+    query.firstName = {
+      $regex: req.body.firstName,
+      $options: "i",
+    };
+  }
+
+  if (req.body.lastName) {
+    query.lastName = {
+      $regex: req.body.lastName,
+      $options: "i",
+    };
+  }
+
+  if (req.body.location) {
+    query.location = req.body.location;
+  }
+
+  if (req.body.country) {
+    query.country = req.body.country;
+  }
+
+  if (req.body.division) {
+    query.division = req.body.division;
+  }
+
+  if (req.body.department) {
+    query.department = req.body.department;
+  }
+
+  if (req.body.level) {
+    query.level = req.body.level;
+  }
+
+  if (req.body.yearsWithCompany) {
+    query.yearsWithCompany = req.body.yearsWithCompany;
+  }
+
+  if (req.body.yearsCurrentPosition) {
+    query.yearsCurrentPosition = yearsCurrentPosition;
+  }
+
+  if (req.body.education) {
+    query.education = req.body.education;
+  }
+
+  if (req.body.areasForDev) {
+    query.areasForDev = req.body.areasForDev;
+  }
+
+  if (req.body.areasOfExp) {
+    query.areasOfExp = req.body.areasOfExp;
+  }
+
+  if (req.body.languages) {
+    query.languages = req.body.languages;
+  }
+
+  console.log(query);
+
+  User.find(query, function (err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("search_results", {
+        results: results,
+      });
+    }
+  });
+});
+
+app.get("/profile/:userID", function (req, res) {
+  if (req.isAuthenticated()) {
+    User.findById(req.params.userID, function (err, user) {
+      if (err) {
+        res.send(err);
+        console.log(err);
+      } else {
+        res.render("profile_view", {
+          user: user,
+        });
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
 });
 
 // app.get("/profile/:userId", function (req, res) {
@@ -122,18 +326,6 @@ app.post("/search", function (req, res) {
 //     }
 //   });
 // });
-
-app.get("/menteeForm", function (req, res) {
-  res.render("menteeForm");
-});
-
-app.get("/mentorForm", function (req, res) {
-  res.render("mentorForm");
-});
-
-app.get("/combinedForm", function (req, res) {
-  res.render("combinedForm");
-});
 
 // app.post("/menteeForm", function (req, res) {
 //   const newMentee = new Mentee({

@@ -1,21 +1,30 @@
 <%- include('partials/command_header') %>
 
 <div class="container">
-    <a href="/search"><button class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Back to
-            Search</button></a>
+    <!-- <a href="/search"><button class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i> Back to
+            Search</button></a> -->
     <h2 class="display-4 mt-3">Results</h2>
     <p class="lead">Here are your search results.</p>
     <ul class="list-group shadow-sm">
+
+        <% results.forEach(function(result){ %>
+
         <li class="list-group-item list-group-item-action">
             <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
                 alt="profile picture of matched mentor">
-            <h4 class="thumbnail-profile-name">Michael Scott</h4>
+            <h4 class="thumbnail-profile-name"><%= result.firstName %> <%= result.lastName %><span
+                    class="lead badge-wrapper"><span class="badge badge-pill badge-success">Available</span></span></h2>
+            </h4>
             <div class="thumbnail-profile-buttons">
-                <a href="/search-profile-view"><button class="btn btn-outline-secondary">View Profile</button></a>
+                <a href="/profile/<%= result._id %>"><button class="btn btn-outline-secondary">View Profile</button></a>
                 <button class="btn btn-primary">Request</button>
             </div>
         </li>
-        <li class="list-group-item list-group-item-action">
+
+        <% }) %>
+
+
+        <!-- <li class="list-group-item list-group-item-action">
             <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
                 alt="profile picture of matched mentor">
             <h4 class="thumbnail-profile-name">Jim Halpert</h4>
@@ -86,7 +95,7 @@
                 <button class="btn btn-outline-secondary">View Profile</button>
                 <button class="btn btn-primary">Request</button>
             </div>
-        </li>
+        </li> -->
     </ul>
 </div>
 

@@ -124,15 +124,15 @@ body {
 .page-wrap {
     display: flex;
     flex-direction: column;
-    margin-top: 0;
+    margin-top: -2rem;
     height: 100vh;
     justify-content: center;
 }
 
 
 .lead-text {
+    margin-bottom: -1rem;
     text-align: center;
-
 }
 
 .register-deck {
@@ -277,8 +277,9 @@ body {
 }
 
 .badge {
-    align-self: flex-start;
-    margin-left: 0.8rem;
+    font-size: .7rem;
+    margin-left: 0.6rem;
+    vertical-align: top;
 }
 
 .contact-card h4 {

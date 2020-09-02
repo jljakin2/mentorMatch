@@ -86,8 +86,7 @@ app.get("/register", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-  User.register(
-    {
+  User.register({
       classification: req.body.classification,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -254,37 +253,52 @@ app.post("/search", function (req, res) {
   }
 
   if (req.body.areasForDev) {
-    query.areasForDev = req.body.areasForDev;
+    query.areasForDev = {
+      $in: req.body.areasForDev
+    };
   }
 
   if (req.body.areasOfExp) {
-    query.areasOfExp = req.body.areasOfExp;
+    query.areasOfExp = {
+      $in: req.body.areasOfExp
+    };
   }
 
   if (req.body.languages) {
-    query.languages = req.body.languages;
+    query.languages = {
+      $in: req.body.languages
+    };
   }
 
   console.log(query);
 
   User.find(query, function (err, results) {
     if (err) {
+      res.send(err);
       console.log(err);
-    } else {
+    } else if (results.length > 1) {
       res.render("search_results", {
         results: results,
       });
+    } else {
+      res.render("search_results_not_found")
     }
   });
 });
 
-app.get("/profile/:userID", function (req, res) {
+app.get("/profile/:userId", function (req, res) {
   if (req.isAuthenticated()) {
-    User.findById(req.params.userID, function (err, user) {
+    const requestedUserId = req.params.userId
+    console.log(typeof requestedUserId);
+
+    User.findOne({
+      _id: requestedUserId
+    }, function (err, user) {
       if (err) {
         res.send(err);
         console.log(err);
       } else {
+        console.log(user);
         res.render("profile_view", {
           user: user,
         });

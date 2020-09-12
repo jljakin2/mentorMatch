@@ -13,12 +13,17 @@
             <h4 class="thumbnail-profile-name"><%= result.firstName %> <%= result.lastName %><span
                     class="lead badge-wrapper"><span class="badge badge-pill badge-success">Available</span></span></h2>
             </h4>
+
+
             <div class="thumbnail-profile-buttons">
+                <% if (currentUser.classification === "mentee" && result.classification === "mentor") { %>
+                <form action="/request/<%= result._id %>" method="POST">
+                    <button class="btn btn-primary">Request</button>
+                </form>
+                <% }; %>
                 <a href="/profile/<%= result._id %>"><button class="btn btn-outline-secondary">View Profile</button></a>
-                <button class="btn btn-primary">Request</button>
             </div>
         </li>
-
         <% }) %>
     </ul>
 </div>

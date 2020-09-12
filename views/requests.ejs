@@ -1,0 +1,73 @@
+<%- include('partials/command_header') %>
+
+<div class="container">
+    <h1>Here are your requests</h1>
+    <p class="lead">Manage your requests below</p>
+
+    <% if (requests.some(request => request.status === 2)) { %>
+    <div class="match-level">
+        <h2 class="display-4">Accepted</h2>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 2) { %>
+            <li class="list-group-item list-group-item-action">
+                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                    alt="profile picture of matched mentor">
+                <div>
+                    <p>Date: <%= request.createdAt %></p>
+                </div>
+                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
+                </h4>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } %>
+
+    <% if (requests.some(request => request.status === 1)) { %>
+    <div class="match-level">
+        <h2 class="display-4">Pending</h2>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 1) { %>
+            <li class="list-group-item list-group-item-action">
+                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                    alt="profile picture of matched mentor">
+                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
+                </h4>
+                <div>
+                    <p>Date: <%= request.createdAt %></p>
+                </div>
+                <a href="/profile/<%= request.recipient._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } %>
+
+    <% if (requests.some(request => request.status === 0)) { %>
+    <div class="match-level">
+        <h2 class="display-4">Rejected</h2>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 0) { %>
+            <li class="list-group-item list-group-item-action">
+                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                    alt="profile picture of matched mentor">
+                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
+                </h4>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } %>
+
+</div>
+
+
+
+<%- include('partials/footer') %>

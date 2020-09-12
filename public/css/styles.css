@@ -328,12 +328,18 @@ body {
 }
 
 .thumbnail-profile-buttons {
+  display: flex;
   margin: 0;
+}
+
+.thumbnail-profile-buttons form {
+  margin-left: 1rem;
 }
 
 /* SEARCH */
 
 /* SEARCH RESULTS */
+
 .no-results-wrapper {
   align-items: center;
   display: flex;

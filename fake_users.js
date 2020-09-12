@@ -51,6 +51,12 @@ const userSchema = new mongoose.Schema({
     mentorshipProcess: String,
     goals: String,
     terms: String,
+    requests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Request",
+    }]
+}, {
+    timestamps: true
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -61,6 +67,31 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// Request db schema set up and initiation
+const requestsSchema = new mongoose.Schema({
+    requester: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    recipient: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    status: {
+        type: Number,
+        enums: [
+            0, //'rejected',
+            1, //'pending',
+            2, //'match',
+        ],
+        default: 1
+    }
+}, {
+    timestamps: true
+})
+
+const Request = new mongoose.model('Request', requestsSchema)
 
 // Bosch specific options that can't be used in faker.js
 const classificationOptions = ["mentee", "mentor"]

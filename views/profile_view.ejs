@@ -13,15 +13,29 @@
                 <h4 class="display-4 second-tier-header contact-email"><%= user.username %></h4>
                 <h4 class="display-4 second-tier-header contact-phone"><%= user.phone %></h4>
             </div>
+            <% if (currentUser.classification === "mentee") { %>
+            <% if (user.requests.some(request => request.requester.toString() === currentUser._id.toString())) { %>
             <div class="profile-view-buttons">
-                <button class="btn btn-large btn-outline-primary">Request</button>
+                <button class="btn btn-outline-primary mr-3" disabled>Requested</button>
             </div>
+            <% } else { %>
+            <div class="profile-view-buttons">
+                <form action="/request/<%= user._id %>" method="POST">
+                    <button class="btn btn-primary request-toast">Request</button>
+                </form>
+            </div>
+            <% }; %>
+            <% };%>
         </div>
 
         <div class="personal-card shadow-sm">
             <h2 class="display-4">Personal Information</h2>
             <table class="table table-borderless">
                 <tbody>
+                    <tr>
+                        <th>Classification:</th>
+                        <td><%= user.classification %></td>
+                    </tr>
                     <tr>
                         <th>Location:</th>
                         <td><%= user.location %></td>

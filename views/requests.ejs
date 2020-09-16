@@ -1,43 +1,30 @@
 <%- include('partials/command_header') %>
 
 <div class="container">
-    <h1>Here are your requests</h1>
+    <h1>Requests</h1>
     <p class="lead">Manage your requests below</p>
-
-    <% if (requests.some(request => request.status === 2)) { %>
+    <!--------- MENTEE VIEW --------->
+    <% if (currentUser.classification === "mentee") { %>
     <div class="match-level">
-        <h2 class="display-4">Accepted</h2>
+        <h2 class="display-4 category-header">Accepted</h2>
+        <% if (requests.some(request => request.status === 2)) { %>
         <ul class="list-group shadow-sm mb-4">
             <% requests.forEach(function(request){ %>
             <% if (request.status === 2) { %>
             <li class="list-group-item list-group-item-action">
-                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
-                    alt="profile picture of matched mentor">
                 <div>
-                    <p>Date: <%= request.createdAt %></p>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
                 </div>
-                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
-                </h4>
-            </li>
-            <% }; %>
-            <% }); %>
-        </ul>
-    </div>
-    <% } %>
-
-    <% if (requests.some(request => request.status === 1)) { %>
-    <div class="match-level">
-        <h2 class="display-4">Pending</h2>
-        <ul class="list-group shadow-sm mb-4">
-            <% requests.forEach(function(request){ %>
-            <% if (request.status === 1) { %>
-            <li class="list-group-item list-group-item-action">
-                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
-                    alt="profile picture of matched mentor">
-                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
-                </h4>
-                <div>
-                    <p>Date: <%= request.createdAt %></p>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %>
+                        <%= request.recipient.lastName %>
+                    </h4>
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
                 </div>
                 <a href="/profile/<%= request.recipient._id %>"><button class="btn btn-outline-secondary">View
                         Profile</button></a>
@@ -46,26 +33,183 @@
             <% }); %>
         </ul>
     </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any accepted requests at this time.</p>
     <% } %>
 
-    <% if (requests.some(request => request.status === 0)) { %>
     <div class="match-level">
-        <h2 class="display-4">Rejected</h2>
+        <h2 class="display-4 category-header">Pending</h2>
+        <% if (requests.some(request => request.status === 1)) { %>
         <ul class="list-group shadow-sm mb-4">
             <% requests.forEach(function(request){ %>
-            <% if (request.status === 0) { %>
+            <% if (request.status === 1) { %>
             <li class="list-group-item list-group-item-action">
-                <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
-                    alt="profile picture of matched mentor">
-                <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %> <%= request.recipient.lastName %>
-                </h4>
+                <div>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
+                </div>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %>
+                        <%= request.recipient.lastName %>
+                    </h4>
+
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
+                </div>
+                <a href="/profile/<%= request.recipient._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
             </li>
             <% }; %>
             <% }); %>
         </ul>
     </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any pending requests at this time.</p>
     <% } %>
 
+    <div class="match-level">
+        <h2 class="display-4 category-header">Declined</h2>
+        <% if (requests.some(request => request.status === 0)) { %>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 0) { %>
+            <li class="list-group-item list-group-item-action">
+                <div>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
+                </div>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.recipient.firstName %>
+                        <%= request.recipient.lastName %>
+                    </h4>
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
+                </div>
+                <a href="/profile/<%= request.recipient._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any declined requests at this time.</p>
+    <% } %>
+
+    <!--------- MENTOR VIEW --------->
+    <% } else { %>
+
+    <div class="match-level">
+        <h2 class="display-4 category-header">Accepted</h2>
+        <% if (requests.some(request => request.status === 2)) { %>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 2) { %>
+            <li class="list-group-item list-group-item-action">
+                <div>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
+                </div>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.requester.firstName %>
+                        <%= request.requester.lastName %>
+                    </h4>
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
+                </div>
+                <a href="/profile/<%= request.requester._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any accepted requests at this time.</p>
+    <% } %>
+
+    <div class="match-level">
+        <h2 class="display-4 category-header">Pending</h2>
+        <% if (requests.some(request => request.status === 1)) { %>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 1) { %>
+            <li class="list-group-item list-group-item-action">
+                <div>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
+                </div>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.requester.firstName %>
+                        <%= request.requester.lastName %>
+                    </h4>
+
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
+                </div>
+                <% if (!requests.some(request => request.status === 2)) { %>
+                <form action="/accept/<%= request.requester._id %>" method="POST">
+                    <button class="btn btn-success accept-toast mr-3">Accept</button>
+                </form>
+                <% } %>
+                <form action="/decline/<%= request.requester._id %>" method="POST">
+                    <button class="btn btn-outline-danger decline-toast mr-3">Decline</button>
+                </form>
+                <a href="/profile/<%= request.requester._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any pending requests at this time.</p>
+    <% } %>
+
+    <div class="match-level">
+        <h2 class="display-4 category-header">Declined</h2>
+        <% if (requests.some(request => request.status === 0)) { %>
+        <ul class="list-group shadow-sm mb-4">
+            <% requests.forEach(function(request){ %>
+            <% if (request.status === 0) { %>
+            <li class="list-group-item list-group-item-action">
+                <div>
+                    <img class="thumbnail-profile-pic" src="assets/profile-placeholder.jpg"
+                        alt="profile picture of matched mentor">
+                </div>
+                <div class="name-and-date">
+                    <h4 class="thumbnail-profile-name"><%= request.requester.firstName %>
+                        <%= request.requester.lastName %>
+                    </h4>
+                    <% const date = new Date(request.updatedAt) %>
+                    <% const month = date.toLocaleString('default', { month: 'long' }); %>
+                    <% const day = date.getDate() %>
+                    <% const year = date.getFullYear() %>
+                    <p class="thumbnail-profile-date second-tier-text"><%= month %> <%= day %>, <%= year %></p>
+                </div>
+                <a href="/profile/<%= request.requester._id %>"><button class="btn btn-outline-secondary">View
+                        Profile</button></a>
+            </li>
+            <% }; %>
+            <% }); %>
+        </ul>
+    </div>
+    <% } else { %>
+    <p class="lead font-italic no-results">You do not have any declined requests at this time.</p>
+    <% } %>
+    <% }; %>
 </div>
 
 

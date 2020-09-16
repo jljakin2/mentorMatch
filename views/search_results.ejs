@@ -17,15 +17,22 @@
 
             <div class="thumbnail-profile-buttons">
                 <% if (currentUser.classification === "mentee" && result.classification === "mentor") { %>
+                <% if (result.requests.some(request => request.requester.toString() === currentUser._id.toString())) { %>
+                <button class="btn btn-outline-primary mr-3" disabled>Requested</button>
+                <% } else { %>
                 <form action="/request/<%= result._id %>" method="POST">
-                    <button class="btn btn-primary">Request</button>
+                    <button class="btn btn-primary request-toast mr-3">Request</button>
                 </form>
+                <% }; %>
                 <% }; %>
                 <a href="/profile/<%= result._id %>"><button class="btn btn-outline-secondary">View Profile</button></a>
             </div>
         </li>
-        <% }) %>
+        <% }); %>
     </ul>
+
+
+
 </div>
 
 <%- include('partials/footer') %>

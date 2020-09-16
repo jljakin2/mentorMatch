@@ -1,37 +1,37 @@
 /* * {
-    border: red 1px solid;
+  border: red 1px solid;
 }
 
 * * {
-    border: blue 1px solid;
+  border: blue 1px solid;
 }
 
 * * * {
-    border: green 1px solid;
+  border: green 1px solid;
 }
 
 * * * * {
-    border: purple 1px solid;
+  border: purple 1px solid;
 }
 
 * * * * * {
-    border: salmon 1px solid;
+  border: salmon 1px solid;
 }
 
 * * * * * * {
-    border: teal 1px solid;
+  border: teal 1px solid;
 }
 
 * * * * * * * {
-    border: orange 1px solid;
+  border: orange 1px solid;
 }
 
 * * * * * * * * {
-    border: lightcoral 1px solid;
+  border: lightcoral 1px solid;
 }
 
 * * * * * * * * * {
-    border: maroon 1px solid;
+  border: maroon 1px solid;
 } */
 
 /* ========== General selectors ========== */
@@ -343,10 +343,36 @@ body {
 .no-results-wrapper {
   align-items: center;
   display: flex;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
 }
 
 .no-results-content {
   text-align: center;
 }
+
+/* REQUESTS */
+
+.category-header {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+}
+
+.name-and-date {
+  display: flex;
+  flex: 5;
+  flex-direction: column;
+  padding: 0;
+}
+
+.thumbnail-profile-date {
+  margin: 0.2rem 0 0 0;
+  padding-left: 2rem;
+}
+
+.no-results {
+  font-weight: lighter;
+  margin: 1rem 0 2rem 0;
+}
+
+/* TOASTS */

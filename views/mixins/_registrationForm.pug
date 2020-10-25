@@ -1,0 +1,253 @@
+mixin registrationForm()
+
+    form(action=(!user ? "/register" : "/account/:slug/edit") method="POST" enctype="multipart/form-data")
+
+        if !user
+            .info-section.shadow-sm
+                h2.info-section-header Mentor or Mentee?
+                .row.pl-3
+                    .form-group.col
+                        label.form-check-label(for="mentorMentee")
+                        select#mentorMentee.form-control(name="classification")
+                            option(selected disabled) Please Select
+                            option(value="Mentor") Mentor
+                            option(value="Mentee") Mentee
+
+
+
+        .info-section.shadow-sm
+            h2.info-section-header Contact Information
+            .row
+                .form-group.col-lg-6
+                    label(for='firstName') First Name
+                    input#firstName.form-control(type='text' name="firstName" value=(user ? user.firstName : "") required)
+                .form-group.col-lg-6
+                    label(for='lastName') Last Name
+                    input#lastName.form-control(type='text' name="lastName" value=(user ? user.lastName : "") required)
+            .row
+                .form-group.col-lg-8
+                    label(for='email') Email
+                    input#email.form-control(type='email' name="email" value=(user ? user.email : "") required)
+                .form-group.col-lg-4
+                    label(for='phone') Phone Number
+                    input#phone.form-control.input-phone(type='tel' name="phone" value=(user ? user.phone : "") required)
+
+
+        .info-section.shadow-sm
+            h2.info-section-header Personal Information
+            .row
+                .form-group.col-lg-6
+                    label(for='location') Location
+                    select#location.form-control(name="location")
+                        option(selected='' disabled='') Please Select
+                        for location in h.locations
+                            if (user ? user.location : "") === location
+                                option(value=location selected) #{location}
+                            else
+                                option(value=location) #{location}
+
+                .form-group.col-lg-6
+                    label(for='country') Country
+                    select#country.form-control(name="country")
+                        option(selected='' disabled='') Please Select
+                        for country in h.countries
+                            if (user ? user.country : "") === country
+                                option(value=country selected) #{country}
+                            else
+                                option(value=country) #{country}
+            .row
+                .form-group.col-lg-6
+                    label(for='division') Division
+                    select#division.form-control(name="division")
+                        option(selected='' disabled='') Please Select
+                        for division in h.divisions
+                            if (user ? user.division : "") === division
+                                option(value=division selected) #{division}
+                            else
+                                option(value=division) #{division}
+
+                .form-group.col-lg-6
+                    label(for='department') Department/Function
+                    select#department.form-control(name="department")
+                        option(selected='' disabled='') Please Select
+                        for department in h.departments
+                            if (user ? user.department : "") === department
+                                option(value=department selected) #{department}
+                            else
+                                option(value=department) #{department}
+            .row
+                .form-group.col-lg-4
+                    label(for='level') Job Level
+                    select#level.form-control(name="level")
+                        option(selected='' disabled='') Please Select
+                        for jobLevel in h.jobLevels
+                            if (user ? user.level : "") === jobLevel
+                                option(value=jobLevel selected) #{jobLevel}
+                            else
+                                option(value=jobLevel) #{jobLevel}
+
+                .form-group.col-lg-4
+                    label(for='yearsWithCompany') Years with Company
+                    select#yearsWithCompany.form-control(name="yearsWithCompany")
+                        option(selected='' disabled='') Please Select
+                        for year in h.years
+                            if (user ? user.yearsWithCompany : "") === year
+                                option(value=year selected) #{year}
+                            else
+                                option(value=year) #{year}
+
+                .form-group.col-lg-4
+                    label(for='yearsInCurrentPosition') Years in Current Position
+                    select#yearsInCurrentPosition.form-control(name="yearsInCurrentPosition")
+                        option(selected='' disabled='') Please Select
+                        for year in h.years
+                            if (user ? user.yearsCurrentPosition : "") === year
+                                option(value=year selected) #{year}
+                            else
+                                option(value=year) #{year}
+
+            if user
+                if user.classification === "Mentee"
+                    .row
+                        .form-group.col
+                            label(for='areasForDevelopment') Areas for Development (you can select multiple)
+                            select#areasForDevelopment.form-control.selectpicker(multiple='' name="areas")
+                                for area in h.areas
+                                    if (user ? user.areas.includes(area) : false)
+                                        option(value=area selected) #{area}
+                                    else
+                                        option(value=area) #{area}
+                else
+                    .row
+                        .form-group.col
+                            label(for='areasOfExpertise') Areas of Expertise (you can select multiple)
+                            select#areasOfExpertise.form-control.selectpicker(multiple='' name="areas")
+                                for area in h.areas
+                                    if (user ? user.areas.includes(area) : false)
+                                        option(value=area selected) #{area}
+                                    else
+                                        option(value=area) #{area}
+
+            else
+                .row#devAreas(style="display: none")
+                    .form-group.col
+                        label(for='areasForDevelopment') Areas for Development (you can select multiple)
+                        select#areasForDevelopment.form-control.selectpicker(multiple='' name="areas")
+                            for area in h.areas
+                                if (user ? user.areas.includes(area) : false)
+                                    option(value=area selected) #{area}
+                                else
+                                    option(value=area) #{area}
+
+                .row#expAreas(style="display: none")
+                    .form-group.col
+                        label(for='areasOfExpertise') Areas of Expertise (you can select multiple)
+                        select#areasOfExpertise.form-control.selectpicker(multiple='' name="areas")
+                            for area in h.areas
+                                if (user ? user.areas.includes(area) : false)
+                                    option(value=area selected) #{area}
+                                else
+                                    option(value=area) #{area}
+            .row
+                .form-group.col-lg-6
+                    label(for='languages') Languages (you can select multiple)
+                    select#languages.form-control.selectpicker(multiple='' name="languages")
+                        for language in h.languages
+                            if (user ? user.languages.includes(language) : false)
+                                option(value=language selected) #{language}
+                            else
+                                option(value=language) #{language}
+                .form-group.col-lg-6
+                    label(for='education') Education Level
+                    select#education.form-control(name="education")
+                        option(selected='' disabled='') Please Select
+                        for educationLevel in h.educationLevels
+                            if (user ? user.education : "") === educationLevel
+                                option(value=educationLevel selected) #{educationLevel}
+                            else
+                                option(value=educationLevel) #{educationLevel}
+            .row
+                .form-group.col-lg-6
+                    label(for='certifications') Certifications / Memberships
+                    input#certifications.form-control(type='text' name="certifications" value=(user ? user.certifications : ""))
+                .form-group.col-lg-6
+                    label(for='communityService') Community Service
+                    input#communityService.form-control(type='text' name="communityService" value=(user ? user.communityService : ""))
+            .row
+                .form-group.col
+                    label(for='linkedin') LinkedIn Profile URL (if you have one)
+                    input#linkedin.form-control(type='url' name="linkedin" value=(user ? user.linkedin : ""))
+
+
+        .info-section.shadow-sm
+            h2.info-section-header Open Ended Questions
+            if user
+                if user.classification === "Mentor"
+                    .row
+                        .form-group.col
+                            label(for='whyMentor') Why do you want to be a mentor?
+                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= user ? user.whyMentor : ""
+                else
+                    .row
+                        .form-group.col
+                            label(for='whyMentee') Why do you want to be a mentee?
+                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= user ? user.whyMentee : ""
+            else
+                .row#mentorQuestion(style="display: none")
+                        .form-group.col
+                            label(for='whyMentor') Why do you want to be a mentor?
+                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= user ? user.whyMentor : ""
+                .row#menteeQuestion(style="display: none")
+                        .form-group.col
+                            label(for='whyMentee') Why do you want to be a mentee?
+                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= user ? user.whyMentee : ""
+
+            .row
+                .form-group.col
+                    label(for='communicationMethod') What process would you like to use for the mentorship (email, phone, in person, etc.)?
+                    textarea#communicationMethod.form-control(rows='3', name="mentorshipProcess")= user ? user.mentorshipProcess: ""
+            .row
+                .form-group.col
+                    label(for='goals') What specific goals are you looking to work on during the 6 month partnership?
+                    textarea#goals.form-control(rows='3', name="goals")= user ? user.goals : ""
+
+
+        .info-section.shadow-sm
+            h2.info-section-header Account Information
+            .row
+                .form-group.col
+                    if user
+                        if user.profilePicture
+                            .mb-3
+                                .medium-avatar(style=`background-image: url("/uploads/${user.profilePicture}");`)
+                    .custom-file
+                        label(for="profilePicture") Profile Picture
+                        input.form-control-file#profilePicture(type="file" name="profilePicture" accept="image/gif, image/png, image/jpg, image/jpeg")
+
+            if !user
+                .row
+                    .form-group.col
+                        label(for="password") Password
+                        span.doNotMatch.hide.ml-3 Passwords do not match
+                        span.match.hide.ml-3 Passwords match!
+                        input.form-control#password(name="password" type="password")
+                        label.mt-4(for="confirm-password") Confirm Password
+                        input.form-control#confirm-password(name="confirm-password" type="password")
+
+        if !user
+            .info-section.shadow-sm
+                p I have read and agree to abide by the Terms of Use for the Mentor Match system.
+                .form-check.form-check-inline
+                    input#termsYes.form-check-input(type='radio' name='terms' value='yes')
+                    label.form-check-label(for='termsYes') Yes
+                .form-check.form-check-inline
+                    input#termsNo.form-check-input(type='radio' name='terms' value='no' checked='')
+                    label.form-check-label(for='termsNo') No
+
+        p(aria-hidden="true")
+        span.required *
+        | Required Field
+        br
+        br
+
+        button.btn.btn-primary.btn-block.mb-4(type='submit')= user ? "Save" : "Submit"

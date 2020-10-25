@@ -1,0 +1,26 @@
+mixin userVerticalCard(result = {})
+    .user-card.shadow
+        .card-header
+            .card-avatar
+                a(href="#")
+                    if result.profilePicture
+                        if result.profilePicture.split(":")[0] === "https"
+                            img(src=result.profilePicture)
+                        else
+                            img(src=`/uploads/${result.profilePicture}`)
+                    else
+                        img(src="/uploads/profile-placeholder.jpg")
+            .card-name-title
+                h4 #{result.firstName} #{result.lastName}
+                h5.card-subtitle #{result.department}
+            .card-button-container
+                .btn.btn-primary.button Request
+        .card-content
+            h5.content-secondary #{result.level}
+            h5.content-secondary #{result.division}
+            h5.content-secondary #{result.location}
+        .card-buttons
+            a.card-button-link(href="https://google.com")
+                i.far.fa-envelope.fa-2x
+            a.card-button-link(href="https://google.com")
+                i.fab.fa-linkedin.fa-2x.ml-2

@@ -4,24 +4,52 @@
   "description": "app that allows a mentor and mentee user to set up profiles and get paired up with either a mentor or mentee",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sample": "node ./data/load-sample-data.js",
+    "blowitallaway": "node ./data/load-sample-data.js --delete"
   },
   "author": "Jeff Jakinovich",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "axios": "^0.20.0",
     "body-parser": "^1.19.0",
+    "cleave.js": "^1.6.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "dompurify": "^2.1.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
+    "es6-promisify": "^5.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "express-validator": "^5.3.0",
     "faker": "^5.1.0",
+    "flash": "^1.1.0",
+    "forever": "^3.0.2",
     "fs": "0.0.1-security",
+    "glob": "^7.1.6",
+    "html-to-text": "^5.1.1",
+    "jimp": "^0.16.1",
+    "juice": "^7.0.0",
     "lodash": "^4.17.19",
+    "md5": "^2.3.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.9.27",
+    "mongoose-mongodb-errors": "0.0.2",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.13",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "toastr": "^2.1.4"
+    "path": "^0.12.7",
+    "pug": "^3.0.0",
+    "slugs": "^0.1.3",
+    "toastr": "^2.1.4",
+    "uuid": "^8.3.1",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0"
   }
 }

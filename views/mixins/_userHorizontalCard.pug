@@ -1,0 +1,22 @@
+mixin userHorizontalCard(result = {})
+    li.list-group-item.list-group-item-action
+        a(href="#")
+            if result.profilePicture
+                if result.profilePicture.split(":")[0] === "https"
+                    img.thumbnail-profile-pic(src=result.profilePicture)
+                else
+                    img.thumbnail-profile-pic(src=`/uploads/${result.profilePicture}`)
+            else
+                img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+        //- img.thumbnail-profile-pic(src="assets/profile-placeholder.jpg" alt="profile picture of user")
+        h4.thumbnail-profile-name #{result.firstName} #{result.lastName}
+            //- span.lead.badge-wrapper
+            //- span.badge.badge-pill.badge-success Available
+
+        .thumbnail-profile-buttons
+            if user.classification === "Mentee" && result.classification === "Mentor"
+                form.request(action=`/request/${result.id}` method="POST")
+                    button.btn.btn-primary.request-button.mr-3(type="submit" name="request") Request
+            //- - const slug = #{result.slug}
+            a(href=`/account/${result.slug}`)
+                button.btn.btn-outline-secondary View Profile

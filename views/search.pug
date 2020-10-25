@@ -1,0 +1,109 @@
+extends layout
+
+block content
+    .container
+        form(action='/search' method='POST')
+            h2.display-4.page-title Search
+            p.lead Search by name or use the &quot;Advanced Search&quot; button to search specific criteria.
+            .row.mb-4.mt-2
+                .col
+                    .form-check.form-check-inline
+                        input#mentee.form-check-input(type='radio' name='classification' value='Mentee')
+                        label.form-check-label(for='mentee')
+                            | Mentee
+                    .form-check.form-check-inline
+                        input#mentor.form-check-input(type='radio' name='classification' value='Mentor')
+                        label.form-check-label(for='mentor')
+                            | Mentor
+                    .form-check.form-check-inline
+                        input#both.form-check-input(type='radio' name='classification' value="" checked='')
+                        label.form-check-label(for='both')
+                            | Both
+            .row
+                .form-group.col-lg-6
+                    label(for='firstName') First Name
+                    input#firstName.form-control(type='text' name='firstName')
+                .form-group.col-lg-6
+                    label(for='lastName') Last Name
+                    input#lastName.form-control(type='text' name='lastName')
+            .row
+                .col
+                    p
+                        a(data-toggle='collapse' href='#advancedSearch' role='button' aria-expanded='false' aria-controls='collapseExample')
+                            | Advanced Search
+                    #advancedSearch.collapse.mb-3
+                        .card.card-body
+
+                            .row
+                                .form-group.col-lg-6
+                                    label(for='location') Location
+                                    select#location.form-control.selectpicker(multiple name='location')
+                                        for location in h.locations
+                                            option(value=location) #{location}
+
+                                .form-group.col-lg-6
+                                    label(for='country') Country
+                                    select#country.form-control.selectpicker(multiple='' name='country')
+                                        for country in h.countries
+                                            option(value=country) #{country}
+
+
+                            .row
+                                .form-group.col-lg-6
+                                    label(for='division') Division
+                                    select#division.form-control.selectpicker(multiple='' name='division')
+                                        for division in h.divisions
+                                            option(value=division) #{division}
+
+                                .form-group.col-lg-6
+                                    label(for='department') Department/Function
+                                    select#department.form-control.selectpicker(multiple='' name='department')
+                                        for department in h.departments
+                                            option(value=department) #{department}
+
+
+                            .row
+                                .form-group.col-lg-4
+                                    label(for='jobLevel') Job Level
+                                    select#jobLevel.form-control.selectpicker(multiple='' name='level')
+                                        for jobLevel in h.jobLevels
+                                            option(value=jobLevel) #{jobLevel}
+
+                                .form-group.col-lg-4
+                                    label(for='yearsWithCompany') Years with Company
+                                    select#yearsWithCompany.form-control.selectpicker(multiple='' name='yearsWithCompany')
+                                        for year in h.years
+                                            option(value=year) #{year}
+
+                                .form-group.col-lg-4
+                                    label(for='yearsInCurrentPosition') Years in Current Position
+                                    select#yearsInCurrentPosition.form-control.selectpicker(multiple='' name='yearsInCurrentPosition')
+                                        for year in h.years
+                                            option(value=year) #{year}
+                            .row
+                                .form-group.col
+                                    label(for='areasForDev') Areas for Development
+                                    select#areasForDev.form-control.selectpicker(multiple='' name='areasForDev')
+                                        for area in h.areas
+                                            option(value=area) #{area}
+
+                            .row
+                                .form-group.col
+                                    label(for='areasOfExp') Areas of Experience
+                                    select#areasOfExp.form-control.selectpicker(multiple='' name='areasOfExp')
+                                        for area in h.areas
+                                            option(value=area) #{area}
+                            .row
+                                .form-group.col-lg-6
+                                    label(for='languages') Languages
+                                    select#languages.form-control.selectpicker(multiple='' name='languages')
+                                        for language in h.languages
+                                            option(value=language) #{language}
+
+                                .form-group.col-lg-6
+                                    label(for='educationLevel') Education Level
+                                    select#educationLevel.form-control.selectpicker(multiple='' name='educationLevel')
+                                        for educationLevel in h.educationLevels
+                                            option(value=educationLevel) #{educationLevel}
+
+            button.btn.btn-primary.mb-4.mt-2(type='submit') Search

@@ -1,0 +1,8 @@
+mixin forgotForm()
+    form.form-signin.shadow-sm(action="/login/forgot" method="POST")
+        img.mb-4.login-img(src="/assets/mentor_match.png" alt="mentor match logo")
+        .form-group.login-info
+            label(for="username") Email
+            input#username.form-control.mb-3(type="email" name="email" required autofocus)
+
+        button.btn.btn-lg.btn-primary.login-button.cta-button(type="submit") Reset

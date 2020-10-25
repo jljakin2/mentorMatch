@@ -1,8 +1,8 @@
 <%- include('partials/command_header') %>
 
 <div class="container">
-    <h1>Requests</h1>
-    <p class="lead">Manage your requests below</p>
+    <h1 class="text-center">Requests</h1>
+    <p class="lead text-center">Manage your requests below</p>
     <!--------- MENTEE VIEW --------->
     <% if (currentUser.classification === "mentee") { %>
     <div class="match-level">
@@ -190,9 +190,8 @@
                         alt="profile picture of matched mentor">
                 </div>
                 <div class="name-and-date">
-                    <h4 class="thumbnail-profile-name"><%= request.requester.firstName %>
-                        <%= request.requester.lastName %>
-                    </h4>
+                    <h4 class="thumbnail-profile-name">
+                        <%= request.requester.firstName %> <%= request.requester.lastName %> </h4>
                     <% const date = new Date(request.updatedAt) %>
                     <% const month = date.toLocaleString('default', { month: 'long' }); %>
                     <% const day = date.getDate() %>

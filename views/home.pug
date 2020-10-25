@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .container.home
+        .jumbotron.hero-jumbo.shadow
+            .hero-content
+                h3.display-4.second-tier-header Welcome to
+                h1.display-3.mb-4 Mentor Match
+                p.lead.second-tier-text
+                    | Build relationships. Improve skills. Share your experiences. Sign up today
+                    | to join Bosch&apos;s
+                    | mentoring program.
+                div
+                    p.startingButtons
+                    a.btn.btn-outline-primary.btn-lg.cta-button-optional(href='/register' role='button') Register
+                    p.startingButtons
+                    a.btn.btn-primary.btn-lg.cta-button.ml-2(href='/login' role='button') Login
+            img.hero-img(src='assets/mentor_chat.png' alt='mentor image')

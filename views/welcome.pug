@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    .container
+        h1.display-3.text-center Welcome, #{user.firstName}
+
+        .welcome-container
+            .helpful-hints-card
+                h4
+                    span
+                    i.fas.fa-info-circle
+                    | Helpful Hints
+                p We have gathered some helpful hints and articles that will help to make your experience in the mentor program a great one!
+
+            .manage-requests-card
+                h5
+                    span
+                    i.fas.fa-tasks
+                    | Manage Requests
+                p You are able to manage all of your requests in one place. If you are a Mentee, you can see the status of your requests to Mentors, and Mentors will be able to sort through their requests in order to accept or decline their requests.
+
+            .top-matches-card
+                h5
+                    span
+                    i.fas.fa-award
+                    | Top Matches
+                p You are able to manage all of your requests in one place. If you are a Mentee, you can see the status of your requests to Mentors, and Mentors will be able to sort through their requests in order to accept or decline their requests.
+
+            .search-card
+                h5
+                    span
+                    i.fas.fa-search
+                    | Search
+                p Do a simple name search or use the advanced criteria to search for other users based on your specific interests and needs.
+
+            .notifications-card
+                h5
+                    span
+                    i.far.fa-bell
+                    | Notifications
+                p All notifications will be handled via email, so make sure your email address is accurate and change your email settings (if necessary) to allow Mentor Match emails.
+
+            .questions-card
+                h5
+                    span
+                    i.far.fa-question-circle
+                    | Questions
+                p If you ever have any questions or feedback regarding your experience, please do not hesitate to reach out.

@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_userVerticalCard
+
+block content
+    .container
+        h4.display-4.page-title Top Matches
+        p.lead Here are your top matches
+        .card-container
+                for result in results
+                    +userVerticalCard(result)

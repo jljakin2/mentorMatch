@@ -1,0 +1,109 @@
+mixin accountView(account = {})
+
+    .profile-view-container
+        .profile-header
+
+            .profile-header-content
+                if account.profilePicture
+                    if account.profilePicture.split(":")[0] === "https"
+                        img.profile-picture(src=account.profilePicture)
+                    else
+                        img.profile-picture(src=`/uploads/${account.profilePicture}`)
+                else
+                    img.profile-picture(src="/uploads/profile-placeholder.jpg")
+                h2.display-4.profile-name #{account.firstName} #{account.lastName}
+                h4.display-4.profile-subtitle #{account.department}
+
+                if account.classification === "Mentor" && user.id !== account.id
+                    button.btn.btn-primary Request
+                if user.id === account.id
+                    a(href=`/account/${user.slug}/edit`)
+                        button.btn.btn-outline-secondary Edit Profile
+
+
+            .profile-header-buttons
+                .profile-email
+                    a.card-button-link(href=`mailto:${account.email}`)
+                        i.far.fa-envelope.fa-2x
+                if account.linkedin
+                    .profile-linkedin
+                        a.card-button-link(href=`${account.linkedin}`)
+                            i.fab.fa-linkedin.fa-2x.ml-2
+
+        .profile-contact
+            h4.display-4.section-header Contact
+            table
+                tr
+                    th.table-row-title
+                        i.fas.fa-phone
+                    td.table-row-content #{account.phone}
+                tr
+                    th.table-row-title
+                        i.far.fa-envelope
+                    td.table-row-content #{account.email}
+                tr
+                    th.table-row-title
+                        i.fas.fa-map-marker-alt
+                    td.table-row-content #{account.location}, #{account.country}
+
+
+        .profile-work
+            h4.display-4.section-header Bosch
+            table
+                tr
+                    th.table-row-title Division
+                    td.table-row-content #{account.division}
+                tr
+                    th.table-row-title Level
+                    td.table-row-content #{account.level}
+                tr
+                    th.table-row-title Current Position
+                    td.table-row-content #{account.yearsWithCompany}
+                tr
+                    th.table-row-title Company
+                    td.table-row-content #{account.yearsCurrentPosition}
+
+        .profile-personal
+            h4.display-4.section-header Personal
+            table
+                tr
+                    th.table-row-title Education
+                    td.table-row-content #{account.education}
+                tr
+                    th.table-row-title Languages
+                    td.table-row-content #{account.languages}
+
+        .profile-areas
+            if account.classification === "Mentee"
+                h4.display-4.section-header Areas For Development
+                - const paragraph = account.areas.join(" |  ")
+                p #{paragraph}
+            else
+                h4.display-4.section-header Areas Of Expertise
+                - const paragraph = account.areas.join(" |  ")
+                p #{paragraph}
+
+        if account.certifications || account.communityService
+            .profile-experience
+                    h4.display-4.section-header Extras
+                        if account.certifications
+                            h4 Certifications
+                            p #{account.certifications}
+                        if account.communityService
+                            h4 Community Service
+                            p #{account.communityService}
+
+        .profile-questions
+            h4.display-4.section-header Questions
+            if account.classification === "Mentor" && account.whyMentor
+                h4 Why do you want to me a mentor?
+                p #{account.whyMentor}
+            else if account.classification === "Mentee" && account.whyMentee
+                h4 Why do you want to me a mentee?
+                p #{account.whyMentee}
+            if account.mentorshipProcess
+                h4 How do you want to handle the mentor process?
+                p #{account.mentorshipProcess}
+            if account.goals
+                h4 What are your goals for the next 6 months?
+                p #{account.goals}

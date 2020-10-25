@@ -6,95 +6,94 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const faker = require('faker');
 const fs = require('fs')
 
-const app = express();
+// const app = express();
 
-app.use(
-    session({
-        secret: "we are bosch so let's be one.",
-        resave: false,
-        saveUninitialized: false,
-    })
-);
+// app.use(
+//     session({
+//         secret: "we are bosch so let's be one.",
+//         resave: false,
+//         saveUninitialized: false,
+//     })
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/mentorMatchDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-mongoose.set("useCreateIndex", true);
+// mongoose.connect("mongodb://localhost:27017/mentorMatchDB", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
+// mongoose.set("useCreateIndex", true);
 
-// User database set up
-const userSchema = new mongoose.Schema({
-    classification: String,
-    password: String,
-    firstName: String,
-    lastName: String,
-    username: String,
-    phone: String,
-    location: String,
-    country: String,
-    division: String,
-    department: String,
-    level: String,
-    yearsWithCompany: String,
-    yearsCurrentPosition: String,
-    areasForDev: Array,
-    areasOfExp: Array,
-    languages: Array,
-    education: String,
-    certifications: String,
-    communityService: String,
-    linkedin: String,
-    whyJoin: String,
-    mentorshipProcess: String,
-    goals: String,
-    terms: String,
-    requests: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Request",
-    }]
-}, {
-    timestamps: true
-});
+// // User database set up
+// const userSchema = new mongoose.Schema({
+//     classification: String,
+//     firstName: String,
+//     lastName: String,
+//     slug: String,
+//     email: String,
+//     phone: String,
+//     location: String,
+//     country: String,
+//     division: String,
+//     department: String,
+//     level: String,
+//     yearsWithCompany: String,
+//     yearsCurrentPosition: String,
+//     areas: Array,
+//     languages: Array,
+//     education: String,
+//     certifications: String,
+//     communityService: String,
+//     linkedin: String,
+//     whyMentor: String,
+//     whyMentee: String,
+//     mentorshipProcess: String,
+//     goals: String,
+//     terms: String,
+//     profilePicture: String,
+// }, {
+//     timestamps: true
+// });
 
-userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
 
-const User = new mongoose.model("User", userSchema);
+// const User = new mongoose.model("User", userSchema);
 
-passport.use(User.createStrategy());
+// passport.use(User.createStrategy());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 // Request db schema set up and initiation
-const requestsSchema = new mongoose.Schema({
-    requester: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    recipient: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    status: {
-        type: Number,
-        enums: [
-            0, //'rejected',
-            1, //'pending',
-            2, //'match',
-        ],
-        default: 1
-    }
-}, {
-    timestamps: true
-})
+// const requestsSchema = new mongoose.Schema({
+//     requester: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User'
+//     },
+//     recipient: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User'
+//     },
+//     status: {
+//         type: Number,
+//         enums: [
+//             0, //'rejected',
+//             1, //'pending',
+//             2, //'match',
+//         ],
+//         default: 1
+//     }
+// }, {
+//     timestamps: true
+// })
 
-const Request = new mongoose.model('Request', requestsSchema)
+// const Request = new mongoose.model('Request', requestsSchema)
+
+const users = [];
 
 // Bosch specific options that can't be used in faker.js
-const classificationOptions = ["mentee", "mentor"]
+const classificationOptions = ["Mentee", "Mentor"]
 
 const locationOptions = [
     "Albion, IN",
@@ -245,7 +244,7 @@ const yearsCurrentPositionOptions = [
     "20-25 years",
     "25+ years"
 ]
-const areasForDevOptions = [
+const areasDevExp = [
     "Advertising",
     "Assertiveness and Confidence",
     "Budgeting / Cost Control",
@@ -292,53 +291,7 @@ const areasForDevOptions = [
     "Transformational Leadership",
     "Work/Life Balance"
 ]
-const areasOfExpOptions = [
-    "Advertising",
-    "Assertiveness and Confidence",
-    "Budgeting / Cost Control",
-    "Change Management",
-    "Communication",
-    "Compliance",
-    "Computer Skills",
-    "Continuous Improvement",
-    "Counseling / Advice",
-    "Cross-Functional Expertise",
-    "Cross-selling",
-    "Customer Service",
-    "Diversity & Inclusion",
-    "Employee Relations",
-    "Giving and Receiving Feedback",
-    "Innovation",
-    "Interviewing / Hiring",
-    "Investigations",
-    "Leading Self and Others",
-    "Learning from Mistakes",
-    "Listening",
-    "Management",
-    "Marketing",
-    "Motivation",
-    "Navigating Organizational Politics",
-    "Negotiation",
-    "Networking",
-    "Organizational Culture",
-    "People Development",
-    "Performance Management",
-    "Persuasion",
-    "Problem-solving",
-    "Project Management",
-    "Relationship Building",
-    "Resolving Conflict",
-    "Safety",
-    "Sales",
-    "Security",
-    "Servant Leadership",
-    "Strategic Planning",
-    "Team Building",
-    "Time Management",
-    "Training",
-    "Transformational Leadership",
-    "Work/Life Balance"
-]
+
 const languagesOptions = [
     "American Sign Language (ASL)",
     "Chinese (Mandarin)",
@@ -371,12 +324,16 @@ const linkedIn = "https://www.linkedin.com/in/jeff-jakinovich-b6b14943/"
 const terms = "yes";
 
 
-for (let id = 1; id <= 100; id++) {
+
+for (let id = 1; id <= 10; id++) {
+
+    const user = new Object();
 
     let classification = classificationOptions[Math.floor(Math.random() * classificationOptions.length)];
     let password = faker.internet.password();
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
+    let slug = lastName.toLowerCase()
     let username = faker.internet.email();
     let phone = faker.phone.phoneNumberFormat();
     let location = locationOptions[Math.floor(Math.random() * locationOptions.length)];
@@ -386,23 +343,14 @@ for (let id = 1; id <= 100; id++) {
     let level = levelOptions[Math.floor(Math.random() * levelOptions.length)];
     let yearsWithCompany = yearsWithCompanyOptions[Math.floor(Math.random() * yearsWithCompanyOptions.length)];
     let yearsCurrentPosition = yearsCurrentPositionOptions[Math.floor(Math.random() * yearsCurrentPositionOptions.length)];
-    let areasForDev = function () {
-        const finalDevs = [];
+    let areas = function () {
+        const finalAreas = [];
 
-        for (let i = 0; i < 10; i++) {
-            finalDevs.push(areasForDevOptions[Math.floor(Math.random() * areasForDevOptions.length)])
+        for (let i = 0; i < 30; i++) {
+            finalAreas.push(areasDevExp[Math.floor(Math.random() * areasDevExp.length)])
         }
 
-        return finalDevs;
-    };
-    let areasOfExp = function () {
-        const finalExps = [];
-
-        for (let i = 0; i < 10; i++) {
-            finalExps.push(areasOfExpOptions[Math.floor(Math.random() * areasOfExpOptions.length)])
-        }
-
-        return finalExps;
+        return finalAreas;
     };
     let languages = function () {
         const finalLanguages = [];
@@ -416,36 +364,46 @@ for (let id = 1; id <= 100; id++) {
     let education = educationOptions[Math.floor(Math.random() * educationOptions.length)];
     let certifications = faker.lorem.text();
     let communityService = faker.lorem.text();
-    let whyJoin = faker.lorem.paragraph();
+    let whyMentor = faker.lorem.paragraph();
+    let whyMentee = faker.lorem.paragraph();
     let communicationMethod = faker.lorem.sentence();
     let goals = faker.lorem.paragraph();
+    let profilePicture = faker.image.avatar()
 
 
-    User.register({
-            classification: classification,
-            firstName: firstName,
-            lastName: lastName,
-            password: password,
-            username: username,
-            phone: phone,
-            location: location,
-            country: country,
-            division: division,
-            department: department,
-            level: level,
-            yearsWithCompany: yearsWithCompany,
-            yearsCurrentPosition: yearsCurrentPosition,
-            areasForDev: areasForDev(),
-            areasOfExp: areasOfExp(),
-            languages: languages(),
-            education: education,
-            certifications: certifications,
-            communityService: communityService,
-            linkedin: linkedIn,
-            whyJoin: whyJoin,
-            mentorshipProcess: communicationMethod,
-            goals: goals,
-            terms: terms,
-        },
-        password)
+
+    user.classification = classification,
+    user.firstName = firstName,
+    user.lastName = lastName,
+    user.slug = slug,
+    user.password = password,
+    user.email = username,
+    user.phone = phone,
+    user.location = location,
+    user.country = country,
+    user.division = division,
+    user.department = department,
+    user.level = level,
+    user.yearsWithCompany = yearsWithCompany,
+    user.yearsCurrentPosition = yearsCurrentPosition,
+    user.areas = areas(),
+    user.languages = languages(),
+    user.education = education,
+    user.certifications = certifications,
+    user.communityService = communityService,
+    user.linkedin = linkedIn,
+    user.whyMentor = whyMentor,
+    user.whyMentee = whyMentee,
+    user.mentorshipProcess = communicationMethod,
+    user.goals = goals,
+    user.terms = terms,
+    user.profilePicture = profilePicture
+
+    users.push(user)
 }
+
+// console.log(users)
+const userJSON = JSON.stringify(users)
+fs.writeFile("users.json", userJSON, function(err, result) {
+    if (err) console.log("uh oh something went wrong", err);
+})

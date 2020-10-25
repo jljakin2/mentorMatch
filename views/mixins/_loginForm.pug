@@ -1,0 +1,14 @@
+mixin loginForm()
+    form.form-signin.shadow-sm(action="/login" method="POST")
+        img.mb-4.login-img(src="/assets/mentor_match.png" alt="mentor match logo")
+        .form-group.login-info
+            label(for="username") Email
+            input#username.form-control.mb-3(type="email" name="email" required autofocus)
+
+            label(for="password") Password
+            a.forgot-password-link(href="/login/forgot") Forgot password?
+            input.form-control#password(type="password" name="password" required)
+
+        button.btn.btn-lg.btn-primary.login-button.cta-button(type="submit") Login
+
+

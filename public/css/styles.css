@@ -79,6 +79,48 @@ body {
   color: #fff;
 }
 
+.medium-avatar {
+  background-position: top center;
+  background-size: cover;
+  border-radius: 50%;
+  height: 8rem;
+  width: 8rem;
+}
+
+.profile-avatar {
+  background-position: top center;
+  background-size: cover;
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+}
+
+/* Navigation */
+.navbar-nav {
+  align-items: center;
+  display: flex;
+}
+
+.nav-item {
+  margin-left: 1rem;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.nav-avatar {
+  background-position: top center;
+  background-size: cover;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.nav-avatar:hover {
+  border: 1px solid #F7F7F7;
+}
+
 /* ========== Home route ========== */
 .home {
   min-height: 100vh;
@@ -159,8 +201,6 @@ body {
 .login-page {
   display: flex;
   justify-content: center;
-  min-height: 90vh;
-  align-items: center;
 }
 
 .form-signin {
@@ -193,6 +233,29 @@ body {
   border: #00a7f5 1px solid;
 }
 
+.hide {
+  display: none;
+}
+
+.doNotMatch {
+  color: palevioletred;
+}
+
+.match {
+  color: palegreen;
+}
+
+.forgot-password-link {
+  color: lightgrey;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  color: grey;
+  text-decoration: none;
+}
+
 /* ========== Forms ========== */
 .form-header {
   margin-bottom: 2rem;
@@ -214,10 +277,63 @@ body {
 }
 
 /* =========================================================== */
-/* ========== Command Center ========== */
+/* ========== USER AUTHORIZED ========== */
+
+/* WELCOME PAGE */
+.welcome-container{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 11rem 11rem 11rem;
+  grid-template-areas:
+    "helpful manage"
+    "top search"
+    "notifications questions";
+  grid-gap: 2rem;
+  margin: 2rem 0;
+}
+
+.welcome-container i {
+  margin-right: 1rem;
+}
+
+.helpful-hints-card {
+  background: #fff;
+  grid-area: helpful;
+  padding: 1.2rem;
+}
+
+.manage-requests-card {
+  background: #fff;
+  grid-area: manage;
+  padding: 1.2rem;
+}
+
+.top-matches-card {
+  background: #fff;
+  grid-area: top;
+  padding: 1.2rem;
+}
+
+.search-card {
+  background: #fff;
+  grid-area: search;
+  padding: 1.2rem;
+}
+
+.notifications-card {
+  background: #fff;
+  grid-area: notifications;
+  padding: 1.2rem;
+}
+
+.questions-card {
+  background: #fff;
+  grid-area: questions;
+  padding: 1.2rem;
+}
 
 /* PERSONAL INFO */
-.profile-section {
+/* .profile-section {
   margin-bottom: 3.5rem;
 }
 
@@ -229,10 +345,10 @@ body {
 .section-container {
   background: #fff;
   border-radius: 1%;
-}
+} */
 
-/* PROFILE VIEW */
-.profile-view-container {
+/* ===== ACCOUNT VIEW ===== */
+/* .profile-view-container {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
@@ -296,9 +412,154 @@ body {
   grid-area: answer;
   padding: 2rem;
   margin-bottom: 2rem;
+} */
+.section-header {
+  font-size: 2.2rem;
+  text-align: center;
 }
 
-/* MATCHES */
+.table-row-title {
+  text-align: right;
+}
+
+.table-row-content {
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.profile-view-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto auto auto auto auto;
+  grid-template-areas:
+    "header header header"
+    "contact work work"
+    "areas areas personal"
+    "experience experience experience"
+    "questions questions questions";
+  margin-bottom: 3rem;
+  row-gap: 2rem;
+}
+
+/* Header Section */
+.profile-header {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: header;
+  margin-top: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.profile-header-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  height: 20rem;
+  margin-bottom: 1rem;
+  width: 20rem;
+}
+
+.profile-subtitle {
+  color: #a6a6a4;
+  font-size: 1.7rem;
+  margin: -.7rem 0 1.2rem 0;
+}
+
+.profile-header-buttons{
+  display: flex;
+}
+
+.card-button-link {
+  color: #a6a6a4;
+  text-decoration: none;
+}
+
+.card-button-link:hover {
+  color: #3f3f44;
+}
+
+.header-table-container {
+  display: flex;
+}
+
+/* Contact Section */
+.profile-contact {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: contact;
+  margin: .5rem 1rem 0 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+/* Work Section */
+.profile-work {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: work;
+  margin: .5rem 0 0 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Personal Section */
+.profile-personal {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: personal;
+  margin: 0 0 0 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Areas Section */
+.profile-areas {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: areas;
+  margin: 0 1rem 0 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Experience Section */
+.profile-experience {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: experience;
+  padding: 2rem;
+}
+
+/* Questions Section */
+.profile-questions {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-area: questions;
+  padding: 2rem;
+}
+
+/* ===== MATCHES ===== */
 .match-level {
   margin-bottom: 2rem;
 }
@@ -336,9 +597,8 @@ body {
   margin-left: 1rem;
 }
 
-/* SEARCH */
 
-/* SEARCH RESULTS */
+/* ===== SEARCH RESULTS ===== */
 
 .no-results-wrapper {
   align-items: center;
@@ -351,7 +611,7 @@ body {
   text-align: center;
 }
 
-/* REQUESTS */
+/* ===== REQUESTS ===== */
 
 .category-header {
   margin: 0 0 0.5rem 0;
@@ -375,4 +635,157 @@ body {
   margin: 1rem 0 2rem 0;
 }
 
-/* TOASTS */
+/* ===== FLASHES ===== */
+.flash {
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+  display: -ms-flexbox;
+  display: flex;
+  animation: slideIn forwards .1s ease-in-out 2;
+  animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1);
+}
+
+.flash+.flash {
+  animation-delay: 0.55s;
+}
+
+.flash+.flash+.flash {
+  animation-delay: 0.6s;
+}
+
+.flash__text {
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.flash__remove {
+  background: none;
+  border: 0;
+}
+
+.flash__remove:hover {
+  color: #FFC40E;
+}
+
+.flash:after {
+  content: '';
+  display: block;
+  background: white;
+  position: absolute;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  top: 8px;
+  left: 8px;
+  z-index: -1;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.flash--success {
+  background: linear-gradient(135deg, #d2ff52 0%, #91e842 100%);
+}
+
+.flash--error {
+  background: linear-gradient(20deg, red 0%, #c80000 100%);
+}
+
+.flash--info {
+  background: linear-gradient(35deg, #f1e767 0%, #feb645 100%);
+}
+
+.flash p {
+  margin: 0;
+}
+
+/* ===== USER VERTICAL CARD ===== */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  .user-card {
+    background: #F5F5F5;
+    height: auto;
+    margin: 2rem 4%;
+    width: 25%;
+  }
+
+  .card-header {
+    align-items: center;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .card-avatar {
+    border-radius: 50%;
+    height: 7rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    width: 7rem;
+  }
+
+  .card-avatar img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .card-name-title {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .card-subtitle {
+    color: #a6a6a4;
+    font-size: 1rem;
+  }
+
+  .card-button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button {
+    font-size: .8rem;
+    margin-top: .7rem;
+  }
+
+  .card-content {
+    height: 25%;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .content-secondary {
+    color: #393e46;
+    font-size: .9rem;
+    padding: .1rem 0;
+  }
+
+  .card-buttons {
+    align-items: flex-end;
+    display: flex;
+    height: 10%;
+    justify-content: center;
+    padding: .5rem;
+    width: 100%;
+  }
+
+  .card-button-link {
+    color: #a6a6a4;
+    text-decoration: none;
+  }
+
+  .card-button-link:hover {
+    color: #3f3f44;
+  }

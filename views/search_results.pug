@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_userHorizontalCard
+
+block content
+    .container
+        h4.display-4.page-title Results
+        p.lead Here are your search results.
+        ul.list-group.shadow-sm.mb-4
+            for result in results
+                +userHorizontalCard(result)

@@ -1,0 +1,13 @@
+mixin resetForm()
+    form.form-signin.shadow-sm(method="POST")
+        img.mb-4.login-img(src="/assets/mentor_match.png" alt="mentor match logo")
+        .form-group.login-info
+            label(for="password") Password
+            span.doNotMatch.hide.ml-3 Passwords do not match
+            span.match.hide.ml-3 Passwords match!
+            input#password.form-control.mb-3(type="password" name="password" required autofocus)
+
+            label(for="password") Confirm Password
+            input.form-control#confirm-password(type="password" name="confirm-password" required)
+
+        button.btn.btn-lg.btn-primary.login-button.cta-button(type="submit") Reset

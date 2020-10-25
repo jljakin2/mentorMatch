@@ -265,10 +265,10 @@
 
             <div class="row">
                 <div class="form-group col">
-                    <label for="areasForDevelopment">Areas for Development (you can select multiple.)<span
+                    <label for="areasForDev">Areas for Development (you can select multiple.)<span
                             class="required">*</span></label>
-                    <select multiple class="form-control selectpicker" id="areasForDevelopment"
-                        name="areasForDevelopment" aria-describedby="required-description" required>
+                    <select multiple class="form-control selectpicker" id="areasForDev" name="areasForDev"
+                        aria-describedby="required-description" required>
                         <option value="Advertising">Advertising</option>
                         <option value="Assertiveness and Confidence">Assertiveness and Confidence</option>
                         <option value="Budgeting / Cost Control">Budgeting / Cost Control</option>
@@ -448,10 +448,10 @@
 
             <div class="row">
                 <div class="form-group col">
-                    <label for="communicationMethod">What process would you like to use for the mentorship (email,
+                    <label for="mentorshipProcess">What process would you like to use for the mentorship (email,
                         phone, in
                         person, etc.)?<span class="required">*</span></label>
-                    <textarea class="form-control" id="communicationMethod" rows="3" name="communicationMethod"
+                    <textarea class="form-control" id="mentorshipProcess" rows="3" name="mentorshipProcess"
                         aria-describedby="required-description" required></textarea>
                 </div>
             </div>
@@ -470,8 +470,12 @@
             <div class="row">
                 <div class="col">
                     <h2 class="info-section-header">Account Information</h2>
-                    <label for="password">Create your password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password1">Create your password <span class="doNotMatch hide ml-3">Passwords do
+                            not
+                            match</span><span class="match hide ml-3">Passwords match!</span></label>
+                    <input type="password" class="form-control" id="password1" name="password" required>
+                    <label class="mt-2" for="password2">Confirm password</label>
+                    <input type="password" class="form-control" id="password2" required>
                 </div>
             </div>
 
@@ -502,7 +506,7 @@
         <p aria-hidden="true" id="required-description">
             <span class="required">*</span>Required field
         </p>
-        <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+        <button type="submit" id="formSubmit" class="btn btn-primary btn-block mb-4" disabled>Submit</button>
 
     </form>
 </div>

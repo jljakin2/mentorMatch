@@ -1,0 +1,8 @@
+extends layout
+
+include mixins/_forgotForm
+
+block content
+    h4.display-4.page-title Forgot Password
+    .container.login-page
+        +forgotForm()

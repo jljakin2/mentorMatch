@@ -1,0 +1,635 @@
+<%- include('partials/command_header') %>
+
+<div class="container">
+    <div class="form-header">
+        <h1>Edit Profile</h1>
+        <p class="lead">Please edit the fields you wish to change and press the "save" button when you are done.</p>
+    </div>
+
+
+    <form action="/personal-info/edit" method="POST">
+
+        <div class="info-section shadow-sm">
+            <h2 class="info-section-header">Contact Information</h2>
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="firstName">First Name<span class="required">*</span></label>
+                    <input type="text" class="form-control" id="firstName" name="firstName"
+                        aria-describedby="required-description" value=<%= currentUser.firstName %> required>
+
+                </div>
+                <div class="form-group col-lg-6">
+                    <label for="lastName">Last Name<span class="required">*</span></label>
+                    <input type="text" class="form-control" id="lastName" name="lastName"
+                        aria-describedby="required-description" value=<%= currentUser.lastName %> required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <label for="username">Email<span class="required">*</span></label>
+                    <input type="email" class="form-control" id="username" name="username"
+                        aria-describedby="required-description" value=<%= currentUser.username %> required>
+
+                </div>
+
+                <div class="form-group col-lg-4">
+                    <label for="phone">Phone Number<span class="required">*</span></label>
+                    <input type="tel" class="form-control" id="phone" name="phone"
+                        aria-describedby="required-description" value=<%= currentUser.phone %> required>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section shadow-sm">
+            <h2 class="info-section-header">Personal Information</h2>
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="location">Location<span class="required">*</span></label>
+                    <select class="form-control" id="location" name="location" aria-describedby="required-description"
+                        value=<%= currentUser.location %> required>
+                        <option value="Albion, IN">Albion, IN</>
+                        <option value="Allen Park, MI">Allen Park, MI</option>
+                        <option value="Allendale, NJ">Allendale, NJ</option>
+                        <option value="Anderson, SC">Anderson, SC</option>
+                        <option value="Ann Arbor, MI">Ann Arbor, MI</option>
+                        <option value="Atlanta, GA">Atlanta, GA</option>
+                        <option value="Bethlehem, PA">Bethlehem, PA</option>
+                        <option value="Broadview, IL">Broadview, IL</option>
+                        <option value="Brook Park, OH">Brook Park, OH</option>
+                        <option value="Buchanan, MI">Buchanan, MI</option>
+                        <option value="Burnsville, MN">Burnsville, MN</option>
+                        <option value="Canton, MI">Canton, MI</option>
+                        <option value="Cartersville, GA">Cartersville, GA</option>
+                        <option value="Charleston, SC">Charleston, SC</option>
+                        <option value="Charlotte, NC">Charlotte, NC</option>
+                        <option value="Chicago, IL">Chicago, IL</option>
+                        <option value="Columbus, OH">Columbus, OH</option>
+                        <option value="El Paso, TX">El Paso, TX</option>
+                        <option value="Exton, PA">Exton, PA</option>
+                        <option value="Fairport, NY">Fairport, NY</option>
+                        <option value="Farmington Hills, MI">Farmington Hills, MI</option>
+                        <option value="Florence, KY">Florence, KY</option>
+                        <option value="Fort Lauderdale, FL">Fort Lauderdale, FL</option>
+                        <option value="Fountain Inn, SC">Fountain Inn, SC</option>
+                        <option value="Fountain Valley, CA">Fountain Valley, CA</option>
+                        <option value="Greer, SC">Greer, SC</option>
+                        <option value="High Point, NC">High Point, NC</option>
+                        <option value="Hoffman Estates, IL">Hoffman Estates, IL</option>
+                        <option value="Houston, TX">Houston, TX</option>
+                        <option value="Kalamazoo, MI">Kalamazoo, MI</option>
+                        <option value="Kentwood, MI">Kentwood, MI</option>
+                        <option value="Lake Zurich, IL">Lake Zurich, IL</option>
+                        <option value="Lancaster, PA">Lancaster, PA</option>
+                        <option value="Laredo, TX">Laredo, TX</option>
+                        <option value="Lexington, KY">Lexington, KY</option>
+                        <option value="Lincoln, NE">Lincoln, NE</option>
+                        <option value="Lincolnton, NC">Lincolnton, NC</option>
+                        <option value="Livonia, MI">Livonia, MI</option>
+                        <option value="Londonberry, NH">Londonberry, NH</option>
+                        <option value="Minneapolis, MN">Minneapolis, MN</option>
+                        <option value="Mississauga, ON">Mississauga, ON</option>
+                        <option value="Morrilton, AR">Morrilton, AR</option>
+                        <option value="Mount Prospect, IL">Mount Prospect, IL</option>
+                        <option value="New Carlisle, IN">New Carlisle, IN</option>
+                        <option value="New Richmond, WI">New Richmond, WI</option>
+                        <option value="Ontario, CA">Ontario, CA</option>
+                        <option value="Owatonna, MN">Owatonna, MN</option>
+                        <option value="Palo Alto, CA">Palo Alto, CA</option>
+                        <option value="Phoenix, AZ">Phoenix, AZ</option>
+                        <option value="Pittsburg, PA">Pittsburg, PA</option>
+                        <option value="Plymouth, MI">Plymouth, MI</option>
+                        <option value="Racine, WI">Racine, WI</option>
+                        <option value="Raleigh, NC">Raleigh, NC</option>
+                        <option value="Rochester, MI">Rochester, MI</option>
+                        <option value="Santa Barbara, CA">Santa Barbara, CA</option>
+                        <option value="Shell Lake, WI">Shell Lake, WI</option>
+                        <option value="St. Joseph, MI">St. Joseph, MI</option>
+                        <option value="Waltham, MA">Waltham, MA</option>
+                        <option value="Warren, MI">Warren, MI</option>
+                        <option value="Welland, ON">Welland, ON</option>
+                        <option value="West Memphis, AR">West Memphis, AR</option>
+                        <option value="Wooster, OH">Wooster, OH</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="country">Country<span class="required">*</span></label>
+                    <select class="form-control" id="country" name="country" aria-describedby="required-description"
+                        value=<%= currentUser.country %> required>
+                        <option value="USA">USA</option>
+                        <option value="Canada">Canada</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="division">Division<span class="required">*</span></label>
+                    <select class="form-control" id="division" name="division" aria-describedby="required-description"
+                        value=<%= currentUser.division %> required>
+                        <option value="Corporate Information Systems & Services (CI)">Corporate Information Systems &
+                            Services (CI)</option>
+                        <option value="Akustica (AKUS)">Akustica (AKUS)</option>
+                        <option value="Automotive Aftermarket (AA)">Automotive Aftermarket (AA)</option>
+                        <option value="Automotive Electronics (AE)">Automotive Electronics (AE)</option>
+                        <option value="Automotive Steering (AS)">Automotive Steering (AS)</option>
+                        <option value="Bosch Battery Systems (BBSN)">Bosch Battery Systems (BBSN)</option>
+                        <option value="Bosch Engineering Group (BEG)">Bosch Engineering Group (BEG)</option>
+                        <option value="Building Technology (BT)">Building Technology (BT)</option>
+                        <option value="Car Multimedia (CM)">Car Multimedia (CM)</option>
+                        <option value="Chassis Controls (CC)">Chassis Controls (CC)</option>
+                        <option value="Corporate (C)">Corporate (C)</option>
+                        <option value="Corporate Research (CR)">Corporate Research (CR)</option>
+                        <option value="Drive & Control Technology (DC)">Drive & Control Technology (DC)</option>
+                        <option value="Electrical Drives (ED)">Electrical Drives (ED)</option>
+                        <option value="ETAS">ETAS</option>
+                        <option value="Packaging Technology (PA)">Packaging Technology (PA)</option>
+                        <option value="Power Tools (PT)">Power Tools (PT)</option>
+                        <option value="Powertrain Solutions (PS)">Powertrain Solutions (PS)</option>
+                        <option value="Robert Bosch North America (RBNA)">Robert Bosch North America (RBNA)</option>
+                        <option value="Service Solutions (SO)">Service Solutions (SO)</option>
+                        <option value="Thermo Technology (TT)">Thermo Technology (TT)</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="department">Department/Function<span class="required">*</span></label>
+                    <select class="form-control" id="department" name="department"
+                        aria-describedby="required-description" value=<%= currentUser.department %> required>
+                        <option value="Accounting">Accounting</option>
+                        <option value="Audit">Audit</option>
+                        <option value="Business Development">Business Development</option>
+                        <option value="Business Unit Leader">Business Unit Leader</option>
+                        <option value="Communications">Communications</option>
+                        <option value="Continuous Improvement (CIP)">Continuous Improvement (CIP)</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Facilities Management">Facilities Management</option>
+                        <option value="Finance/Controlling">Finance/Controlling</option>
+                        <option value="General Manager">General Manager</option>
+                        <option value="HS&E">HS&E</option>
+                        <option value="Human Resources">Human Resources</option>
+                        <option value="Information Systems / Technology">Information Systems / Technology</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Logistics / Supply Chain">Logistics / Supply Chain</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Project Management">Project Management</option>
+                        <option value="Purchasing">Purchasing</option>
+                        <option value="Quality">Quality</option>
+                        <option value="Quality Management">Quality Management</option>
+                        <option value="Regional President">Regional President</option>
+                        <option value="Research and Development">Research and Development</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Tax">Tax</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <label for="jobLevel">Job Level<span class="required">*</span></label>
+                    <select class="form-control" id="jobLevel" name="level" aria-describedby="required-description"
+                        value=<%= currentUser.level %> required>
+                        <option value="SL5 - Exec. Vice-President / President">SL5 - Exec. Vice-President / President
+                        </option>
+                        <option value="SL4 - Sr. Vice-President">SL4 - Sr. Vice-President</option>
+                        <option value="SL3 - Vice-President">SL3 - Vice-President</option>
+                        <option value="SL2 - Director">SL2 - Director</option>
+                        <option value="SL1 - Manager">SL1 - Manager</option>
+                        <option value="E4 - Sr. Level Associate">E4 - Sr. Level Associate</option>
+                        <option value="E2 - E3 Associate">E2 - E3 Associate</option>
+                        <option value="N2 - N4 Associate">N2 - N4 Associate</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-4">
+                    <label for="yearsWithCompany">Years with Company<span class="required">*</span></label>
+                    <select class="form-control" id="yearsWithCompany" name="yearsWithCompany"
+                        aria-describedby="required-description" value=<%= currentUser.yearsWithCompany%> required>
+                        <option value="Less than 1 year">Less than 1 year</option>
+                        <option value="1-3 years">1-3 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="5-10 years">5-10 years</option>
+                        <option value="10-15 years">10-15 years</option>
+                        <option value="15-20 years">15-20 years</option>
+                        <option value="20-25 years">20-25 years</option>
+                        <option value="25+ years">25+ years</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-4">
+                    <label for="yearsCurrentPosition">Years in Current Position<span class="required">*</span></label>
+                    <select class="form-control" id="yearsCurrentPosition" name="yearsCurrentPosition"
+                        aria-describedby="required-description" value=<%= currentUser.yearsCurrentPosition %> required>
+                        <option value="Less than 1 year">Less than 1 year</option>
+                        <option value="1-3 years">1-3 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="5-10 years">5-10 years</option>
+                        <option value="10-15 years">10-15 years</option>
+                        <option value="15-20 years">15-20 years</option>
+                        <option value="20-25 years">20-25 years</option>
+                        <option value="25+ years">25+ years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+                    <label for="areasForDev">Areas for Development (you can select multiple.)<span
+                            class="required">*</span></label>
+                    <select multiple class="form-control selectpicker" id="areasForDev" name="areasForDev"
+                        aria-describedby="required-description" value=<%= currentUser.areasForDev %> required>
+                        <option value="Advertising" <% if (currentUser.areasForDev.includes("Advertising")) { %>
+                            selected <% } %>>Advertising</option>
+                        <option value="Assertiveness and Confidence"
+                            <% if (currentUser.areasForDev.includes("Assertiveness and Confidence")) { %> selected
+                            <% } %>>
+                            Assertiveness and Confidence</option>
+                        <option value="Budgeting / Cost Control"
+                            <% if (currentUser.areasForDev.includes("Budgeting / Cost Control")) { %> selected <% } %>>
+                            Budgeting / Cost Control</option>
+                        <option value="Change Management"
+                            <% if (currentUser.areasForDev.includes("Change Management")) { %> selected <% } %>>
+                            Change Management</option>
+                        <option value="Communication" <% if (currentUser.areasForDev.includes("Communication")) { %>
+                            selected <% } %>>
+                            Communication</option>
+                        <option value="Compliance" <% if (currentUser.areasForDev.includes("Compliance")) { %> selected
+                            <% } %>>Compliance</option>
+                        <option value="Computer Skills" <% if (currentUser.areasForDev.includes("Computer Skills")) { %>
+                            selected <% } %>>
+                            Computer Skills</option>
+                        <option value="Continuous Improvement"
+                            <% if (currentUser.areasForDev.includes("Continuous Improvement")) { %> selected <% } %>>
+                            Continuous Improvement</option>
+                        <option value="Counseling / Advice"
+                            <% if (currentUser.areasForDev.includes("Counseling / Advice")) { %> selected <% } %>>
+                            Counseling / Advice</option>
+                        <option value="Cross-Functional Expertise"
+                            <% if (currentUser.areasForDev.includes("Cross-Functional Expertise")) { %> selected
+                            <% } %>>
+                            Cross-Functional Expertise</option>
+                        <option value="Cross-selling" <% if (currentUser.areasForDev.includes("Cross-selling")) { %>
+                            selected <% } %>>
+                            Cross-selling</option>
+                        <option value="Customer Service"
+                            <% if (currentUser.areasForDev.includes("Customer Service")) { %> selected <% } %>>
+                            Customer Service</option>
+                        <option value="Diversity & Inclusion"
+                            <% if (currentUser.areasForDev.includes("Diversity & Inclusion")) { %> selected <% } %>>
+                            Diversity & Inclusion</option>
+                        <option value="Employee Relations"
+                            <% if (currentUser.areasForDev.includes("Employee Relations")) { %> selected <% } %>>
+                            Employee Relations</option>
+                        <option value="Giving and Receiving Feedback"
+                            <% if (currentUser.areasForDev.includes("Giving and Receiving Feedback")) { %> selected
+                            <% } %>>Giving
+                            and Receiving Feedback</option>
+                        <option value="Innovation" <% if (currentUser.areasForDev.includes("Innovation")) { %> selected
+                            <% } %>>Innovation</option>
+                        <option value="Interviewing / Hiring"
+                            <% if (currentUser.areasForDev.includes("Interviewing / Hiring")) { %> selected <% } %>>
+                            Interviewing / Hiring</option>
+                        <option value="Investigations" <% if (currentUser.areasForDev.includes("Investigations")) { %>
+                            selected <% } %>>
+                            Investigations</option>
+                        <option value="Leading Self and Others"
+                            <% if (currentUser.areasForDev.includes("Leading Self and Others")) { %> selected <% } %>>
+                            Leading Self and Others</option>
+                        <option value="Learning from Mistakes"
+                            <% if (currentUser.areasForDev.includes("Learning from Mistakes")) { %> selected <% } %>>
+                            Learning from Mistakes</option>
+                        <option value="Listening" <% if (currentUser.areasForDev.includes("Listening")) { %> selected
+                            <% } %>>Listening</option>
+                        <option value="Management" <% if (currentUser.areasForDev.includes("Management")) { %> selected
+                            <% } %>>Management</option>
+                        <option value="Marketing" <% if (currentUser.areasForDev.includes("Marketing")) { %> selected
+                            <% } %>>Marketing</option>
+                        <option value="Motivation" <% if (currentUser.areasForDev.includes("Motivation")) { %> selected
+                            <% } %>>Motivation</option>
+                        <option value="Navigating Organizational Politics"
+                            <% if (currentUser.areasForDev.includes("Navigating Organizational Politics")) { %> selected
+                            <% } %>>
+                            Navigating Organizational Politics</option>
+                        <option value="Negotiation" <% if (currentUser.areasForDev.includes("Negotiation")) { %>
+                            selected <% } %>>Negotiation</option>
+                        <option value="Networking" <% if (currentUser.areasForDev.includes("Networking")) { %> selected
+                            <% } %>>Networking</option>
+                        <option value="Organizational Culture"
+                            <% if (currentUser.areasForDev.includes("Organizational Culture")) { %> selected <% } %>>
+                            Organizational Culture</option>
+                        <option value="People Development"
+                            <% if (currentUser.areasForDev.includes("People Development")) { %> selected <% } %>>People
+                            Development</option>
+                        <option value="Performance Management"
+                            <% if (currentUser.areasForDev.includes("Performance Management")) { %> selected <% } %>>
+                            Performance Management</option>
+                        <option value="Persuasion" <% if (currentUser.areasForDev.includes("Persuasion")) { %> selected
+                            <% } %>>Persuasion</option>
+                        <option value="Problem-solving" <% if (currentUser.areasForDev.includes("Problem-solving")) { %>
+                            selected <% } %>>
+                            Problem-solving</option>
+                        <option value="Project Management"
+                            <% if (currentUser.areasForDev.includes("Project Management")) { %> selected <% } %>>
+                            Project Management</option>
+                        <option value="Relationship Building"
+                            <% if (currentUser.areasForDev.includes("Relationship Building")) { %> selected <% } %>>
+                            Relationship Building</option>
+                        <option value="Resolving Conflict"
+                            <% if (currentUser.areasForDev.includes("Resolving Conflict")) { %> selected <% } %>>
+                            Resolving Conflict</option>
+                        <option value="Safety" <% if (currentUser.areasForDev.includes("Safety")) { %> selected <% } %>>
+                            Safety</option>
+                        <option value="Sales" <% if (currentUser.areasForDev.includes("Sales")) { %> selected <% } %>>
+                            Sales</option>
+                        <option value="Security" <% if (currentUser.areasForDev.includes("Security")) { %> selected
+                            <% } %>>Security</option>
+                        <option value="Servant Leadership"
+                            <% if (currentUser.areasForDev.includes("Servant Leadership")) { %> selected <% } %>>
+                            Servant Leadership</option>
+                        <option value="Strategic Planning"
+                            <% if (currentUser.areasForDev.includes("Strategic Planning")) { %> selected <% } %>>
+                            Strategic Planning</option>
+                        <option value="Team Building" <% if (currentUser.areasForDev.includes("Team Building")) { %>
+                            selected <% } %>>Team
+                            Building</option>
+                        <option value="Time Management" <% if (currentUser.areasForDev.includes("Time Management")) { %>
+                            selected <% } %>>
+                            Time
+                            Management</option>
+                        <option value="Training" <% if (currentUser.areasForDev.includes("Training")) { %> selected
+                            <% } %>>Training</option>
+                        <option value="Transformational Leadership"
+                            <% if (currentUser.areasForDev.includes("Transformational Leadership")) { %> selected
+                            <% } %>>
+                            Transformational Leadership</option>
+                        <option value="Work/Life Balance"
+                            <% if (currentUser.areasForDev.includes("Work/Life Balance")) { %> selected <% } %>>
+                            Work/Life Balance</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+                    <label for="areasOfExp">Areas of Expertise (you can select multiple.)<span
+                            class="required">*</span></label>
+                    <select multiple class="form-control selectpicker" id="areasOfExp" name="areasOfExp"
+                        aria-describedby="required-description" required>
+                        <option value="Advertising" <% if (currentUser.areasOfExp.includes("Advertising")) { %> selected
+                            <% } %>>Advertising</option>
+                        <option value="Assertiveness and Confidence"
+                            <% if (currentUser.areasOfExp.includes("Assertiveness and Confidence")) { %> selected
+                            <% } %>>
+                            Assertiveness and Confidence</option>
+                        <option value="Budgeting / Cost Control"
+                            <% if (currentUser.areasOfExp.includes("Budgeting / Cost Control")) { %> selected <% } %>>
+                            Budgeting / Cost Control</option>
+                        <option value="Change Management"
+                            <% if (currentUser.areasOfExp.includes("Change Management")) { %> selected <% } %>>
+                            Change Management</option>
+                        <option value="Communication" <% if (currentUser.areasOfExp.includes("Communication")) { %>
+                            selected <% } %>>
+                            Communication</option>
+                        <option value="Compliance" <% if (currentUser.areasOfExp.includes("Compliance")) { %> selected
+                            <% } %>>Compliance</option>
+                        <option value="Computer Skills" <% if (currentUser.areasOfExp.includes("Computer Skills")) { %>
+                            selected <% } %>>
+                            Computer Skills</option>
+                        <option value="Continuous Improvement"
+                            <% if (currentUser.areasOfExp.includes("Continuous Improvement")) { %> selected <% } %>>
+                            Continuous Improvement</option>
+                        <option value="Counseling / Advice"
+                            <% if (currentUser.areasOfExp.includes("Counseling / Advice")) { %> selected <% } %>>
+                            Counseling / Advice</option>
+                        <option value="Cross-Functional Expertise"
+                            <% if (currentUser.areasOfExp.includes("Cross-Functional Expertise")) { %> selected <% } %>>
+                            Cross-Functional Expertise</option>
+                        <option value="Cross-selling" <% if (currentUser.areasOfExp.includes("Cross-selling")) { %>
+                            selected <% } %>>
+                            Cross-selling</option>
+                        <option value="Customer Service"
+                            <% if (currentUser.areasOfExp.includes("Customer Service")) { %> selected <% } %>>
+                            Customer Service</option>
+                        <option value="Diversity & Inclusion"
+                            <% if (currentUser.areasOfExp.includes("Diversity & Inclusion")) { %> selected <% } %>>
+                            Diversity & Inclusion</option>
+                        <option value="Employee Relations"
+                            <% if (currentUser.areasOfExp.includes("Employee Relations")) { %> selected <% } %>>
+                            Employee Relations</option>
+                        <option value="Giving and Receiving Feedback"
+                            <% if (currentUser.areasOfExp.includes("Giving and Receiving Feedback")) { %> selected
+                            <% } %>>Giving
+                            and Receiving Feedback</option>
+                        <option value="Innovation" <% if (currentUser.areasOfExp.includes("Innovation")) { %> selected
+                            <% } %>>Innovation</option>
+                        <option value="Interviewing / Hiring"
+                            <% if (currentUser.areasOfExp.includes("Interviewing / Hiring")) { %> selected <% } %>>
+                            Interviewing / Hiring</option>
+                        <option value="Investigations" <% if (currentUser.areasOfExp.includes("Investigations")) { %>
+                            selected <% } %>>
+                            Investigations</option>
+                        <option value="Leading Self and Others"
+                            <% if (currentUser.areasOfExp.includes("Leading Self and Others")) { %> selected <% } %>>
+                            Leading Self and Others</option>
+                        <option value="Learning from Mistakes"
+                            <% if (currentUser.areasOfExp.includes("Learning from Mistakes")) { %> selected <% } %>>
+                            Learning from Mistakes</option>
+                        <option value="Listening" <% if (currentUser.areasOfExp.includes("Listening")) { %> selected
+                            <% } %>>Listening</option>
+                        <option value="Management" <% if (currentUser.areasOfExp.includes("Management")) { %> selected
+                            <% } %>>Management</option>
+                        <option value="Marketing" <% if (currentUser.areasOfExp.includes("Marketing")) { %> selected
+                            <% } %>>Marketing</option>
+                        <option value="Motivation" <% if (currentUser.areasOfExp.includes("Motivation")) { %> selected
+                            <% } %>>Motivation</option>
+                        <option value="Navigating Organizational Politics"
+                            <% if (currentUser.areasOfExp.includes("Navigating Organizational Politics")) { %> selected
+                            <% } %>>
+                            Navigating Organizational Politics</option>
+                        <option value="Negotiation" <% if (currentUser.areasOfExp.includes("Negotiation")) { %> selected
+                            <% } %>>Negotiation</option>
+                        <option value="Networking" <% if (currentUser.areasOfExp.includes("Networking")) { %> selected
+                            <% } %>>Networking</option>
+                        <option value="Organizational Culture"
+                            <% if (currentUser.areasOfExp.includes("Organizational Culture")) { %> selected <% } %>>
+                            Organizational Culture</option>
+                        <option value="People Development"
+                            <% if (currentUser.areasOfExp.includes("People Development")) { %> selected <% } %>>People
+                            Development</option>
+                        <option value="Performance Management"
+                            <% if (currentUser.areasOfExp.includes("Performance Management")) { %> selected <% } %>>
+                            Performance Management</option>
+                        <option value="Persuasion" <% if (currentUser.areasOfExp.includes("Persuasion")) { %> selected
+                            <% } %>>Persuasion</option>
+                        <option value="Problem-solving" <% if (currentUser.areasOfExp.includes("Problem-solving")) { %>
+                            selected <% } %>>
+                            Problem-solving</option>
+                        <option value="Project Management"
+                            <% if (currentUser.areasOfExp.includes("Project Management")) { %> selected <% } %>>
+                            Project Management</option>
+                        <option value="Relationship Building"
+                            <% if (currentUser.areasOfExp.includes("Relationship Building")) { %> selected <% } %>>
+                            Relationship Building</option>
+                        <option value="Resolving Conflict"
+                            <% if (currentUser.areasOfExp.includes("Resolving Conflict")) { %> selected <% } %>>
+                            Resolving Conflict</option>
+                        <option value="Safety" <% if (currentUser.areasOfExp.includes("Safety")) { %> selected <% } %>>
+                            Safety</option>
+                        <option value="Sales" <% if (currentUser.areasOfExp.includes("Sales")) { %> selected <% } %>>
+                            Sales</option>
+                        <option value="Security" <% if (currentUser.areasOfExp.includes("Security")) { %> selected
+                            <% } %>>Security</option>
+                        <option value="Servant Leadership"
+                            <% if (currentUser.areasOfExp.includes("Servant Leadership")) { %> selected <% } %>>
+                            Servant Leadership</option>
+                        <option value="Strategic Planning"
+                            <% if (currentUser.areasOfExp.includes("Strategic Planning")) { %> selected <% } %>>
+                            Strategic Planning</option>
+                        <option value="Team Building" <% if (currentUser.areasOfExp.includes("Team Building")) { %>
+                            selected <% } %>>Team
+                            Building</option>
+                        <option value="Time Management" <% if (currentUser.areasOfExp.includes("Time Management")) { %>
+                            selected <% } %>>
+                            Time
+                            Management</option>
+                        <option value="Training" <% if (currentUser.areasOfExp.includes("Training")) { %> selected
+                            <% } %>>Training</option>
+                        <option value="Transformational Leadership"
+                            <% if (currentUser.areasOfExp.includes("Transformational Leadership")) { %> selected
+                            <% } %>>
+                            Transformational Leadership</option>
+                        <option value="Work/Life Balance"
+                            <% if (currentUser.areasOfExp.includes("Work/Life Balance")) { %> selected <% } %>>
+                            Work/Life Balance</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="languages">Languages (you can select multiple.)<span class="required">*</span></label>
+                    <select multiple class="form-control selectpicker" id="languages" name="languages"
+                        aria-describedby="required-description" required>
+                        <option value="American Sign Language (ASL)"
+                            <% if (currentUser.languages.includes("American Sign Language (ASL)")) { %> selected
+                            <% } %>>American Sign Language (ASL)</option>
+                        <option value="Chinese (Mandarin)"
+                            <% if (currentUser.languages.includes("Chinese (Mandarin)")) { %> selected <% } %>>Chinese
+                            (Mandarin)</option>
+                        <option value="Dutch" <% if (currentUser.languages.includes("Dutch")) { %> selected <% } %>>
+                            Dutch</option>
+                        <option value="English" <% if (currentUser.languages.includes("English")) { %> selected <% } %>>
+                            English</option>
+                        <option value="Filipino" <% if (currentUser.languages.includes("Filipino")) { %> selected
+                            <% } %>>Filipino</option>
+                        <option value="Flemish" <% if (currentUser.languages.includes("Flemish")) { %> selected <% } %>>
+                            Flemish</option>
+                        <option value="French" <% if (currentUser.languages.includes("French")) { %> selected <% } %>>
+                            French</option>
+                        <option value="German" <% if (currentUser.languages.includes("German")) { %> selected <% } %>>
+                            German</option>
+                        <option value="Hawaiian" <% if (currentUser.languages.includes("Hawaiian")) { %> selected
+                            <% } %>>Hawaiian</option>
+                        <option value="Italian" <% if (currentUser.languages.includes("Italian")) { %> selected <% } %>>
+                            Italian</option>
+                        <option value="Japanese" <% if (currentUser.languages.includes("Japanese")) { %> selected
+                            <% } %>>Japanese</option>
+                        <option value="Korean" <% if (currentUser.languages.includes("Korean")) { %> selected <% } %>>
+                            Korean</option>
+                        <option value="Polish" <% if (currentUser.languages.includes("Polish")) { %> selected <% } %>>
+                            Polish</option>
+                        <option value="Portuguese" <% if (currentUser.languages.includes("Portuguese")) { %> selected
+                            <% } %>>Portuguese</option>
+                        <option value="Russian" <% if (currentUser.languages.includes("Russian")) { %> selected <% } %>>
+                            Russian</option>
+                        <option value="Spanish" <% if (currentUser.languages.includes("Spanish")) { %> selected <% } %>>
+                            Spanish</option>
+                        <option value="Vietnamese" <% if (currentUser.languages.includes("Vietnamese")) { %> selected
+                            <% } %>>Vietnamese</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="educationLevel">Education Level<span class="required">*</span></label>
+                    <select class="form-control" id="educationLevel" name="education"
+                        aria-describedby="required-description" value=<%= currentUser.education %> required>
+                        <option value="High School">High School</option>
+                        <option value="Associates Degree">Associates Degree</option>
+                        <option value="BA/BS">BA/BS</option>
+                        <option value="MS/MBA">MS/MBA</option>
+                        <option value="PHD">PHD</option>
+                        <option value="JD">JD</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label for="certifications">Certifications / Memberships</label>
+                    <input type="text" class="form-control" id="certifications" name="certifications"
+                        value=<%= currentUser.certifications %>>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="communityService">Community Service</label>
+                    <input type="text" class="form-control" id="communityService" name="communityService"
+                        value=<%= currentUser.communityService %>>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+                    <label for="linkedin">LinkedIn Profile URL (if you have one.)</label>
+                    <input type="url" class="form-control" id="linkedin" name="linkedin"
+                        value=<%= currentUser.linkedin %>>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-section-header">Open Ended Questions</h2>
+            <div class="row">
+                <div class="form-group col">
+                    <label for="whyJoin">Why did you want to join the program as a Mentee or Mentor?<span
+                            class="required">*</span></label>
+                    <textarea class="form-control" id="whyJoin" rows="3" name="whyJoin"
+                        aria-describedby="required-description" required><%= currentUser.whyJoin %></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+                    <label for="mentorshipProcess">What process would you like to use for the mentorship (email,
+                        phone, in
+                        person, etc.)?<span class="required">*</span></label>
+                    <textarea class="form-control" id="mentorshipProcess" rows="3" name="mentorshipProcess"
+                        aria-describedby="required-description" required><%= currentUser.mentorshipProcess %></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col">
+                    <label for="goals">What specific goals are you looking to work accomplish during your time in this
+                        program?<span class="required">*</span></label>
+                    <textarea class="form-control" id="goals" rows="3" name="goals"
+                        aria-describedby="required-description" required><%= currentUser.goals %></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <p aria-hidden="true" id="required-description">
+            <span class="required">*</span>Required field
+        </p>
+        <button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+
+    </form>
+</div>
+
+<%- include('partials/footer') %>

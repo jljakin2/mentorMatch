@@ -1,0 +1,8 @@
+extends layout
+
+include mixins/_loginForm
+
+block content
+    h4.display-4.page-title Login
+    .container.login-page
+       +loginForm()

@@ -20,12 +20,12 @@ const generateHTML = (filename, options = {}) => {
     return inlined;
 };
 
-exports.send = async (options) => {
+exports.sendForgotPassword = async (options) => {
     const html = generateHTML(options.filename, options);
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "Dang That's Delicious <noreply@delicious.com",
+        from: "Mentor Match <noreply@mentormatch.com",
         to: options.user.email,
         subject: options.subject,
         html,
@@ -34,6 +34,51 @@ exports.send = async (options) => {
     const sendMail = promisify(transport.sendMail, transport);
     return sendMail(mailOptions);
 };
+
+exports.sendRequest = async (options) => {
+    const html = generateHTML(options.filename, options);
+    const text = htmlToText.fromString(html);
+
+    const mailOptions = {
+        from: "Mentor Match <noreply@mentormatch.com",
+        to: options.mentor.email,
+        subject: options.subject,
+        html,
+        text
+    };
+    const sendMail = promisify(transport.sendMail, transport);
+    return sendMail(mailOptions);
+}
+
+exports.sendAccept = async (options) => {
+    const html = generateHTML(options.filename, options);
+    const text = htmlToText.fromString(html);
+
+    const mailOptions = {
+        from: "Mentor Match <noreply@mentormatch.com",
+        to: options.mentee.email,
+        subject: options.subject,
+        html,
+        text
+    };
+    const sendMail = promisify(transport.sendMail, transport);
+    return sendMail(mailOptions);
+}
+
+exports.sendDecline = async (options) => {
+    const html = generateHTML(options.filename, options);
+    const text = htmlToText.fromString(html);
+
+    const mailOptions = {
+        from: "Mentor Match <noreply@mentormatch.com",
+        to: options.mentee.email,
+        subject: options.subject,
+        html,
+        text
+    };
+    const sendMail = promisify(transport.sendMail, transport);
+    return sendMail(mailOptions);
+}
 
 // TEST to make sure mail is working
 // transport.sendMail({

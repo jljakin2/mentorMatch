@@ -1,0 +1,5 @@
+extends email-layout
+
+block content
+    h2 #{mentor.firstName} #{mentor.lastName} has accepted your mentorship request
+    +button("/requests", "Respond")

@@ -325,7 +325,7 @@ const terms = "yes";
 
 
 
-for (let id = 1; id <= 10; id++) {
+for (let id = 1; id <= 30; id++) {
 
     const user = new Object();
 
@@ -346,7 +346,7 @@ for (let id = 1; id <= 10; id++) {
     let areas = function () {
         const finalAreas = [];
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 10; i++) {
             finalAreas.push(areasDevExp[Math.floor(Math.random() * areasDevExp.length)])
         }
 

@@ -127,7 +127,7 @@ exports.welcome = (req, res) => {
 }
 
 exports.getAccount = async (req, res) => {
-  const account = await User.findOne({slug: req.params.slug});
+  const account = await (await User.findOne({slug: req.params.slug})).populate("requests");
   res.render("account", {title: `${account.firstName}'s Account`, account});
 }
 

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sample": "node ./data/load-sample-data.js",
-    "blowitallaway": "node ./data/load-sample-data.js --delete"
+    "blowitallaway": "node ./data/load-sample-data.js --delete",
+    "build": "browserify ./public/javascripts/main.js -o ./public/javascripts/bundle.js",
+    "watch": "watchify ./public/javascripts/main.js -o ./public/javascripts/bundle.js"
   },
   "author": "Jeff Jakinovich",
   "license": "ISC",
@@ -50,6 +52,7 @@
     "validator": "^13.1.17"
   },
   "devDependencies": {
-    "browserify": "^17.0.0"
+    "browserify": "^17.0.0",
+    "watchify": "^3.11.1"
   }
 }

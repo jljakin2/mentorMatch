@@ -14,13 +14,31 @@ mixin accountView(account = {})
                 h2.display-4.profile-name #{account.firstName} #{account.lastName}
                 h4.display-4.profile-subtitle #{account.department}
 
-                if account.classification === "Mentor" && user.id !== account.id
-                    button.btn.btn-primary Request
+                //- set of conditionals and checks that do the following: 1) makes sure user is a mentee, the account is one of a mentor, and the user and account are not the same person
+                //- 2) compares lists of requests and if the user and the account share a request, that means the mentee has already requested that mentor so we show a different button
+                if account.classification === "Mentor" && user.id !== account.id && user.classification === "Mentee"
+                    - const userRequests = user.requests.map(obj => obj.toString())
+                    - const accountRequests = account.requests.map(obj => obj.toString())
+                    - let alreadyRequested = false
+                    each userRequest in userRequests
+                        if (accountRequests.includes(userRequest))
+                            - alreadyRequested = true
+                            - break
+                        else
+                            - continue
+                    //- show requested button
+                    if (alreadyRequested)
+                        input.btn.btn-outline-secondary(type="button" value="Requested" disabled)
+                    //- allow user to request that particular mentor
+                    else
+                        form.request-form(action=`/request/${account.id}` method="POST" onsubmit=`return confirm('Are you sure you want to send this request to ${account.firstName} ${account.lastName}?')`)
+                            input.btn.btn-primary.request-button(type="submit" value="Request")
+
                 if user.id === account.id
                     a(href=`/account/${user.slug}/edit`)
                         button.btn.btn-outline-secondary Edit Profile
 
-
+            pre=h.dump(alreadyRequested)
             .profile-header-buttons
                 .profile-email
                     a.card-button-link(href=`mailto:${account.email}`)

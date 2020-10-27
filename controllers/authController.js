@@ -63,7 +63,7 @@ exports.forgot = async (req, res) => {
     // TEST the resetURL in development mode to make sure it works. NEVER KEEP THIS LINE OF CODE FOR PRODUCTION!!!
     // req.flash("success", `You have been emailed a password reset link. ${resetURL}`);
 
-    await mail.send({
+    await mail.sendForgotPassword({
         user,
         subject: "Password Reset",
         resetURL,

@@ -83,11 +83,19 @@ router
 router
     .route("/requests")
     // gets requests page for user to manage requests
-    .get(authController.isLoggedIn, requestsController.manageRequests);
+    .get(authController.isLoggedIn, catchErrors(requestsController.manageRequests));
 
 router
     .route("/request/:userId")
     .post(catchErrors(requestsController.addRequest));
+
+router
+    .route("/accept/:userId")
+    .post(catchErrors(requestsController.acceptRequest));
+
+router
+    .route("/decline/:userId")
+    .post(catchErrors(requestsController.declineRequest));
 
 // exports all of these routes so we can use them on the app.js file
 module.exports = router;

@@ -52,6 +52,19 @@ exports.resize = async (req, res, next) => {
   next();
 };
 
+exports.atLeastSL1 = (req, res, next) => {
+  if ((req.body.level === "E4 - Sr. Level Associate" || req.body.level === "E2 - E3 Associate" || req.body.level ==="N2 - N4 Associate") && (req.body.classification === "Mentor")) {
+    req.flash("error", "You must be an SL1+ to register as a mentor.")
+    res.render("register", {
+      title: "Registration Form",
+      body: req.body,
+      flashes: req.flash()
+    });
+  } else {
+    return next();
+  }
+};
+
 // middleware to validate user's input on the sign up form on the server side. We also have front end validators
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody("firstName");
@@ -127,7 +140,7 @@ exports.welcome = (req, res) => {
 }
 
 exports.getAccount = async (req, res) => {
-  const account = await (await User.findOne({slug: req.params.slug})).populate("requests");
+  const account = await User.findOne({slug: req.params.slug}).populate("requests");
   res.render("account", {title: `${account.firstName}'s Account`, account});
 }
 
@@ -228,11 +241,90 @@ exports.searchResults = async (req, res) => {
     };
   }
 
-  const results = await User.find(query).exec()
+  // const page = req.params.page;
+  // const limit = 10;
+  // const skip = (page * limit) - limit;
 
-  if (results) {
+  const results = await User.find(query)
+  // .skip(skip).limit(limit);
+  const resultsCount = results.length
+  // const pages = Math.ceil(resultsCount / limit);
+
+  // req.query.country = req.body.country
+  console.log(req.query);
+
+  if (resultsCount > 0) {
     res.render("search_results", {title: "Search Results", results})
   } else {
     res.render("search_results_not_found", {title: "No Results"})
   }
+}
+
+exports.findTopMatches = async (req, res) => {
+  const scoredMatches = [];
+
+  if (req.user.classification === "Mentee") {
+
+    const currentMentee = await User.findOne({_id: req.user._id});
+    const matchingMentors = await User.find({classification: "Mentor"});
+
+    // loop through each user in db
+    matchingMentors.forEach(matchingMentor => {
+
+      let score = 0;
+
+      // loop through each area in the looped user document
+      matchingMentor.areas.forEach(area => {
+
+        // for each area in the user's areas list, check if the area matches
+        if (currentMentee.areas.includes(area)) {
+          score += 3;
+        }
+      });
+
+    let mentorAndScore = {
+      person: matchingMentor,
+      score: score
+    };
+
+    scoredMatches.push(mentorAndScore);
+    });
+  } else {
+
+    const currentMentor = await User.findOne({_id: req.user._id});
+    const matchingMentees = await User.find({classification: "Mentee"});
+
+    // loop through each user in db
+    matchingMentees.forEach(matchingMentee => {
+
+      let score = 0;
+
+      // loop through each area in the looped user document
+      matchingMentee.areas.forEach(area => {
+
+        // for each area in the user's areas list, check if the area matches
+        if (currentMentor.areas.includes(area)) {
+          score += 3;
+        }
+      });
+
+    let menteeAndScore = {
+      person: matchingMentee,
+      score: score
+    };
+
+    scoredMatches.push(menteeAndScore);
+    });
+  };
+
+
+  // sort matches in descending order based on the score
+  const sortedMatches = scoredMatches.sort(function(a,b){
+    return b.score - a.score;
+  });
+
+  const matches = sortedMatches.slice(0, 10);
+
+  res.render("top_matches", {title: "Top Matches", matches});
+
 }

@@ -25,7 +25,7 @@ exports.sendForgotPassword = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "Mentor Match <noreply@mentormatch.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.user.email,
         subject: options.subject,
         html,
@@ -40,7 +40,7 @@ exports.sendRequest = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "Mentor Match <noreply@mentormatch.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.mentor.email,
         subject: options.subject,
         html,
@@ -55,8 +55,8 @@ exports.sendAccept = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "Mentor Match <noreply@mentormatch.com",
-        to: options.mentee.email,
+        from: "Mentor Match <noreply@mentormatch.com>",
+        to: [`${options.mentor.email}`, `${options.mentee.email}`],
         subject: options.subject,
         html,
         text
@@ -70,7 +70,7 @@ exports.sendDecline = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "Mentor Match <noreply@mentormatch.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.mentee.email,
         subject: options.subject,
         html,

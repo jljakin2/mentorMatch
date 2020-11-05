@@ -22,7 +22,7 @@ exports.menu = [{
     title: "Requests",
   },
   {
-    slug: "/top",
+    slug: "/top-matches",
     title: "Top Matches",
   },
   {

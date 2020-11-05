@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    .no-results-wrapper
-        no-results-content
-            h4.display-4 No results found. Please try again.
-            input.btn.btn-primary.mt-3(type="button" value="Try Again" onclick="history.back(-1)")
+    .container
+        h4.display-4.page-title Results
+        p.lead No results found. Please try again.
+        input.btn.btn-primary.mt-3(type="button" value="Try Again" onclick="history.back(-1)")

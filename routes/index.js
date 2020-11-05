@@ -39,6 +39,7 @@ router
     .post(
         userController.upload,
         catchErrors(userController.resize),
+        userController.atLeastSL1,
         userController.validateRegister,
         catchErrors(userController.register),
         authController.login
@@ -76,8 +77,14 @@ router
     .route("/search")
     // gets the search page so the user can search for other users based on basic and advanced criteria
     .get(authController.isLoggedIn, userController.searchForm)
-    // gets the results from the user's search query and displays them ***********TODO add pagination
     .post(catchErrors(userController.searchResults));
+
+
+// router
+//     .route("/search/:query")
+//     .get(userController.getSearchResults)
+//     // gets the results from the user's search query and displays them
+//     .post(catchErrors(userController.searchResults));
 
 // === REQUESTS ===
 router
@@ -91,11 +98,15 @@ router
 
 router
     .route("/accept/:userId")
-    .post(catchErrors(requestsController.acceptRequest));
+    .post(catchErrors(requestsController.isAcceptedAlready), catchErrors(requestsController.acceptRequest));
 
 router
     .route("/decline/:userId")
     .post(catchErrors(requestsController.declineRequest));
+
+router
+    .route("/top-matches")
+    .get(catchErrors(userController.findTopMatches));
 
 // exports all of these routes so we can use them on the app.js file
 module.exports = router;

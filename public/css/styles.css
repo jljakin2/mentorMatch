@@ -123,10 +123,9 @@ body {
 
 /* ========== Home route ========== */
 .home {
-  min-height: 100vh;
+  align-items: flex-end;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .hero-jumbo {
@@ -332,87 +331,8 @@ body {
   padding: 1.2rem;
 }
 
-/* PERSONAL INFO */
-/* .profile-section {
-  margin-bottom: 3.5rem;
-}
-
-.profile-section-title {
-  font-size: 2.75rem;
-  margin-bottom: 1rem;
-}
-
-.section-container {
-  background: #fff;
-  border-radius: 1%;
-} */
-
 /* ===== ACCOUNT VIEW ===== */
-/* .profile-view-container {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "header "
-    "personal"
-    "answer";
-  row-gap: 2rem;
-}
 
-.contact-card {
-  background: #fff;
-  display: flex;
-  grid-area: header;
-  margin-top: 1.5rem;
-  padding: 2rem;
-  text-align: center;
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 2.5rem;
-  text-align: left;
-}
-
-.profile-picture {
-  border-radius: 50%;
-  height: 10rem;
-  width: 10rem;
-}
-
-.profile-view-buttons {
-  margin-left: auto;
-}
-
-.contact-card h2 {
-  display: flex;
-  font-size: 3rem;
-}
-
-.badge {
-  font-size: 0.7rem;
-  margin-left: 0.6rem;
-  vertical-align: top;
-}
-
-.contact-card h4 {
-  font-size: 1.3rem;
-}
-
-.personal-card {
-  background: #fff;
-  grid-area: personal;
-  padding: 2rem;
-}
-
-.open-card {
-  background: #fff;
-  grid-area: answer;
-  padding: 2rem;
-  margin-bottom: 2rem;
-} */
 .section-header {
   font-size: 2.2rem;
   text-align: center;
@@ -461,11 +381,21 @@ body {
   text-align: center;
 }
 
-.profile-picture {
+.profile-picture-container {
+  align-items: flex-start;
+  background: #f5f5f5;
   border-radius: 50%;
+  display: flex;
   height: 20rem;
+  justify-content: center;
   margin-bottom: 1rem;
+  overflow: hidden;
   width: 20rem;
+}
+
+.profile-picture {
+  height: 110%;
+  width: auto;
 }
 
 .profile-subtitle {
@@ -726,17 +656,21 @@ body {
     width: 100%;
   }
 
-  .card-avatar {
+  .profile-avatar-container {
+    align-items: flex-start;
+    background: #f5f5f5;
     border-radius: 50%;
-    height: 7rem;
+    display: flex;
+    height: 6.7rem;
+    justify-content: center;
     margin-top: 1rem;
     overflow: hidden;
-    width: 7rem;
+    width: 6.7rem;
   }
 
-  .card-avatar img {
-    height: 100%;
-    width: 100%;
+  .profile-avatar {
+    height: 105%;
+    width: auto;
   }
 
   .card-name-title {

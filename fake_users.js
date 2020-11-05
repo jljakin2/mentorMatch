@@ -324,8 +324,8 @@ const linkedIn = "https://www.linkedin.com/in/jeff-jakinovich-b6b14943/"
 const terms = "yes";
 
 
-
-for (let id = 1; id <= 30; id++) {
+// change value HERE to adjust how many users are created
+for (let id = 1; id <= 50; id++) {
 
     const user = new Object();
 

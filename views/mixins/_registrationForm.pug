@@ -8,7 +8,7 @@ mixin registrationForm()
                 .row.pl-3
                     .form-group.col
                         label.form-check-label(for="mentorMentee")
-                        select#mentorMentee.form-control(name="classification")
+                        select#mentorMentee.form-control(name="classification" required)
                             option(selected disabled) Please Select
                             option(value="Mentor") Mentor
                             option(value="Mentee") Mentee
@@ -19,89 +19,111 @@ mixin registrationForm()
             h2.info-section-header Contact Information
             .row
                 .form-group.col-lg-6
-                    label(for='firstName') First Name
-                    input#firstName.form-control(type='text' name="firstName" value=(user ? user.firstName : "") required)
+                    label(for='firstName')
+                        | First Name
+                        span.required *
+                    input#firstName.form-control(type='text' name="firstName" value=((user ? user.firstName : "") || (body ? body.firstName : "")) required)
                 .form-group.col-lg-6
-                    label(for='lastName') Last Name
-                    input#lastName.form-control(type='text' name="lastName" value=(user ? user.lastName : "") required)
+                    label(for='lastName')
+                        | Last Name
+                        span.required *
+                    input#lastName.form-control(type='text' name="lastName" value=((user ? user.lastName : "") || (body ? body.lastName : "")) required)
             .row
                 .form-group.col-lg-8
-                    label(for='email') Email
-                    input#email.form-control(type='email' name="email" value=(user ? user.email : "") required)
+                    label(for='email')
+                        | Email
+                        span.required *
+                    input#email.form-control(type='email' name="email" value=((user ? user.email : "") || (body ? body.email : "")) required)
                 .form-group.col-lg-4
-                    label(for='phone') Phone Number
-                    input#phone.form-control.input-phone(type='tel' name="phone" value=(user ? user.phone : "") required)
+                    label(for='phone')
+                        | Phone Number
+                        span.required *
+                    input#phone.form-control.input-phone(type='tel' name="phone" value=((user ? user.phone : "") || (body ? body.phone : "")) required)
 
 
         .info-section.shadow-sm
             h2.info-section-header Personal Information
             .row
                 .form-group.col-lg-6
-                    label(for='location') Location
-                    select#location.form-control(name="location")
+                    label(for='location')
+                        | Location
+                        span.required *
+                    select#location.form-control(name="location" required)
                         option(selected='' disabled='') Please Select
                         for location in h.locations
-                            if (user ? user.location : "") === location
+                            if ((user ? user.location : "") || (body ? body.location : "")) === location
                                 option(value=location selected) #{location}
                             else
                                 option(value=location) #{location}
 
                 .form-group.col-lg-6
-                    label(for='country') Country
-                    select#country.form-control(name="country")
+                    label(for='country')
+                        | Country
+                        span.required *
+                    select#country.form-control(name="country" required)
                         option(selected='' disabled='') Please Select
                         for country in h.countries
-                            if (user ? user.country : "") === country
+                            if ((user ? user.country : "") || (body ? body.country : "")) === country
                                 option(value=country selected) #{country}
                             else
                                 option(value=country) #{country}
             .row
                 .form-group.col-lg-6
-                    label(for='division') Division
-                    select#division.form-control(name="division")
+                    label(for='division')
+                        | Division
+                        span.required *
+                    select#division.form-control(name="division" required)
                         option(selected='' disabled='') Please Select
                         for division in h.divisions
-                            if (user ? user.division : "") === division
+                            if ((user ? user.division : "") || (body ? body.division : "")) === division
                                 option(value=division selected) #{division}
                             else
                                 option(value=division) #{division}
 
                 .form-group.col-lg-6
-                    label(for='department') Department/Function
-                    select#department.form-control(name="department")
+                    label(for='department')
+                        | Department/Function
+                        span.required *
+                    select#department.form-control(name="department" required)
                         option(selected='' disabled='') Please Select
                         for department in h.departments
-                            if (user ? user.department : "") === department
+                            if ((user ? user.department : "") || (body ? body.department : "")) === department
                                 option(value=department selected) #{department}
                             else
                                 option(value=department) #{department}
             .row
                 .form-group.col-lg-4
-                    label(for='level') Job Level
-                    select#level.form-control(name="level")
+                    label(for='level')
+                        | Job Level
+                        span.required *
+                    select#level.form-control(name="level" required)
                         option(selected='' disabled='') Please Select
                         for jobLevel in h.jobLevels
-                            if (user ? user.level : "") === jobLevel
+                            if ((user ? user.level : "") || (body ? body.level : "")) === jobLevel
                                 option(value=jobLevel selected) #{jobLevel}
                             else
                                 option(value=jobLevel) #{jobLevel}
 
                 .form-group.col-lg-4
-                    label(for='yearsWithCompany') Years with Company
-                    select#yearsWithCompany.form-control(name="yearsWithCompany")
+                    label(for='yearsWithCompany')
+                        | Years with Company
+                        span.required *
+                    select#yearsWithCompany.form-control(name="yearsWithCompany" required)
                         option(selected='' disabled='') Please Select
                         for year in h.years
-                            if (user ? user.yearsWithCompany : "") === year
+                            if ((user ? user.yearsWithCompany : "") || (body ? body.yearsWithCompany : "")) === year
                                 option(value=year selected) #{year}
                             else
                                 option(value=year) #{year}
 
                 .form-group.col-lg-4
-                    label(for='yearsInCurrentPosition') Years in Current Position
-                    select#yearsInCurrentPosition.form-control(name="yearsInCurrentPosition")
+                    label(for='yearsInCurrentPosition')
+                        | Years in Current Position
+                        span.required *
+                    select#yearsInCurrentPosition.form-control(name="yearsInCurrentPosition" required)
                         option(selected='' disabled='') Please Select
                         for year in h.years
-                            if (user ? user.yearsCurrentPosition : "") === year
+                            if ((user ? user.yearsCurrentPosition : "") || (body ? body.yearsCurrentPosition : "")) === year
                                 option(value=year selected) #{year}
                             else
                                 option(value=year) #{year}
@@ -113,7 +135,7 @@ mixin registrationForm()
                             label(for='areasForDevelopment') Areas for Development (you can select multiple)
                             select#areasForDevelopment.form-control.selectpicker(multiple='' name="areas")
                                 for area in h.areas
-                                    if (user ? user.areas.includes(area) : false)
+                                    if ((user ? user.areas.includes(area) : false) || (body ? body.areas.includes(area) : false))
                                         option(value=area selected) #{area}
                                     else
                                         option(value=area) #{area}
@@ -123,7 +145,7 @@ mixin registrationForm()
                             label(for='areasOfExpertise') Areas of Expertise (you can select multiple)
                             select#areasOfExpertise.form-control.selectpicker(multiple='' name="areas")
                                 for area in h.areas
-                                    if (user ? user.areas.includes(area) : false)
+                                    if ((user ? user.areas.includes(area) : false) || (body ? body.areas.includes(area) : false))
                                         option(value=area selected) #{area}
                                     else
                                         option(value=area) #{area}
@@ -134,7 +156,7 @@ mixin registrationForm()
                         label(for='areasForDevelopment') Areas for Development (you can select multiple)
                         select#areasForDevelopment.form-control.selectpicker(multiple='' name="areas")
                             for area in h.areas
-                                if (user ? user.areas.includes(area) : false)
+                                if ((user ? user.areas.includes(area) : false) || (body ? body.areas.includes(area) : false))
                                     option(value=area selected) #{area}
                                 else
                                     option(value=area) #{area}
@@ -144,39 +166,42 @@ mixin registrationForm()
                         label(for='areasOfExpertise') Areas of Expertise (you can select multiple)
                         select#areasOfExpertise.form-control.selectpicker(multiple='' name="areas")
                             for area in h.areas
-                                if (user ? user.areas.includes(area) : false)
+                                if ((user ? user.areas.includes(area) : false) || (body ? body.areas.includes(area) : false))
                                     option(value=area selected) #{area}
                                 else
                                     option(value=area) #{area}
             .row
                 .form-group.col-lg-6
                     label(for='languages') Languages (you can select multiple)
-                    select#languages.form-control.selectpicker(multiple='' name="languages")
+
+                    select#languages.form-control.selectpicker(multiple='' name="languages" required)
                         for language in h.languages
-                            if (user ? user.languages.includes(language) : false)
+                            if ((user ? user.languages.includes(language) : false) || (body ? body.languages.includes(language) : false))
                                 option(value=language selected) #{language}
                             else
                                 option(value=language) #{language}
                 .form-group.col-lg-6
-                    label(for='education') Education Level
-                    select#education.form-control(name="education")
+                    label(for='education')
+                        | Education Level
+                        span.required *
+                    select#education.form-control(name="education" required)
                         option(selected='' disabled='') Please Select
                         for educationLevel in h.educationLevels
-                            if (user ? user.education : "") === educationLevel
+                            if ((user ? user.education : "") || (body ? body.education : "")) === educationLevel
                                 option(value=educationLevel selected) #{educationLevel}
                             else
                                 option(value=educationLevel) #{educationLevel}
             .row
                 .form-group.col-lg-6
                     label(for='certifications') Certifications / Memberships
-                    input#certifications.form-control(type='text' name="certifications" value=(user ? user.certifications : ""))
+                    input#certifications.form-control(type='text' name="certifications" value=((user ? user.certifications : "") || (body ? body.certifications : "")))
                 .form-group.col-lg-6
                     label(for='communityService') Community Service
-                    input#communityService.form-control(type='text' name="communityService" value=(user ? user.communityService : ""))
+                    input#communityService.form-control(type='text' name="communityService" value=((user ? user.communityService : "") || (body ? body.communityService : "")))
             .row
                 .form-group.col
                     label(for='linkedin') LinkedIn Profile URL (if you have one)
-                    input#linkedin.form-control(type='url' name="linkedin" value=(user ? user.linkedin : ""))
+                    input#linkedin.form-control(type='url' name="linkedin" value=((user ? user.linkedin : "") || (body ? body.linkedin : "")))
 
 
         .info-section.shadow-sm
@@ -186,30 +211,30 @@ mixin registrationForm()
                     .row
                         .form-group.col
                             label(for='whyMentor') Why do you want to be a mentor?
-                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= user ? user.whyMentor : ""
+                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= (user ? user.whyMentor : "") || (body ? body.whyMentor : "")
                 else
                     .row
                         .form-group.col
                             label(for='whyMentee') Why do you want to be a mentee?
-                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= user ? user.whyMentee : ""
+                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= (user ? user.whyMentee : "") || (body ? body.whyMentee : "")
             else
                 .row#mentorQuestion(style="display: none")
                         .form-group.col
                             label(for='whyMentor') Why do you want to be a mentor?
-                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= user ? user.whyMentor : ""
+                            textarea#whyMentor.form-control(rows='3', name="whyMentor")= (user ? user.whyMentor : "") || (body ? body.whyMentor : "")
                 .row#menteeQuestion(style="display: none")
                         .form-group.col
                             label(for='whyMentee') Why do you want to be a mentee?
-                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= user ? user.whyMentee : ""
+                            textarea#whyMentee.form-control(rows='3', name="whyMentee")= (user ? user.whyMentee : "") || (body ? body.whyMentee : "")
 
             .row
                 .form-group.col
                     label(for='communicationMethod') What process would you like to use for the mentorship (email, phone, in person, etc.)?
-                    textarea#communicationMethod.form-control(rows='3', name="mentorshipProcess")= user ? user.mentorshipProcess: ""
+                    textarea#communicationMethod.form-control(rows='3', name="mentorshipProcess")= (user ? user.mentorshipProcess: "") || (body ? body.mentorshipProcess : "")
             .row
                 .form-group.col
                     label(for='goals') What specific goals are you looking to work on during the 6 month partnership?
-                    textarea#goals.form-control(rows='3', name="goals")= user ? user.goals : ""
+                    textarea#goals.form-control(rows='3', name="goals")= (user ? user.goals : "") || (body ? body.goals : "")
 
 
         .info-section.shadow-sm
@@ -227,16 +252,20 @@ mixin registrationForm()
             if !user
                 .row
                     .form-group.col
-                        label(for="password") Password
+                        label(for="password")
+                            | Password
+                            span.required *
                         span.doNotMatch.hide.ml-3 Passwords do not match
                         span.match.hide.ml-3 Passwords match!
-                        input.form-control#password(name="password" type="password")
-                        label.mt-4(for="confirm-password") Confirm Password
-                        input.form-control#confirm-password(name="confirm-password" type="password")
+                        input.form-control#password(name="password" type="password" required)
+                        label.mt-4(for="confirm-password")
+                            | Confirm Password
+                            span.required *
+                        input.form-control#confirm-password(name="confirm-password" type="password" required)
 
         if !user
             .info-section.shadow-sm
-                p I have read and agree to abide by the Terms of Use for the Mentor Match system.
+                p I have read and agree to abide by the Terms of Use for the Mentor Match platform.
                 .form-check.form-check-inline
                     input#termsYes.form-check-input(type='radio' name='terms' value='yes')
                     label.form-check-label(for='termsYes') Yes
@@ -246,7 +275,7 @@ mixin registrationForm()
 
         p(aria-hidden="true")
         span.required *
-        | Required Field
+        |  Required Field
         br
         br
 

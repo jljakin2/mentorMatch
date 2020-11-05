@@ -1,5 +1,21 @@
 extends email-layout
 
 block content
-    h2 #{mentor.firstName} #{mentor.lastName} has declined your mentorship request
-    +button("/requests", "Respond")
+    p Dear
+        strong  #{mentee.firstName},
+    p Thank you for requesting a mentor through Mentor Match.
+    p Your request to
+        strong  #{mentor.firstName} #{mentor.lastName}
+        |  has been declined but we encourage you to take the opportunity to search for a different mentor candidate that better serves your needs.
+    p Please request a different mentor candidate within the next 3 business days. Click the button below to start your search.
+    +button(searchURL, "Search Mentors")
+    p
+        strong If you do not request a new mentor, you will not be able to participate in this cycle of the mentoring program.
+    br
+    hr
+    p
+    | If you have questions, please use the button below.
+    strong  DO NOT
+    |  respond to this email directly.
+    br
+    +button("mailto: RBNA.Mentoring@us.bosch.com", "Email Us!")

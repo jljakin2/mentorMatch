@@ -1,26 +1,28 @@
-mixin userVerticalCard(result = {})
+mixin userVerticalCard(match = {})
     .user-card.shadow
         .card-header
-            .card-avatar
-                a(href="#")
-                    if result.profilePicture
-                        if result.profilePicture.split(":")[0] === "https"
-                            img(src=result.profilePicture)
-                        else
-                            img(src=`/uploads/${result.profilePicture}`)
-                    else
-                        img(src="/uploads/profile-placeholder.jpg")
+            if match.person.profilePicture
+                if match.person.profilePicture.split(":")[0] === "https"
+                    .profile-avatar-container
+                        img.profile-avatar(src=match.person.profilePicture)
+                else
+                    .profile-avatar-container
+                        img.profile-avatar(src=`/uploads/${match.person.profilePicture}`)
+            else
+                .profile-avatar-container
+                    img.profile-avatar(src="/uploads/profile-placeholder.jpg")
             .card-name-title
-                h4 #{result.firstName} #{result.lastName}
-                h5.card-subtitle #{result.department}
+                h4 #{match.person.firstName} #{match.person.lastName}
+                h5.card-subtitle #{match.person.department}
             .card-button-container
-                .btn.btn-primary.button Request
+                a(href=`/account/${match.person.slug}`)
+                    .btn.btn-outline-primary.button View Profile
         .card-content
-            h5.content-secondary #{result.level}
-            h5.content-secondary #{result.division}
-            h5.content-secondary #{result.location}
+            h5.content-secondary #{match.person.level}
+            h5.content-secondary #{match.person.division}
+            h5.content-secondary #{match.person.location}
         .card-buttons
-            a.card-button-link(href="https://google.com")
+            a.card-button-link(href=`mailto: ${match.person.email}`)
                 i.far.fa-envelope.fa-2x
-            a.card-button-link(href="https://google.com")
+            a.card-button-link(href=`${match.person.linkedin}`)
                 i.fab.fa-linkedin.fa-2x.ml-2

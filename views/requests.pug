@@ -2,7 +2,10 @@ extends layout
 
 block content
     .container
-        h2.display-4.text-center Manage Requests
+        if (user.classification) === "Mentee"
+            h2.display-4.text-center View Requests
+        else
+            h2.display-4.text-center Manage Requests
         //- ===== MENTEE VIEW =====
         if (user.classification === "Mentee")
             .match-level
@@ -132,9 +135,15 @@ block content
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentee.firstName} #{request.mentee.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()
-                                form(action=`/accept/${request.mentee._id}` method="POST")
-                                    button.btn.btn-success.mr-3 Accept
-                                form(action=`/decline/${request.mentee._id}` method="POST")
+
+                                //- makes sure the "accept" button is only shown when the mentor doesn't have any accepted requests and the mentee hasn't accepted any requests
+                                if (!mentorRequests.some(request => request.status === 2) && (!request.mentee.requests.some(request => request.status === 2)))
+                                    form(action=`/accept/${request.mentee._id}` method="POST" onsubmit=`return confirm('Are you sure you want to accept the request from ${request.mentee.firstName} ${request.mentee.lastName}?')`)
+                                        button.btn.btn-success.mr-3 Accept
+                                //- if just the mentee has an accepted request we will show the mentor that the mentee is already matched
+                                if (request.mentee.requests.some(request => request.status === 2))
+                                    input.btn.btn-outline-success.mr-3(type="button" value="Matched" disabled)
+                                form(action=`/decline/${request.mentee._id}` method="POST" onsubmit=`return confirm('Are you sure you want to decline the request from ${request.mentee.firstName} ${request.mentee.lastName}?')`)
                                     button.btn.btn-outline-danger.mr-3 Decline
                                 a(href=`/account/${request.mentee.slug}`)
                                     button.btn.btn-outline-secondary View Profile

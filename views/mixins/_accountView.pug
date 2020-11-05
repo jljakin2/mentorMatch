@@ -6,29 +6,55 @@ mixin accountView(account = {})
             .profile-header-content
                 if account.profilePicture
                     if account.profilePicture.split(":")[0] === "https"
-                        img.profile-picture(src=account.profilePicture)
+                        .profile-picture-container
+                            img.profile-picture(src=account.profilePicture)
                     else
-                        img.profile-picture(src=`/uploads/${account.profilePicture}`)
+                        .profile-picture-container
+                            img.profile-picture(src=`/uploads/${account.profilePicture}`)
                 else
-                    img.profile-picture(src="/uploads/profile-placeholder.jpg")
+                    .profile-picture-container
+                        img.profile-picture(src="/uploads/profile-placeholder.jpg")
                 h2.display-4.profile-name #{account.firstName} #{account.lastName}
                 h4.display-4.profile-subtitle #{account.department}
 
-                //- set of conditionals and checks that do the following: 1) makes sure user is a mentee, the account is one of a mentor, and the user and account are not the same person
-                //- 2) compares lists of requests and if the user and the account share a request, that means the mentee has already requested that mentor so we show a different button
+                //- Logic that checks to make sure user is allowed to see the request feature which means they are a mentee. Also checks that the mentor
+                //- that is being viewed hasn't already been requested by the user and that the mentor isn't at the limit of matches
                 if account.classification === "Mentor" && user.id !== account.id && user.classification === "Mentee"
                     - const userRequests = user.requests.map(obj => obj.toString())
-                    - const accountRequests = account.requests.map(obj => obj.toString())
+                    - const accountPreRequests = []
+
+                    //- loop that takes the id from each request since we had to populate the requests in the User model
+                    each request in account.requests
+                        - accountPreRequests.push(request._id)
+
+                    - const accountRequests = accountPreRequests.map(obj => obj.toString())
                     - let alreadyRequested = false
+                    - let alreadyMatched = false
+
+                    //- loop that checks if the mentee has already requested the mentor
                     each userRequest in userRequests
                         if (accountRequests.includes(userRequest))
                             - alreadyRequested = true
                             - break
                         else
                             - continue
+
+                    //- loop that checks if the mentor has any matches
+                    each request in account.requests
+                        if request.status === 2
+                            - alreadyMatched = true
+                            - break
+                        else
+                            - continue
+
                     //- show requested button
-                    if (alreadyRequested)
+                    if (alreadyRequested && alreadyMatched)
+                        input.btn.btn-outline-success(type="button" value="Matched" disabled)
+
+                    //- show matched button
+                    else if (alreadyRequested)
                         input.btn.btn-outline-secondary(type="button" value="Requested" disabled)
+
                     //- allow user to request that particular mentor
                     else
                         form.request-form(action=`/request/${account.id}` method="POST" onsubmit=`return confirm('Are you sure you want to send this request to ${account.firstName} ${account.lastName}?')`)

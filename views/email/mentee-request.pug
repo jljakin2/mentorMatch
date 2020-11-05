@@ -1,5 +1,20 @@
 extends email-layout
 
 block content
-    h2 #{mentee.firstName} #{mentee.lastName} has sent you a request to be their mentor.
-    +button("/requests", "Respond")
+    p Dear
+        strong  #{mentor.firstName},
+    p
+    strong #{mentee.firstName} #{mentee.lastName}
+    |   has requested you as a mentor in the RBNA mentoring program. Click the button below to manage your requests.
+    +button(manageRequestsURL, "Manage Requests")
+    p
+        strong Please accept or decline the request within 4 business days.
+    p We wish you a successful experience and thank you for being a mentor!
+    br
+    hr
+    p
+    | If you have questions, please use the button below.
+    strong  DO NOT
+    |  respond to this email directly.
+    br
+    +button("mailto: RBNA.Mentoring@us.bosch.com", "Email Us!")

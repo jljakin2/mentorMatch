@@ -1,5 +1,25 @@
 extends email-layout
 
 block content
-    h2 #{mentor.firstName} #{mentor.lastName} has accepted your mentorship request
-    +button("/requests", "Respond")
+    p Dear
+        strong  #{mentor.firstName}
+        |  and
+        strong  #{mentee.firstName},
+    p Congratulations!
+    p
+        strong You have been matched with each other in the RBNA Mentoring Program!
+    p Next steps:
+        ol
+            li @#{mentee.firstName} #{mentee.lastName} be sure to schedule your first meeting with #{mentor.firstName} #{mentor.lastName} within the next two weeks.
+            li Both mentor and mentee should complete the 13 questions in the Bosch Mentoring dashboard
+            li To set your partnership up for success, be sure to review and discuss the 13 questions together in your first meeting.
+
+    p We wish you a successful partnership!
+    br
+    hr
+    p
+    | If you have questions, please use the button below.
+    strong  DO NOT
+    |  respond to this email directly.
+    br
+    +button("mailto: RBNA.Mentoring@us.bosch.com", "Email Us!")

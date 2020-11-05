@@ -5,7 +5,8 @@ include mixins/_userVerticalCard
 block content
     .container
         h4.display-4.page-title Top Matches
-        p.lead Here are your top matches
+        p.lead.text-center Here are your top 10 matches
+        //- pre= h.dump(matches)
         .card-container
-                for result in results
-                    +userVerticalCard(result)
+                for match in matches
+                    +userVerticalCard(match)

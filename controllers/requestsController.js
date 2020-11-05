@@ -7,7 +7,7 @@ const mail = require("../handlers/mail")
 exports.manageRequests = async (req, res) => {
 
     if (req.user.classification === "Mentee") {
-        let menteeRequests = await Request.find({
+        const menteeRequests = await Request.find({
             mentee: req.user._id,
         })
         .populate("mentor")
@@ -17,10 +17,10 @@ exports.manageRequests = async (req, res) => {
             title: "Manage Requests", menteeRequests
         });
     } else {
-        let mentorRequests = await Request.find({
+        const mentorRequests = await Request.find({
             mentor: req.user._id,
         })
-        .populate("mentee")
+        .populate({path: "mentee", model: "User", populate: {path: "requests", model: "Request"}})
         .exec();
 
         res.render("requests", {
@@ -29,8 +29,7 @@ exports.manageRequests = async (req, res) => {
     }
 
 
-}
-
+};
 
 exports.addRequest = async (req, res) => {
     // save new request
@@ -52,7 +51,7 @@ exports.addRequest = async (req, res) => {
     context: "query"}).exec();
 
     // update mentee model with new request id
-    const updatedMentee = User.findOneAndUpdate({
+    const updatedMentee = await User.findOneAndUpdate({
         _id: req.user._id,
     }, {
         $addToSet: {
@@ -64,15 +63,27 @@ exports.addRequest = async (req, res) => {
     // send email notification to mentor that the mentee has requested them
     const mentor = await User.findOne({_id: req.params.userId})
     const mentee = await User.findOne({_id: req.user._id})
+    const manageRequestsURL = `http://${req.headers.host}/requests`;
     await mail.sendRequest({
         mentor,
         subject: "Mentee Request",
-        mentee,
+        mentee, mentor, manageRequestsURL,
         filename: "mentee-request"
     })
 
     req.flash("success", `Request has been sent to ${updatedMentor.firstName} ${updatedMentor.lastName}`)
     res.redirect("back");
+};
+
+exports.isAcceptedAlready = async (req, res, next) => {
+    const existingRequests = await User.findOne({_id: req.params.userId}).populate("requests").exec();
+
+    if (existingRequests.requests.some(request => request.status === 2)) {
+        req.flash("error", "Uh oh! Looks like that user has already been matched with someone else.")
+        res.redirect("back");
+    } else {
+        return next();
+    }
 };
 
 exports.acceptRequest = async (req, res) => {
@@ -81,7 +92,7 @@ exports.acceptRequest = async (req, res) => {
     const acceptedRequests = await Request.find({mentor: req.user._id, status: 2})
 
     // check if there is more than one accepted request
-    if (acceptedRequest.length > 0) {
+    if (acceptedRequests.length > 0) {
         req.flash("error", "You can only accept one mentee.")
         res.redirect("back")
     } else {
@@ -89,10 +100,11 @@ exports.acceptRequest = async (req, res) => {
 
         const mentee = await User.findOne({_id: req.params.userId})
         const mentor = await User.findOne({_id: req.user._id})
+
         await mail.sendAccept({
-            mentee,
+            mentee, mentor,
             subject: "Mentorship Accepted",
-            mentor,
+            mentor, mentee,
             filename: "mentee-accept"
         })
 
@@ -101,24 +113,25 @@ exports.acceptRequest = async (req, res) => {
 
     }
 
-}
+};
 
 exports.declineRequest = async (req, res) => {
     // find the request and update the status to declined
-    const declinedRequest = await Request.findByIdAndUpdate({mentee: req.params.userId, mentor: req.user._id}, {status: 0}, {new: true});
+    const declinedRequest = await Request.findOneAndUpdate({mentee: req.params.userId, mentor: req.user._id}, {status: 0}, {new: true});
 
     const mentee = await User.findOne({_id: req.params.userId})
     const mentor = await User.findOne({_id: req.user._id})
+    const searchURL = `http://${req.headers.host}/search`;
     await mail.sendDecline({
         mentee,
         subject: "Mentorship Declined",
-        mentor,
+        mentor, searchURL,
         filename: "mentee-decline"
     })
 
     req.flash("success", "Request has been successfully declined. A notification has been sent to the mentee.");
     res.redirect("back");
-}
+};
 
 
 

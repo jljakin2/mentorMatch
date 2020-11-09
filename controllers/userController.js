@@ -20,9 +20,14 @@ const multerOptions = {
 };
 
 exports.homePage = (req, res) => {
-  res.render("home", {
-    title: "Home",
-  });
+  // checks to see if user is logged in so when they go to the home route, they are redirected to their dashboard home
+  if (req.isAuthenticated()) {
+    res.redirect("/welcome");
+  } else {
+    res.render("home", {
+      title: "Home",
+    });
+  };
 };
 
 exports.registerForm = (req, res) => {

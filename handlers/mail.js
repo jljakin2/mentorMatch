@@ -1,17 +1,27 @@
 const nodemailer = require("nodemailer");
+const sgTransport = require('nodemailer-sendgrid-transport');
 const pug = require("pug");
 const juice = require("juice");
 const htmlToText = require("html-to-text");
 const promisify = require("es6-promisify");
 
-const transport = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
+const options = {
     auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-    },
-});
+      api_user: process.env.SENDGRID_USERNAME,
+      api_key: process.env.SENDGRID_PASSWORD
+    }
+  }
+
+const transport = nodemailer.createTransport(sgTransport(options));
+
+// const transport = nodemailer.createTransport(sgTransport(options){
+//     host: process.env.MAIL_HOST,
+//     port: process.env.MAIL_PORT,
+//     auth: {
+//         user: process.env.MAIL_USER,
+//         pass: process.env.MAIL_PASS,
+//     },
+// });
 
 // make sure template can be connected so it renders in the sent mail
 const generateHTML = (filename, options = {}) => {

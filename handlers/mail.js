@@ -5,14 +5,14 @@ const juice = require("juice");
 const htmlToText = require("html-to-text");
 const promisify = require("es6-promisify");
 
-const options = {
+const emailOptions = {
     auth: {
       api_user: process.env.SENDGRID_USERNAME,
       api_key: process.env.SENDGRID_PASSWORD
     }
   }
 
-const transport = nodemailer.createTransport(sgTransport(options));
+const transport = nodemailer.createTransport(sgTransport(emailOptions));
 
 // const transport = nodemailer.createTransport(sgTransport(options){
 //     host: process.env.MAIL_HOST,

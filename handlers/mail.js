@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
+// const sgTransport = require('nodemailer-sendgrid-transport');
+const postmarkTransport = require('nodemailer-postmark-transport');
 const pug = require("pug");
 const juice = require("juice");
 const htmlToText = require("html-to-text");
@@ -7,12 +8,11 @@ const promisify = require("es6-promisify");
 
 const emailOptions = {
     auth: {
-      api_user: process.env.SENDGRID_USERNAME,
-      api_key: process.env.SENDGRID_PASSWORD
+      api_key: process.env.POSTMARKAPI
     }
   }
 
-const transport = nodemailer.createTransport(sgTransport(emailOptions));
+const transport = nodemailer.createTransport(postmarkTransport(emailOptions));
 
 // const transport = nodemailer.createTransport(sgTransport(options){
 //     host: process.env.MAIL_HOST,

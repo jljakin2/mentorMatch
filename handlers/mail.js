@@ -1,27 +1,17 @@
 const nodemailer = require("nodemailer");
-const sgTransport = require('nodemailer-sendgrid-transport');
 const pug = require("pug");
 const juice = require("juice");
 const htmlToText = require("html-to-text");
 const promisify = require("es6-promisify");
 
-const emailOptions = {
+const transport = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     auth: {
-      api_user: process.env.SENDGRID_USERNAME,
-      api_key: process.env.SENDGRID_PASSWORD
-    }
-  }
-
-const transport = nodemailer.createTransport(sgTransport(emailOptions));
-
-// const transport = nodemailer.createTransport(sgTransport(options){
-//     host: process.env.MAIL_HOST,
-//     port: process.env.MAIL_PORT,
-//     auth: {
-//         user: process.env.MAIL_USER,
-//         pass: process.env.MAIL_PASS,
-//     },
-// });
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+    },
+});
 
 // make sure template can be connected so it renders in the sent mail
 const generateHTML = (filename, options = {}) => {
@@ -35,7 +25,7 @@ exports.sendForgotPassword = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "jeff.jak13@gmail.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.user.email,
         subject: options.subject,
         html,
@@ -50,7 +40,7 @@ exports.sendRequest = async (options) => {
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "jeff.jak13@gmail.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.mentor.email,
         subject: options.subject,
         html,
@@ -58,29 +48,29 @@ exports.sendRequest = async (options) => {
     };
     const sendMail = promisify(transport.sendMail, transport);
     return sendMail(mailOptions);
-}
+};
 
 exports.sendAccept = async (options) => {
     const html = generateHTML(options.filename, options);
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "jeff.jak13@gmail.com",
-        to: [`${options.mentor.email}`, `${options.mentee.email}`],
+        from: "Mentor Match <noreply@mentormatch.com>",
+        to: `${options.mentor.email}, ${options.mentee.email}`,
         subject: options.subject,
         html,
         text
     };
     const sendMail = promisify(transport.sendMail, transport);
     return sendMail(mailOptions);
-}
+};
 
 exports.sendDecline = async (options) => {
     const html = generateHTML(options.filename, options);
     const text = htmlToText.fromString(html);
 
     const mailOptions = {
-        from: "jeff.jak13@gmail.com",
+        from: "Mentor Match <noreply@mentormatch.com>",
         to: options.mentee.email,
         subject: options.subject,
         html,

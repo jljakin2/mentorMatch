@@ -9,7 +9,7 @@ block content
         //- ===== MENTEE VIEW =====
         if (user.classification === "Mentee")
             .match-level
-                h2.display-4.category-header
+                h2.display-4.category-header Accepted
                 if (menteeRequests.some(request => request.status === 2))
                     ul.list-group.shadow-sm-mb-4
                     for request in menteeRequests
@@ -88,7 +88,7 @@ block content
         //- ===== MENTOR VIEW =====
         else
             .match-level
-                h2.display-4.category-header
+                h2.display-4.category-header Accepted
                 if (mentorRequests.some(request => request.status === 2))
                     ul.list-group.shadow-sm-mb-4
                     for request in mentorRequests

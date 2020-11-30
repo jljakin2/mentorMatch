@@ -2,6 +2,7 @@ const express = require("express");
 const userController = require("../controllers/userController");
 const requestsController = require("../controllers/requestsController");
 const authController = require("../controllers/authController");
+const adminController = require("../controllers/adminController")
 const router = express.Router();
 const {
     catchErrors
@@ -54,7 +55,7 @@ router
 router
     .route("/account/:slug")
     // gets the account page for the user to review their account info
-    .get(authController.isLoggedIn, catchErrors(userController.getAccount));
+    .get(authController.isLoggedIn, catchErrors(userController.whichCountry), catchErrors(userController.getAccount));
 
 
 router
@@ -107,6 +108,16 @@ router
 router
     .route("/top-matches")
     .get(catchErrors(userController.findTopMatches));
+
+router
+    .route("/resources")
+    .get(userController.getResources);
+
+// ADMIN
+router
+    .route("/admin")
+    .get(adminController.adminCode);
+    // .post(adminController);
 
 // exports all of these routes so we can use them on the app.js file
 module.exports = router;

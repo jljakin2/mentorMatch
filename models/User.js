@@ -96,10 +96,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    mentorshipProcess: {
-        type: String,
-        trim: true
-    },
     goals: {
         type: String,
         trim: true
@@ -115,6 +111,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Request",
       }],
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true,
 });

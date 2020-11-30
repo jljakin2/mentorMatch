@@ -10,8 +10,13 @@ mixin userHorizontalCard(result = {})
                 img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
         //- img.thumbnail-profile-pic(src="assets/profile-placeholder.jpg" alt="profile picture of user")
         h4.thumbnail-profile-name #{result.firstName} #{result.lastName}
-            //- span.lead.badge-wrapper
-            //- span.badge.badge-pill.badge-success Available
+            span.lead.badge-wrapper
+                if result.classification === "Mentor"
+                    span.badge.badge-pill.badge-warning.ml-2
+                        | Mentor
+                else
+                    span.badge.badge-pill.badge-success.ml-2
+                        | Mentee
 
         .thumbnail-profile-buttons
             a(href=`/account/${result.slug}`)

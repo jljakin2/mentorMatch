@@ -16,6 +16,12 @@ mixin accountView(account = {})
                         img.profile-picture(src="/uploads/profile-placeholder.jpg")
                 h2.display-4.profile-name #{account.firstName} #{account.lastName}
                 h4.display-4.profile-subtitle #{account.department}
+                if account.classification === "Mentor"
+                    span.badge.badge-pill.badge-warning.badge-profile.mb-4
+                        | Mentor
+                else
+                    span.badge.badge-pill.badge-success.badge-profile.mb-4
+                        | Mentee
 
                 //- Logic that checks to make sure user is allowed to see the request feature which means they are a mentee. Also checks that the mentor
                 //- that is being viewed hasn't already been requested by the user and that the mentor isn't at the limit of matches
@@ -29,7 +35,9 @@ mixin accountView(account = {})
 
                     - const accountRequests = accountPreRequests.map(obj => obj.toString())
                     - let alreadyRequested = false
-                    - let alreadyMatched = false
+                    - let mentorAlreadyMatched = false
+                    - let menteeAlreadyMatched = false
+                    - let pendingRequestActive = false
 
                     //- loop that checks if the mentee has already requested the mentor
                     each userRequest in userRequests
@@ -41,19 +49,43 @@ mixin accountView(account = {})
 
                     //- loop that checks if the mentor has any matches
                     each request in account.requests
-                        if request.status === 2
-                            - alreadyMatched = true
+                        if (request.status === 2)
+                            - mentorAlreadyMatched = true
                             - break
                         else
                             - continue
 
-                    //- show requested button
-                    if (alreadyRequested && alreadyMatched)
+                    //- loop that checks if the mentee has any matches
+                    each fullUserRequest in fullUserRequests
+                        if (fullUserRequest.status === 2)
+                            - menteeAlreadyMatched = true
+                            - break
+                        else
+                            - continue
+
+                    //- loop that checks if the mentee has sent any requests that are still pending
+                    each fullUserRequest in fullUserRequests
+                        if (fullUserRequest.status === 1)
+                            - pendingRequestActive = true
+                            - break
+                        else
+                            - continue
+
+                    //- mentee is already matched so they can't request anyone else
+                    if (menteeAlreadyMatched)
+                        p Since you are already matched, you cannot request another match at this time.
+
+                    //- show Matched button
+                    else if (mentorAlreadyMatched)
                         input.btn.btn-outline-success(type="button" value="Matched" disabled)
 
-                    //- show matched button
+                    //- show Requested button
                     else if (alreadyRequested)
                         input.btn.btn-outline-secondary(type="button" value="Requested" disabled)
+
+                    //- show disabled button that tells mentee user that they have a pending request so they must wait for that request to be resolved
+                    else if (pendingRequestActive)
+                        input.btn.btn-outline-primary(type="button" value="You Are Awaiting Pending Request" disabled)
 
                     //- allow user to request that particular mentor
                     else
@@ -64,7 +96,7 @@ mixin accountView(account = {})
                     a(href=`/account/${user.slug}/edit`)
                         button.btn.btn-outline-secondary Edit Profile
 
-            pre=h.dump(alreadyRequested)
+
             .profile-header-buttons
                 .profile-email
                     a.card-button-link(href=`mailto:${account.email}`)
@@ -140,14 +172,11 @@ mixin accountView(account = {})
         .profile-questions
             h4.display-4.section-header Questions
             if account.classification === "Mentor" && account.whyMentor
-                h4 Why do you want to me a mentor?
+                h4 Why do you want to be a mentor?
                 p #{account.whyMentor}
             else if account.classification === "Mentee" && account.whyMentee
-                h4 Why do you want to me a mentee?
+                h4 Why do you want to be a mentee?
                 p #{account.whyMentee}
-            if account.mentorshipProcess
-                h4 How do you want to handle the mentor process?
-                p #{account.mentorshipProcess}
             if account.goals
-                h4 What are your goals for the next 6 months?
+                h4 What specific goals are you looking to work on during the 6 month partnership?
                 p #{account.goals}

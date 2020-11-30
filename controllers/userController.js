@@ -143,18 +143,38 @@ exports.welcome = (req, res) => {
   res.render("welcome", {
     title: "Welcome"
   });
-}
+};
+
+exports.whichCountry = async (req, res, next) => {
+  const mexico = ["Mexico"];
+  const northern = ["USA", "Canada"];
+
+  const account = await User.findOne({slug: req.params.slug});
+
+  if (((req.user.country === "Mexico") && (mexico.includes(account.country))) || (northern.includes(req.user.country)) && (northern.includes(account.country))) {
+    next();
+  } else {
+    req.flash("error", "The user you are looking for isn't part of your country's version of Mentor Match.")
+    res.redirect("/welcome");
+  };
+};
 
 exports.getAccount = async (req, res) => {
+  const fullPreUserRequests = await User.findOne({_id: req.user._id}).populate("requests");
+  const fullUserRequests = fullPreUserRequests.requests;
+
   const account = await User.findOne({slug: req.params.slug}).populate("requests");
-  res.render("account", {title: `${account.firstName}'s Account`, account});
-}
+
+  res.render("account", {title: `${account.firstName}'s Account`, account, fullUserRequests});
+};
+
+
 
 exports.editAccount = (req, res) => {
   res.render("editAccount", {
     title: "Edit Profile"
   })
-}
+};
 
 exports.updateAccount = async (req, res) => {
 
@@ -170,7 +190,7 @@ exports.updateAccount = async (req, res) => {
 
   req.flash("success", "You have successfully updated your profile!")
   res.redirect(`/account/${user.slug}`)
-}
+};
 
 exports.searchForm = (req, res) => {
   res.render("search", {title: "Search"});
@@ -203,6 +223,12 @@ exports.searchResults = async (req, res) => {
 
   if (req.body.country) {
     query.country = req.body.country;
+  } else {
+      if (req.user.country === "Mexico") {
+        query.country = "Mexico"
+      } else {
+        query.country = {$in: ["USA", "Canada"]}
+      }
   }
 
   if (req.body.division) {
@@ -264,15 +290,19 @@ exports.searchResults = async (req, res) => {
   } else {
     res.render("search_results_not_found", {title: "No Results"})
   }
-}
+};
 
 exports.findTopMatches = async (req, res) => {
   const scoredMatches = [];
 
+  // const account = await User.findOne({slug: req.params.slug, country: "Mexico"}).populate("requests");
+  // res.render("account", {title: `${account.firstName}'s Account`, account, fullUserRequests});
+  // const account = await User.findOne({slug: req.params.slug, country: {$in: ["USA", "Canada"]}}).populate("requests");
+
   if (req.user.classification === "Mentee") {
 
     const currentMentee = await User.findOne({_id: req.user._id});
-    const matchingMentors = await User.find({classification: "Mentor"});
+    const matchingMentors = await User.find({classification: "Mentor", country: (req.user.country === "Mexico" ? "Mexico" : {$in: ["USA", "Canada"]})});
 
     // loop through each user in db
     matchingMentors.forEach(matchingMentor => {
@@ -298,7 +328,7 @@ exports.findTopMatches = async (req, res) => {
   } else {
 
     const currentMentor = await User.findOne({_id: req.user._id});
-    const matchingMentees = await User.find({classification: "Mentee"});
+    const matchingMentees = await User.find({classification: "Mentee", country: (req.user.country === "Mexico" ? "Mexico" : {$in: ["USA", "Canada"]})});
 
     // loop through each user in db
     matchingMentees.forEach(matchingMentee => {
@@ -333,4 +363,8 @@ exports.findTopMatches = async (req, res) => {
 
   res.render("top_matches", {title: "Top Matches", matches});
 
-}
+};
+
+exports.getResources = async (req, res) => {
+  res.render("resources", {title: "Resources"})
+};

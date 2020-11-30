@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h4.display-4.page-title Admin Code
+    .container.login-page
+        form.form-signin.shadow-sm(action="/a.dmin" method="POST")
+            //- img.mb-4.login-img(src="/assets/mentor_match.png" alt="mentor match logo")
+            .form-group.login-info
+                label(for="adminCode") Please enter the admin code.
+                input#adminCode.form-control(type="password" name="adminCode" required autofocus)
+
+            button.btn.btn-lg.btn-primary.login-button.cta-button(type="submit") Submit

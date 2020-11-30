@@ -282,11 +282,10 @@ body {
 .welcome-container{
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 11rem 11rem 11rem;
+  grid-template-rows: 11rem 11rem;
   grid-template-areas:
-    "helpful manage"
-    "top search"
-    "notifications questions";
+    "manage top-matches"
+    "search questions";
   grid-gap: 2rem;
   margin: 2rem 0;
 }
@@ -295,40 +294,40 @@ body {
   margin-right: 1rem;
 }
 
-.helpful-hints-card {
+.welcome-card {
   background: #fff;
-  grid-area: helpful;
   padding: 1.2rem;
+  text-decoration: none;
+  color: black;
+  transition: all .15s;
+}
+
+.welcome-card:hover {
+  text-decoration: none;
+  color: black;
+  transform: translateY(-.3rem);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+}
+
+.welcome-card:active {
+  transform: translateY(-.1rem);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
 }
 
 .manage-requests-card {
-  background: #fff;
   grid-area: manage;
-  padding: 1.2rem;
 }
 
 .top-matches-card {
-  background: #fff;
-  grid-area: top;
-  padding: 1.2rem;
+  grid-area: top-matches;
 }
 
 .search-card {
-  background: #fff;
   grid-area: search;
-  padding: 1.2rem;
-}
-
-.notifications-card {
-  background: #fff;
-  grid-area: notifications;
-  padding: 1.2rem;
 }
 
 .questions-card {
-  background: #fff;
   grid-area: questions;
-  padding: 1.2rem;
 }
 
 /* ===== ACCOUNT VIEW ===== */
@@ -516,6 +515,8 @@ body {
   flex: 5;
   margin: 0;
   padding-left: 2rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .thumbnail-profile-buttons {
@@ -525,6 +526,14 @@ body {
 
 .thumbnail-profile-buttons form {
   margin-left: 1rem;
+}
+
+.badge-wrapper{
+  font-size: 1rem;
+}
+
+.badge-profile {
+  font-size: 1rem;
 }
 
 
@@ -563,6 +572,49 @@ body {
 .no-results {
   font-weight: lighter;
   margin: 1rem 0 2rem 0;
+}
+
+/* ===== RESOURCES ===== */
+.resources-container{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 11rem;
+  grid-template-areas:
+    "program coaching";
+  grid-gap: 2rem;
+  margin: 2rem 0;
+}
+
+.resources-container i {
+  margin-right: 1rem;
+}
+
+.resources-card {
+  background: #fff;
+  padding: 1.2rem;
+  text-decoration: none;
+  color: black;
+  transition: all .15s;
+}
+
+.resources-card:hover {
+  text-decoration: none;
+  color: black;
+  transform: translateY(-.3rem);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+}
+
+.resources-card:active {
+  transform: translateY(-.1rem);
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+}
+
+.program-card {
+  grid-area: program;
+}
+
+.coaching-card {
+  grid-area: coaching;
 }
 
 /* ===== FLASHES ===== */
@@ -722,4 +774,9 @@ body {
 
   .card-button-link:hover {
     color: #3f3f44;
+  }
+
+  .badge-wrapper{
+    /* align-items: flex-start; */
+    display: flex;
   }

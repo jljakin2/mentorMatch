@@ -229,10 +229,6 @@ mixin registrationForm()
 
             .row
                 .form-group.col
-                    label(for='communicationMethod') What process would you like to use for the mentorship (email, phone, in person, etc.)?
-                    textarea#communicationMethod.form-control(rows='3', name="mentorshipProcess")= (user ? user.mentorshipProcess: "") || (body ? body.mentorshipProcess : "")
-            .row
-                .form-group.col
                     label(for='goals') What specific goals are you looking to work on during the 6 month partnership?
                     textarea#goals.form-control(rows='3', name="goals")= (user ? user.goals : "") || (body ? body.goals : "")
 

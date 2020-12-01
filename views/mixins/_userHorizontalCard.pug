@@ -1,13 +1,18 @@
 mixin userHorizontalCard(result = {})
     li.list-group-item.list-group-item-action
-        a(href="#")
-            if result.profilePicture
-                if result.profilePicture.split(":")[0] === "https"
-                    img.thumbnail-profile-pic(src=result.profilePicture)
-                else
-                    img.thumbnail-profile-pic(src=`/uploads/${result.profilePicture}`)
-            else
-                img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+        - const avatarFirst = result.firstName.charAt(0)
+        - const avatarLast = result.lastName.charAt(0)
+        - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+        .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
+            //- PROFILE PICTURE FEATURE
+            //- if result.profilePicture
+            //-     if result.profilePicture.split(":")[0] === "https"
+            //-         img.thumbnail-profile-pic(src=result.profilePicture)
+            //-     else
+            //-         img.thumbnail-profile-pic(src=`/uploads/${result.profilePicture}`)
+            //- else
+            //-     img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
         //- img.thumbnail-profile-pic(src="assets/profile-placeholder.jpg" alt="profile picture of user")
         h4.thumbnail-profile-name #{result.firstName} #{result.lastName}
             span.lead.badge-wrapper

@@ -4,16 +4,23 @@ mixin accountView(account = {})
         .profile-header
 
             .profile-header-content
-                if account.profilePicture
-                    if account.profilePicture.split(":")[0] === "https"
-                        .profile-picture-container
-                            img.profile-picture(src=account.profilePicture)
-                    else
-                        .profile-picture-container
-                            img.profile-picture(src=`/uploads/${account.profilePicture}`)
-                else
-                    .profile-picture-container
-                        img.profile-picture(src="/uploads/profile-placeholder.jpg")
+                - const avatarFirst = account.firstName.charAt(0)
+                - const avatarLast = account.lastName.charAt(0)
+                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+                .avatar-container.avatar-account(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
+
+
+                //- PROFILE PICTURE FEATURE
+                //- if account.profilePicture
+                //-     if account.profilePicture.split(":")[0] === "https"
+                //-         .profile-picture-container
+                //-             img.profile-picture(src=account.profilePicture)
+                //-     else
+                //-         .profile-picture-container
+                //-             img.profile-picture(src=`/uploads/${account.profilePicture}`)
+                //- else
+                //-     .profile-picture-container
+                //-         img.profile-picture(src="/uploads/profile-placeholder.jpg")
                 h2.display-4.profile-name #{account.firstName} #{account.lastName}
                 h4.display-4.profile-subtitle #{account.department}
                 if account.classification === "Mentor"

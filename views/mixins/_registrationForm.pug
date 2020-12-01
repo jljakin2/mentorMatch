@@ -44,29 +44,43 @@ mixin registrationForm()
         .info-section.shadow-sm
             h2.info-section-header Personal Information
             .row
-                .form-group.col-lg-6
-                    label(for='location')
-                        | Location
-                        span.required *
-                    select#location.form-control(name="location" required)
-                        option(selected='' disabled='') Please Select
-                        for location in h.locations
-                            if ((user ? user.location : "") || (body ? body.location : "")) === location
-                                option(value=location selected) #{location}
-                            else
-                                option(value=location) #{location}
+                if !user
+                    .form-group.col-lg-6
+                        label(for='location')
+                            | Location
+                            span.required *
+                        select#location.form-control(name="location" required)
+                            option(selected='' disabled='') Please Select
+                            for location in h.locations
+                                if ((user ? user.location : "") || (body ? body.location : "")) === location
+                                    option(value=location selected) #{location}
+                                else
+                                    option(value=location) #{location}
 
-                .form-group.col-lg-6
-                    label(for='country')
-                        | Country
-                        span.required *
-                    select#country.form-control(name="country" required)
-                        option(selected='' disabled='') Please Select
-                        for country in h.countries
-                            if ((user ? user.country : "") || (body ? body.country : "")) === country
-                                option(value=country selected) #{country}
-                            else
-                                option(value=country) #{country}
+                else
+                    .form-group.col
+                        label(for='location')
+                            | Location
+                            span.required *
+                        select#location.form-control(name="location" required)
+                            option(selected='' disabled='') Please Select
+                            for location in h.locations
+                                if ((user ? user.location : "") || (body ? body.location : "")) === location
+                                    option(value=location selected) #{location}
+                                else
+                                    option(value=location) #{location}
+                if !user
+                    .form-group.col-lg-6
+                        label(for='country')
+                            | Country
+                            span.required *
+                        select#country.form-control(name="country" required)
+                            option(selected='' disabled='') Please Select
+                            for country in h.countries
+                                if ((user ? user.country : "") || (body ? body.country : "")) === country
+                                    option(value=country selected) #{country}
+                                else
+                                    option(value=country) #{country}
             .row
                 .form-group.col-lg-6
                     label(for='division')
@@ -233,19 +247,21 @@ mixin registrationForm()
                     textarea#goals.form-control(rows='3', name="goals")= (user ? user.goals : "") || (body ? body.goals : "")
 
 
-        .info-section.shadow-sm
-            h2.info-section-header Account Information
-            .row
-                .form-group.col
-                    if user
-                        if user.profilePicture
-                            .mb-3
-                                .medium-avatar(style=`background-image: url("/uploads/${user.profilePicture}");`)
-                    .custom-file
-                        label(for="profilePicture") Profile Picture
-                        input.form-control-file#profilePicture(type="file" name="profilePicture" accept="image/gif, image/png, image/jpg, image/jpeg")
 
-            if !user
+            //- PROFILE PICTURE FEATURE
+            //- .row
+            //-     .form-group.col
+            //-         if user
+            //-             if user.profilePicture
+            //-                 .mb-3
+            //-                     .medium-avatar(style=`background-image: url("/uploads/${user.profilePicture}");`)
+            //-         .custom-file
+            //-             label(for="profilePicture") Profile Picture
+            //-             input.form-control-file#profilePicture(type="file" name="profilePicture" accept="image/gif, image/png, image/jpg, image/jpeg")
+
+        if !user
+            .info-section.shadow-sm
+                h2.info-section-header Account Information
                 .row
                     .form-group.col
                         label(for="password")

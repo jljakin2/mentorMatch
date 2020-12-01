@@ -1,16 +1,22 @@
 mixin userVerticalCard(match = {})
     .user-card.shadow
         .card-header
-            if match.person.profilePicture
-                if match.person.profilePicture.split(":")[0] === "https"
-                    .profile-avatar-container
-                        img.profile-avatar(src=match.person.profilePicture)
-                else
-                    .profile-avatar-container
-                        img.profile-avatar(src=`/uploads/${match.person.profilePicture}`)
-            else
-                .profile-avatar-container
-                    img.profile-avatar(src="/uploads/profile-placeholder.jpg")
+            - const avatarFirst = match.person.firstName.charAt(0)
+            - const avatarLast = match.person.lastName.charAt(0)
+            - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+            .avatar-container.avatar-vertical(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
+            //- PROFILE PICTURE FEATURE
+            //- if match.person.profilePicture
+            //-     if match.person.profilePicture.split(":")[0] === "https"
+            //-         .profile-avatar-container
+            //-             img.profile-avatar(src=match.person.profilePicture)
+            //-     else
+            //-         .profile-avatar-container
+            //-             img.profile-avatar(src=`/uploads/${match.person.profilePicture}`)
+            //- else
+            //-     .profile-avatar-container
+            //-         img.profile-avatar(src="/uploads/profile-placeholder.jpg")
             .card-name-title
                 h4 #{match.person.firstName} #{match.person.lastName}
                 h5.card-subtitle #{match.person.department}
@@ -24,5 +30,6 @@ mixin userVerticalCard(match = {})
         .card-buttons
             a.card-button-link(href=`mailto: ${match.person.email}`)
                 i.far.fa-envelope.fa-2x
-            a.card-button-link(href=`${match.person.linkedin}`)
-                i.fab.fa-linkedin.fa-2x.ml-2
+            if (match.person.linkedin)
+                a.card-button-link(href=`${match.person.linkedin}`)
+                    i.fab.fa-linkedin.fa-2x.ml-2

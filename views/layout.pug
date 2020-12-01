@@ -27,10 +27,11 @@ html
                                         a.nav-link(href=item.slug) #{item.title}
                             ul.navbar-nav.ml-auto
                                 li.nav-item
-                                    a.nav-link(href="/logout") Logout
+                                    a.nav-link(href=`/account/${user.slug}`) Account
                                 li.nav-item
-                                    a.nav-link(href=`/account/${user.slug}`)
-                                        .nav-avatar(style=`background-image: url("/uploads/${user.profilePicture || "profile-placeholder.jpg"}");`)
+                                    a.nav-link(href="/logout") Logout
+                                    //- a.nav-link(href=`/account/${user.slug}`)
+                                    //-     .nav-avatar(style=`background-image: url("/uploads/${user.profilePicture || "profile-placeholder.jpg"}");`)
 
                     else
                         a.navbar-brand(href="/") Mentor Match

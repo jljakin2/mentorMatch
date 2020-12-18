@@ -277,13 +277,48 @@ mixin registrationForm()
 
         if !user
             .info-section.shadow-sm
-                p I have read and agree to abide by the Terms of Use for the Mentor Match platform.
-                .form-check.form-check-inline
-                    input#termsYes.form-check-input(type='radio' name='terms' value='yes')
-                    label.form-check-label(for='termsYes') Yes
-                .form-check.form-check-inline
-                    input#termsNo.form-check-input(type='radio' name='terms' value='no' checked='')
-                    label.form-check-label(for='termsNo') No
+                p
+                    | By participating in the RBNA Mentoring Program, I have read and agree to abide by the above Terms of Use for the Mentor Match system.
+                    br
+                    button.btn.btn-primary.btn-sm.mt-2(type='button' data-bs-toggle='modal' data-bs-target='#termsModal')
+                        | View Terms
+                    .form-check.form-check-inline
+                        input#termsYes.form-check-input(type='radio' name='terms' value='yes')
+                        label.form-check-label(for='termsYes') Yes
+                    .form-check.form-check-inline
+                        input#termsNo.form-check-input(type='radio' name='terms' value='no' checked='')
+                        label.form-check-label(for='termsNo') No
+                #termsModal.modal.fade(tabindex='-1' aria-labelledby='termsModalLabel' aria-hidden='true')
+                    .modal-dialog.modal-dialog-scrollable
+                        .modal-content
+                            .modal-header
+                                h5#termsModalLabel.modal-title Terms of Use
+                            .modal-body
+                                p Bosch has created Mentor Match as a valuable tool for employees to develop mentoring relationships. Mentor Match is designed to allow personal input. Employees will utilize this system to promote their professional development and career goals, and will apply and abide by all current internet use policies as defined by Bosch.
+
+                                p In order to curtail any potential for inappropriate use of Mentor Match, the following policy and agreement is required for participation.
+
+                                p Bosch requires participants to maintain a courteous, polite dialogue in Mentor Match. This system is provided to encourage the sharing of ideas, knowledge and suggestions among employees. As such, employees should be respectful and helpful in encouraging each other’s ideas, while offering only constructive criticism and suggestions.
+
+                                p The amount of time an employee spends during the work day on Mentor Match should be limited to an appropriate length and only when it does not interfere with work tasks and projects.
+
+                                p Bosch prohibits the following actions while using Mentor Match:
+
+                                ul
+                                    li Posting false or misleading declarations of work or personal achievements
+                                    li Disclosure of confidential and/or proprietary information
+                                    li Solicitation of any outside business without specific permission granted from Administrator
+                                    li Distributing employee contact information to any outside business
+                                    li Intimidating any other employee, including threatening behavior, continual badgering or stalking
+                                    li Any form of harassment
+                                    li Profanity
+                                    li Complaining about the company or any relevant policies, procedures or decisions
+                                    li Sharing your profile ID or allowing access to any unauthorized person
+                                    li Access to Mentor Match is prohibited should you leave employment of Bosch, regardless of whether your access has been deleted.
+
+                                p The administrators will monitor and administrate Mentor Match. Should violations of the Terms of Use be discovered, appropriate action will be taken. Depending on the severity of the violation, Bosch may institute an appropriate response.
+                            .modal-footer
+                                button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
 
         p(aria-hidden="true")
         span.required *

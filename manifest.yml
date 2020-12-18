@@ -1,0 +1,5 @@
+applications:
+  - name: mentorMatch
+    random-route: true
+    path: mentorMatch
+    memory: 1GB

@@ -1,0 +1,117 @@
+extends layout
+
+block content
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js")
+    h4.display-4.page-title Gap Analysis
+    //- pre=h.dump(menteeAreas)
+    //- pre=h.dump(mentorAreas)
+    //- pre=h.dump(finalGaps)
+    .container
+        canvas#myChart(width=400 height=400)
+
+        table.table.mt-4
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") Area
+                    th(scope="col") Gap (mentees with skill request minus available mentors with skills)
+
+            tbody
+                - let count = 1
+                - const gaps = Object.entries(finalGaps)
+                for gap in gaps
+                    tr
+                        th(scope="row") #{count}
+                        - count++
+                        td #{gap[0]}
+                        td #{gap[1]}
+
+
+
+    script.
+        const ctx = document.querySelector("#myChart").getContext("2d")
+        const myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    "Advertising",
+                    "Assertiveness and Confidence",
+                    "Budgeting / Cost Control",
+                    "Change Management",
+                    "Communication",
+                    "Compliance",
+                    "Computer Skills",
+                    "Continuous Improvement",
+                    "Counseling / Advice",
+                    "Cross-Functional Expertise",
+                    "Cross-selling",
+                    "Customer Service",
+                    "Diversity & Inclusion",
+                    "Employee Relations",
+                    "Giving and Receiving Feedback",
+                    "Innovation",
+                    "Interviewing / Hiring",
+                    "Investigations",
+                    "Leading Self and Others",
+                    "Learning from Mistakes",
+                    "Listening",
+                    "Management",
+                    "Marketing",
+                    "Motivation",
+                    "Navigating Organizational Politics",
+                    "Negotiation",
+                    "Networking",
+                    "Organizational Culture",
+                    "People Development",
+                    "Performance Management",
+                    "Persuasion",
+                    "Problem-solving",
+                    "Project Management",
+                    "Relationship Building",
+                    "Resolving Conflict",
+                    "Safety",
+                    "Sales",
+                    "Security",
+                    "Servant Leadership",
+                    "Strategic Planning",
+                    "Team Building",
+                    "Time Management",
+                    "Training",
+                    "Transformational Leadership",
+                    "Work/Life Balance",
+                    ],
+                datasets: [
+                    {
+                    label: "Mentee",
+                    fill: true,
+                    backgroundColor: "rgba(179,181,198,0.2)",
+                    borderColor: "rgba(179,181,198,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(179,181,198,1)",
+                    data: !{JSON.stringify(menteeData)}
+                    }, {
+                    label: "Mentor",
+                    fill: true,
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(255,99,132,1)",
+                    pointBorderColor: "#fff",
+                    data: !{JSON.stringify(mentorData)}
+                    }
+                ]
+            },
+            options: {
+            title: {
+                display: true,
+                text: 'Skill gaps among mentees and mentors'
+            }
+            }
+        });
+
+
+
+
+
+
+

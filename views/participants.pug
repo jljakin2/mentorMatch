@@ -1,0 +1,92 @@
+extends layout
+
+block content
+    h4.display-4.page-title Participants
+    .container
+        //- pre=h.dump(participants)
+        //- p.lead.mr-2(style = "display: inline;") Download full demographic report
+        button.btn.btn-primary#download.mb-2 Full Report
+        table.table
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") First Name
+                    th(scope="col") Last Name
+                    th(scope="col") Email
+                    th(scope="col") Joined
+                    th.center(scope="col") Admin
+                    th.center(scope="col") Remove User
+
+            tbody
+                - let count = 1
+                for p in participants
+                    tr
+                        th(scope="row") #{count}
+                        - count++
+                        td #{p.firstName}
+                        td #{p.lastName}
+                        td
+                            a.email(href=`mailto: ${p.email}`) #{p.email}
+                        td #{p.createdAt.toDateString()}
+                        if p.isAdmin
+                            td.center
+                                form(action=`/admin/remove-admin/${p._id}` method="POST" onsubmit="return confirm('Are you sure you want to remove this user as an Admin?')")
+                                    button.transparent-btn(type="submit")
+                                        i.fas.fa-times.times
+                        else
+                            td.center
+                                form(action=`/admin/add/${p._id}` method="POST" onsubmit="return confirm('Are you sure you want to add the user as an Admin?')")
+                                    button.transparent-btn(type="submit")
+                                        i.fas.fa-plus.add
+                        td.center
+                            form(action=`/admin/remove-user/${p._id}` method="POST" onsubmit="return confirm('Are you sure you want to remove the user from the platform?')")
+                                button.transparent-btn(type="submit")
+                                    i.fas.fa-trash-alt.remove
+
+    script.
+
+        const objectsToCsv = (data) => {
+            const csvRows = [];
+
+            //- get the headers
+            const headers = Object.keys(data[0])
+            csvRows.push(headers.join(','))
+
+            //- loop over the rows
+            for (const row of data) {
+                const values = headers.map(header => {
+                    const escaped = (''+row[header]).replace(/"/g, '\\"')
+                    return `"${escaped}"`
+                })
+                csvRows.push(values.join(','))
+            }
+
+            return csvRows.join('\n')
+        }
+
+        const download = (data) => {
+            const blob = new Blob([data], { type: 'text/csv' })
+            const url = window.URL.createObjectURL(blob)
+
+            const a = document.createElement('a')
+            a.setAttribute('hidden', '')
+            a.setAttribute('href', url)
+            a.setAttribute('download', 'participants_report.csv')
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+        }
+
+
+
+        const getReport = () => {
+            const csvData = objectsToCsv(!{JSON.stringify(participants)})
+            download(csvData)
+        }
+
+        document.querySelector("#download").addEventListener("click", getReport)
+
+
+
+
+

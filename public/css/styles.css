@@ -1,39 +1,3 @@
-/* * {
-  border: red 1px solid;
-}
-
-* * {
-  border: blue 1px solid;
-}
-
-* * * {
-  border: green 1px solid;
-}
-
-* * * * {
-  border: purple 1px solid;
-}
-
-* * * * * {
-  border: salmon 1px solid;
-}
-
-* * * * * * {
-  border: teal 1px solid;
-}
-
-* * * * * * * {
-  border: orange 1px solid;
-}
-
-* * * * * * * * {
-  border: lightcoral 1px solid;
-}
-
-* * * * * * * * * {
-  border: maroon 1px solid;
-} */
-
 /* ========== General selectors ========== */
 ::root {
   font-size: 16px;
@@ -118,7 +82,7 @@ body {
 }
 
 .nav-avatar:hover {
-  border: 1px solid #F7F7F7;
+  border: 1px solid #f7f7f7;
 }
 
 /* ========== Home route ========== */
@@ -279,19 +243,20 @@ body {
 /* ========== USER AUTHORIZED ========== */
 
 /* WELCOME PAGE */
-.welcome-container{
+.welcome-container {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 11rem 11rem;
   grid-template-areas:
-    "manage top-matches"
-    "search questions";
+    "card-1 card-2"
+    "card-3 card-4";
   grid-gap: 2rem;
   margin: 2rem 0;
 }
 
 .welcome-container i {
   margin-right: 1rem;
+  color: #00a7f5;
 }
 
 .welcome-card {
@@ -299,35 +264,35 @@ body {
   padding: 1.2rem;
   text-decoration: none;
   color: black;
-  transition: all .15s;
+  transition: all 0.15s;
 }
 
 .welcome-card:hover {
   text-decoration: none;
   color: black;
-  transform: translateY(-.3rem);
-  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .welcome-card:active {
-  transform: translateY(-.1rem);
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.manage-requests-card {
-  grid-area: manage;
+.card-1 {
+  grid-area: card-1;
 }
 
-.top-matches-card {
-  grid-area: top-matches;
+.card-2 {
+  grid-area: card-2;
 }
 
-.search-card {
-  grid-area: search;
+.card-3 {
+  grid-area: card-3;
 }
 
-.questions-card {
-  grid-area: questions;
+.card-4 {
+  grid-area: card-4;
 }
 
 /* ===== ACCOUNT VIEW ===== */
@@ -414,10 +379,10 @@ body {
 .profile-subtitle {
   color: #a6a6a4;
   font-size: 1.7rem;
-  margin: -.7rem 0 1.2rem 0;
+  margin: -0.7rem 0 1.2rem 0;
 }
 
-.profile-header-buttons{
+.profile-header-buttons {
   display: flex;
 }
 
@@ -441,12 +406,10 @@ body {
   display: flex;
   flex-direction: column;
   grid-area: contact;
-  margin: .5rem 1rem 0 0;
+  margin: 0.5rem 1rem 0 0;
   padding: 2rem;
   text-align: center;
 }
-
-
 
 /* Work Section */
 .profile-work {
@@ -455,7 +418,7 @@ body {
   display: flex;
   flex-direction: column;
   grid-area: work;
-  margin: .5rem 0 0 1rem;
+  margin: 0.5rem 0 0 1rem;
   padding: 2rem;
   text-align: center;
 }
@@ -542,14 +505,13 @@ body {
   margin-left: 1rem;
 }
 
-.badge-wrapper{
+.badge-wrapper {
   font-size: 1rem;
 }
 
 .badge-profile {
   font-size: 1rem;
 }
-
 
 /* ===== SEARCH RESULTS ===== */
 
@@ -595,12 +557,11 @@ body {
 }
 
 /* ===== RESOURCES ===== */
-.resources-container{
+.resources-container {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 11rem;
-  grid-template-areas:
-    "program coaching";
+  grid-template-areas: "program coaching";
   grid-gap: 2rem;
   margin: 2rem 0;
 }
@@ -614,23 +575,27 @@ body {
   padding: 1.2rem;
   text-decoration: none;
   color: black;
-  transition: all .15s;
+  transition: all 0.15s;
 }
 
 .resources-card:hover {
   text-decoration: none;
   color: black;
-  transform: translateY(-.3rem);
-  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .resources-card:active {
-  transform: translateY(-.1rem);
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .program-card {
   grid-area: program;
+}
+
+.resources-container i {
+  color: #00a7f5;
 }
 
 .coaching-card {
@@ -648,15 +613,15 @@ body {
   border-radius: 3px;
   display: -ms-flexbox;
   display: flex;
-  animation: slideIn forwards .1s ease-in-out 2;
+  animation: slideIn forwards 0.1s ease-in-out 2;
   animation-timing-function: cubic-bezier(0.01, 1.68, 0.58, 1);
 }
 
-.flash+.flash {
+.flash + .flash {
   animation-delay: 0.55s;
 }
 
-.flash+.flash+.flash {
+.flash + .flash + .flash {
   animation-delay: 0.6s;
 }
 
@@ -671,11 +636,11 @@ body {
 }
 
 .flash__remove:hover {
-  color: #FFC40E;
+  color: #ffc40e;
 }
 
 .flash:after {
-  content: '';
+  content: "";
   display: block;
   background: white;
   position: absolute;
@@ -705,104 +670,162 @@ body {
 }
 
 /* ===== USER VERTICAL CARD ===== */
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-  }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
 
-  .user-card {
-    background: #F5F5F5;
-    height: auto;
-    margin: 2rem 4%;
-    width: 25%;
-  }
+.user-card {
+  background: #f5f5f5;
+  height: auto;
+  margin: 2rem 4%;
+  width: 25%;
+}
 
-  .card-header {
-    align-items: center;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 65%;
-    justify-content: center;
-    width: 100%;
-  }
+.card-header {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  justify-content: center;
+  width: 100%;
+}
 
-  .avatar-vertical {
-    width: 6.7rem;
-    height: 6.7rem;
-    font-size: 2.5rem;
-  }
+.avatar-vertical {
+  width: 6.7rem;
+  height: 6.7rem;
+  font-size: 2.5rem;
+}
 
-  .profile-avatar-container {
-    align-items: flex-start;
-    background: #f5f5f5;
-    border-radius: 50%;
-    display: flex;
-    height: 6.7rem;
-    justify-content: center;
-    margin-top: 1rem;
-    overflow: hidden;
-    width: 6.7rem;
-  }
+.profile-avatar-container {
+  align-items: flex-start;
+  background: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  height: 6.7rem;
+  justify-content: center;
+  margin-top: 1rem;
+  overflow: hidden;
+  width: 6.7rem;
+}
 
-  .profile-avatar {
-    height: 105%;
-    width: auto;
-  }
+.profile-avatar {
+  height: 105%;
+  width: auto;
+}
 
-  .card-name-title {
-    margin-top: 1rem;
-    text-align: center;
-  }
+.card-name-title {
+  margin-top: 1rem;
+  text-align: center;
+}
 
-  .card-subtitle {
-    color: #a6a6a4;
-    font-size: 1rem;
-  }
+.card-subtitle {
+  color: #a6a6a4;
+  font-size: 1rem;
+}
 
-  .card-button-container {
-    display: flex;
-    justify-content: center;
-  }
+.card-button-container {
+  display: flex;
+  justify-content: center;
+}
 
-  .button {
-    font-size: .8rem;
-    margin-top: .7rem;
-  }
+.button {
+  font-size: 0.8rem;
+  margin-top: 0.7rem;
+}
 
-  .card-content {
-    height: 25%;
-    padding: 1rem 0;
-    text-align: center;
-    width: 100%;
-  }
+.card-content {
+  height: 25%;
+  padding: 1rem 0;
+  text-align: center;
+  width: 100%;
+}
 
-  .content-secondary {
-    color: #393e46;
-    font-size: .9rem;
-    padding: .1rem 0;
-  }
+.content-secondary {
+  color: #393e46;
+  font-size: 0.9rem;
+  padding: 0.1rem 0;
+}
 
-  .card-buttons {
-    align-items: flex-end;
-    display: flex;
-    height: 10%;
-    justify-content: center;
-    padding: .5rem;
-    width: 100%;
-  }
+.card-buttons {
+  align-items: flex-end;
+  display: flex;
+  height: 10%;
+  justify-content: center;
+  padding: 0.5rem;
+  width: 100%;
+}
 
-  .card-button-link {
-    color: #a6a6a4;
-    text-decoration: none;
-  }
+.card-button-link {
+  color: #a6a6a4;
+  text-decoration: none;
+}
 
-  .card-button-link:hover {
-    color: #3f3f44;
-  }
+.card-button-link:hover {
+  color: #3f3f44;
+}
 
-  .badge-wrapper{
-    /* align-items: flex-start; */
-    display: flex;
-  }
+.badge-wrapper {
+  /* align-items: flex-start; */
+  display: flex;
+}
+
+/* ===== ADMIN HOME ===== */
+.admin-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 7rem 7rem;
+  grid-template-areas:
+    "card-1 card-2"
+    "card-3 card-4";
+  grid-gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.admin-container i {
+  margin-right: 1rem;
+  color: #00a7f5;
+  font-size: 1.6rem;
+}
+
+/* ===== ADMIN PARTICIPANTS ===== */
+
+.transparent-btn {
+  background: transparent;
+  border: none;
+}
+
+.email:link,
+.email:visited {
+  color: #333333;
+  text-decoration: none;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.add {
+  color: #00a7f5;
+  text-align: center;
+}
+
+.remove {
+  color: rgba(226, 0, 21, 0.5);
+}
+
+.times {
+  color: rgba(226, 0, 21, 0.5);
+}
+
+.center {
+  text-align: center;
+}
+
+/* ===== ADMIN MENTORSHIPS ===== */
+
+/* ===== ADMIN MANUAL CONNECTIONS ===== */
+
+/* ===== ADMIN GAP ANALYSIS ===== */

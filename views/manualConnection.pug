@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h4.display-4.page-title Manual Matches
+    .container
+        form(action="/admin/add-manual-connection/add" method="POST")
+            .form-group.login-info
+                label(for="menteeEmail") Mentee Email
+                input#menteeEmail.form-control.mb-3(type="email" name="menteeEmail" required autofocus)
+
+                label(for="mentorEmail") Mentor Email
+                input#mentorEmail.form-control.mb-3(type="email" name="mentorEmail" required)
+
+            button.d-grid.btn.btn-lg.btn-primary.login-button.cta-button(type="submit") Connect

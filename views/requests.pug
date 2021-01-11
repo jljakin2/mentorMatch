@@ -15,17 +15,22 @@ block content
                     for request in menteeRequests
                         if (request.status === 2)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentor.firstName.charAt(0)
+                                - const avatarLast = request.mentor.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentor.profilePicture
-                                    if request.mentor.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentor.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentor.profilePicture
+                                //-     if request.mentor.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentor.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentor.firstName} #{request.mentor.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()
@@ -40,17 +45,22 @@ block content
                     for request in menteeRequests
                         if (request.status === 1)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentor.firstName.charAt(0)
+                                - const avatarLast = request.mentor.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentor.profilePicture
-                                    if request.mentor.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentor.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentor.profilePicture
+                                //-     if request.mentor.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentor.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
 
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentor.firstName} #{request.mentor.lastName}
@@ -66,17 +76,22 @@ block content
                     for request in menteeRequests
                         if (request.status === 0)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentor.firstName.charAt(0)
+                                - const avatarLast = request.mentor.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentor.profilePicture
-                                    if request.mentor.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentor.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentor.profilePicture
+                                //-     if request.mentor.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentor.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentor.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentor.firstName} #{request.mentor.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()
@@ -94,17 +109,22 @@ block content
                     for request in mentorRequests
                         if (request.status === 2)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentee.firstName.charAt(0)
+                                - const avatarLast = request.mentee.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentee.profilePicture
-                                    if request.mentee.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentee.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentee.profilePicture
+                                //-     if request.mentee.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentee.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentee.firstName} #{request.mentee.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()
@@ -121,17 +141,22 @@ block content
                     for request in mentorRequests
                         if (request.status === 1)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentee.firstName.charAt(0)
+                                - const avatarLast = request.mentee.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentee.profilePicture
-                                    if request.mentee.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentee.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentee.profilePicture
+                                //-     if request.mentee.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentee.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentee.firstName} #{request.mentee.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()
@@ -157,17 +182,22 @@ block content
                     for request in mentorRequests
                         if (request.status === 0)
                             li.list-group-item.list-group-item-action
+                                - const avatarFirst = request.mentee.firstName.charAt(0)
+                                - const avatarLast = request.mentee.lastName.charAt(0)
+                                - const avatarColor = h.colors[Math.floor(Math.random() * h.colors.length)]
+
+                                .avatar-container.avatar-horizontal(style=`background: ${avatarColor}`) #{avatarFirst}#{avatarLast}
                                 //- TODO: take out conditional that looks for AWS photos
-                                if request.mentee.profilePicture
-                                    if request.mentee.profilePicture.split(":")[0] === "https"
-                                        div
-                                            img.thumbnail-profile-pic(src=request.mentee.profilePicture)
-                                    else
-                                        div
-                                            img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
-                                else
-                                    div
-                                        img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
+                                //- if request.mentee.profilePicture
+                                //-     if request.mentee.profilePicture.split(":")[0] === "https"
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=request.mentee.profilePicture)
+                                //-     else
+                                //-         div
+                                //-             img.thumbnail-profile-pic(src=`/uploads/${request.mentee.profilePicture}`)
+                                //- else
+                                //-     div
+                                //-         img.thumbnail-profile-pic(src="/uploads/profile-placeholder.jpg")
                                 .name-and-date
                                     h4.thumbnail-profile-name #{request.mentee.firstName} #{request.mentee.lastName}
                                     time.thumbnail-profile-date.second-tier-text(datetime=request.updatedAt)= h.moment(request.updatedAt).fromNow()

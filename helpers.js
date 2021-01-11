@@ -17,7 +17,8 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 // Some details about the site
 exports.siteName = `Mentor Match`;
 
-exports.menu = [{
+exports.menu = [
+  {
     slug: "/requests",
     title: "Requests",
   },
@@ -32,6 +33,29 @@ exports.menu = [{
   {
     slug: "/resources",
     title: "Resources",
+  },
+];
+
+exports.adminMenu = [
+  {
+    slug: "/requests",
+    title: "Requests",
+  },
+  {
+    slug: "/top-matches",
+    title: "Top Matches",
+  },
+  {
+    slug: "/search",
+    title: "Search",
+  },
+  {
+    slug: "/resources",
+    title: "Resources",
+  },
+  {
+    slug: "/admin",
+    title: "Admin",
   },
 ];
 
@@ -56,7 +80,7 @@ exports.colors = [
   "#525F6B",
   "rgba(82,95,107,0.50)",
   "#BFC0C2",
-  "rgba(191,192,194,0.50)"
+  "rgba(191,192,194,0.50)",
 ];
 
 // FORM CHOICES
@@ -134,7 +158,7 @@ exports.locations = [
   "Welland, ON",
   "West Memphis, AR",
   "Wooster, OH",
-  "Other"
+  "Other",
 ];
 
 exports.countries = ["USA", "Canada", "Mexico"];
@@ -172,7 +196,7 @@ exports.divisions = [
   "RBMX",
   "Service Solutions (SO)",
   "Thermo Technology (TT)",
-  "Other"
+  "Other",
 ];
 
 exports.departments = [
@@ -210,9 +234,8 @@ exports.departments = [
   "Tax",
   "Tec Service",
   "Warehouse/Distr",
-  "Other"
+  "Other",
 ];
-
 
 exports.jobLevels = [
   "SL5 - Exec. Vice-President / President",

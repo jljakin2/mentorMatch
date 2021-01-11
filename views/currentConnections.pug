@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h4.display-4.page-title Connections
+    .container
+        table.table
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") Mentee
+                    th(scope="col") Mentee Email
+                    th(scope="col") Mentor
+                    th(scope="col") Mentor Email
+                    th(scope="col") Created
+                    th.center(scope="col") Delete Connection
+
+            tbody
+                - let count = 1
+                for c in connections
+                    tr
+                        th(scope="row") #{count}
+                        - count++
+                        td #{c.mentee.firstName} #{c.mentee.lastName}
+                        td
+                            a.email(href=`mailto: ${c.mentee.email}`) #{c.mentee.email}
+                        td #{c.mentor.firstName} #{c.mentor.lastName}
+                        td
+                            a.email(href=`mailto: ${c.mentor.email}`) #{c.mentor.email}
+                        td #{c.createdAt.toDateString()}
+                        td.center
+                            form(action="/" method="POST")
+                                button.transparent-btn(type="submit")
+                                    i.fas.fa-trash-alt.remove

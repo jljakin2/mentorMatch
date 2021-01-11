@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h4.display-4.page-title Admin Home
+    .container
+        .admin-container
+            a.card-1.welcome-card.shadow-sm(href="/admin/participants")
+                    h5
+                        span
+                        i.fas.fa-users
+                        | Participants
+                    p See participants, manage access rights, download demographics report.
+
+            a.card-2.welcome-card.shadow-sm(href="/admin/current-connections")
+                h5
+                    span
+                    i.fas.fa-link
+                    | Current Connections
+                p See all mentor and mentee connections.
+
+            a.card-3.welcome-card.shadow-sm(href="/admin/add-manual-connection")
+                h5
+                    span
+                    i.fas.fa-plus
+                    | Manually Add Connection
+                p Add a connection manually.
+
+            a.card-4.welcome-card.shadow-sm(href="/admin/gap-analysis")
+                h5
+                    span
+                    i.fas.fa-chart-pie
+                    | Gap Analysis
+                p Identify potential gaps in skill areas.

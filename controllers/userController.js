@@ -13,9 +13,12 @@ const multerOptions = {
     if (isPhoto) {
       next(null, true);
     } else {
-      next({
-        message: "That filetype isn't allowed!"
-      }, false);
+      next(
+        {
+          message: "That filetype isn't allowed!",
+        },
+        false
+      );
     }
   },
 };
@@ -28,7 +31,7 @@ exports.homePage = (req, res) => {
     res.render("home", {
       title: "Home",
     });
-  };
+  }
 };
 
 exports.registerForm = (req, res) => {
@@ -58,13 +61,35 @@ exports.resize = async (req, res, next) => {
   next();
 };
 
-exports.atLeastSL1 = (req, res, next) => {
-  if ((req.body.level === "E4 - Sr. Level Associate" || req.body.level === "E2 - E3 Associate" || req.body.level ==="N2 - N4 Associate") && (req.body.classification === "Mentor")) {
-    req.flash("error", "You must be an SL1+ to register as a mentor.")
+exports.yesToTerms = (req, res, next) => {
+  console.log(req.body.terms);
+  if (req.body.terms !== "yes") {
+    req.flash(
+      "error",
+      "You must agree to the terms of use in order to use the platform."
+    );
     res.render("register", {
       title: "Registration Form",
       body: req.body,
-      flashes: req.flash()
+      flashes: req.flash(),
+    });
+  } else {
+    return next();
+  }
+};
+
+exports.atLeastSL1 = (req, res, next) => {
+  if (
+    (req.body.level === "E4 - Sr. Level Associate" ||
+      req.body.level === "E2 - E3 Associate" ||
+      req.body.level === "N2 - N4 Associate") &&
+    req.body.classification === "Mentor"
+  ) {
+    req.flash("error", "You must be an SL1+ to register as a mentor.");
+    res.render("register", {
+      title: "Registration Form",
+      body: req.body,
+      flashes: req.flash(),
     });
   } else {
     return next();
@@ -130,18 +155,18 @@ exports.register = async (req, res, next) => {
     mentorshipProcess: req.body.mentorshipProcess,
     goals: req.body.goals,
     profilePicture: req.body.profilePicture,
-    terms: req.body.terms
+    terms: req.body.terms,
   });
 
   const register = promisify(User.register, User);
-  await register(user, req.body.password)
+  await register(user, req.body.password);
 
   next(); // pass to authController.login
 };
 
 exports.welcome = (req, res) => {
   res.render("welcome", {
-    title: "Welcome"
+    title: "Welcome",
   });
 };
 
@@ -149,58 +174,71 @@ exports.whichCountry = async (req, res, next) => {
   const mexico = ["Mexico"];
   const northern = ["USA", "Canada"];
 
-  const account = await User.findOne({slug: req.params.slug});
+  const account = await User.findOne({ slug: req.params.slug });
 
-  if (((req.user.country === "Mexico") && (mexico.includes(account.country))) || (northern.includes(req.user.country)) && (northern.includes(account.country))) {
+  if (
+    (req.user.country === "Mexico" && mexico.includes(account.country)) ||
+    (northern.includes(req.user.country) && northern.includes(account.country))
+  ) {
     next();
   } else {
-    req.flash("error", "The user you are looking for isn't part of your country's version of Mentor Match.")
+    req.flash(
+      "error",
+      "The user you are looking for isn't part of your country's version of Mentor Match."
+    );
     res.redirect("/welcome");
-  };
+  }
 };
 
 exports.getAccount = async (req, res) => {
-  const fullPreUserRequests = await User.findOne({_id: req.user._id}).populate("requests");
+  const fullPreUserRequests = await User.findOne({
+    _id: req.user._id,
+  }).populate("requests");
   const fullUserRequests = fullPreUserRequests.requests;
 
-  const account = await User.findOne({slug: req.params.slug}).populate("requests");
+  const account = await User.findOne({ slug: req.params.slug }).populate(
+    "requests"
+  );
 
-  res.render("account", {title: `${account.firstName}'s Account`, account, fullUserRequests});
+  res.render("account", {
+    title: `${account.firstName}'s Account`,
+    account,
+    fullUserRequests,
+  });
 };
-
-
 
 exports.editAccount = (req, res) => {
   res.render("editAccount", {
-    title: "Edit Profile"
-  })
+    title: "Edit Profile",
+  });
 };
 
 exports.updateAccount = async (req, res) => {
-
-  const user = await User.findOneAndUpdate({
-    _id: req.user._id
-  },
+  const user = await User.findOneAndUpdate(
+    {
+      _id: req.user._id,
+    },
     req.body,
-  {
-    new: true,
-    runValidators: true,
-    context: "query"
-  }).exec();
+    {
+      new: true,
+      runValidators: true,
+      context: "query",
+    }
+  ).exec();
 
-  req.flash("success", "You have successfully updated your profile!")
-  res.redirect(`/account/${user.slug}`)
+  req.flash("success", "You have successfully updated your profile!");
+  res.redirect(`/account/${user.slug}`);
 };
 
 exports.searchForm = (req, res) => {
-  res.render("search", {title: "Search"});
+  res.render("search", { title: "Search" });
 };
 
 exports.searchResults = async (req, res) => {
   const query = {};
 
   if (req.body.classification) {
-      query.classification = req.body.classification;
+    query.classification = req.body.classification;
   }
 
   if (req.body.firstName) {
@@ -224,11 +262,11 @@ exports.searchResults = async (req, res) => {
   if (req.body.country) {
     query.country = req.body.country;
   } else {
-      if (req.user.country === "Mexico") {
-        query.country = "Mexico"
-      } else {
-        query.country = {$in: ["USA", "Canada"]}
-      }
+    if (req.user.country === "Mexico") {
+      query.country = "Mexico";
+    } else {
+      query.country = { $in: ["USA", "Canada"] };
+    }
   }
 
   if (req.body.division) {
@@ -255,40 +293,34 @@ exports.searchResults = async (req, res) => {
     query.education = req.body.education;
   }
 
-  if (req.body.areasForDev) {
-    query.areasForDev = {
-      $in: req.body.areasForDev,
-    };
-  }
-
-  if (req.body.areasOfExp) {
-    query.areasOfExp = {
-      $in: req.body.areasOfExp,
-    };
+  if (req.body.areas) {
+    if (req.body.areas.length > 1) {
+      query.areas = {
+        $all: req.body.areas,
+      };
+    } else if (req.body.areas.length === 1) {
+      query.areas = req.body.areas;
+    }
   }
 
   if (req.body.languages) {
-    query.languages = {
-      $in: req.body.languages,
-    };
+    if (req.body.languages.length > 1) {
+      query.languages = {
+        $all: req.body.languages,
+      };
+    } else if (req.body.languages.length === 1) {
+      query.languages = req.body.languages;
+    }
   }
 
-  // const page = req.params.page;
-  // const limit = 10;
-  // const skip = (page * limit) - limit;
+  const results = await User.find(query);
 
-  const results = await User.find(query)
-  // .skip(skip).limit(limit);
-  const resultsCount = results.length
-  // const pages = Math.ceil(resultsCount / limit);
-
-  // req.query.country = req.body.country
-  console.log(req.query);
+  const resultsCount = results.length;
 
   if (resultsCount > 0) {
-    res.render("search_results", {title: "Search Results", results})
+    res.render("search_results", { title: "Search Results", results });
   } else {
-    res.render("search_results_not_found", {title: "No Results"})
+    res.render("search_results_not_found", { title: "No Results" });
   }
 };
 
@@ -300,71 +332,71 @@ exports.findTopMatches = async (req, res) => {
   // const account = await User.findOne({slug: req.params.slug, country: {$in: ["USA", "Canada"]}}).populate("requests");
 
   if (req.user.classification === "Mentee") {
-
-    const currentMentee = await User.findOne({_id: req.user._id});
-    const matchingMentors = await User.find({classification: "Mentor", country: (req.user.country === "Mexico" ? "Mexico" : {$in: ["USA", "Canada"]})});
+    const currentMentee = await User.findOne({ _id: req.user._id });
+    const matchingMentors = await User.find({
+      classification: "Mentor",
+      country:
+        req.user.country === "Mexico" ? "Mexico" : { $in: ["USA", "Canada"] },
+    });
 
     // loop through each user in db
-    matchingMentors.forEach(matchingMentor => {
-
+    matchingMentors.forEach((matchingMentor) => {
       let score = 0;
 
       // loop through each area in the looped user document
-      matchingMentor.areas.forEach(area => {
-
+      matchingMentor.areas.forEach((area) => {
         // for each area in the user's areas list, check if the area matches
         if (currentMentee.areas.includes(area)) {
           score += 3;
         }
       });
 
-    let mentorAndScore = {
-      person: matchingMentor,
-      score: score
-    };
+      let mentorAndScore = {
+        person: matchingMentor,
+        score: score,
+      };
 
-    scoredMatches.push(mentorAndScore);
+      scoredMatches.push(mentorAndScore);
     });
   } else {
-
-    const currentMentor = await User.findOne({_id: req.user._id});
-    const matchingMentees = await User.find({classification: "Mentee", country: (req.user.country === "Mexico" ? "Mexico" : {$in: ["USA", "Canada"]})});
+    const currentMentor = await User.findOne({ _id: req.user._id });
+    const matchingMentees = await User.find({
+      classification: "Mentee",
+      country:
+        req.user.country === "Mexico" ? "Mexico" : { $in: ["USA", "Canada"] },
+    });
 
     // loop through each user in db
-    matchingMentees.forEach(matchingMentee => {
-
+    matchingMentees.forEach((matchingMentee) => {
       let score = 0;
 
       // loop through each area in the looped user document
-      matchingMentee.areas.forEach(area => {
-
+      matchingMentee.areas.forEach((area) => {
         // for each area in the user's areas list, check if the area matches
         if (currentMentor.areas.includes(area)) {
           score += 3;
         }
       });
 
-    let menteeAndScore = {
-      person: matchingMentee,
-      score: score
-    };
+      let menteeAndScore = {
+        person: matchingMentee,
+        score: score,
+      };
 
-    scoredMatches.push(menteeAndScore);
+      scoredMatches.push(menteeAndScore);
     });
-  };
-
+  }
 
   // sort matches in descending order based on the score
-  const sortedMatches = scoredMatches.sort(function(a,b){
+  const sortedMatches = scoredMatches.sort(function (a, b) {
     return b.score - a.score;
   });
 
   const matches = sortedMatches.slice(0, 10);
 
-  res.render("top_matches", {title: "Top Matches", matches});
-
+  res.render("top_matches", { title: "Top Matches", matches });
 };
 
 exports.getResources = async (req, res) => {
-  res.render("resources", {title: "Resources"})
+  res.render("resources", { title: "Resources" });
 };

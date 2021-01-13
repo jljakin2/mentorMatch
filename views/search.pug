@@ -88,17 +88,11 @@ block content
                                             option(value=year) #{year}
                             .row
                                 .form-group.col
-                                    label(for='areasForDev') Areas for Development
-                                    select#areasForDev.form-control.selectpicker(multiple='' name='areasForDev')
+                                    label(for='areas') Areas
+                                    select#areas.form-control.selectpicker(multiple='' name='areas')
                                         for area in h.areas
                                             option(value=area) #{area}
 
-                            .row
-                                .form-group.col
-                                    label(for='areasOfExp') Areas of Experience
-                                    select#areasOfExp.form-control.selectpicker(multiple='' name='areasOfExp')
-                                        for area in h.areas
-                                            option(value=area) #{area}
                             .row
                                 .form-group.col-lg-6
                                     label(for='languages') Languages

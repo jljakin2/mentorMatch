@@ -209,7 +209,7 @@ body {
 }
 
 .forgot-password-link {
-  color: lightgrey;
+  color: rgb(158, 158, 158);
   margin-left: 1rem;
   text-decoration: none;
 }

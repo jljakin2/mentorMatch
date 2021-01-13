@@ -38,6 +38,7 @@ router
   .post(
     userController.upload,
     catchErrors(userController.resize),
+    userController.yesToTerms,
     userController.atLeastSL1,
     userController.validateRegister,
     catchErrors(userController.register),
@@ -137,6 +138,14 @@ router
     adminController.isAdmin,
     catchErrors(adminController.currentConnections)
   );
+
+router
+  .route("/admin/current-connections/delete/:menteeid/:mentorid")
+  .post(adminController.isAdmin, catchErrors(adminController.deleteConnection));
+
+router
+  .route("/admin/current-connections/delete-all")
+  .post(adminController.isAdmin, catchErrors(adminController.deleteAll));
 
 router
   .route("/admin/add-manual-connection")

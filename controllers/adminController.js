@@ -74,6 +74,27 @@ exports.currentConnections = async (req, res) => {
   });
 };
 
+exports.deleteConnection = async (req, res) => {
+  const menteeId = req.params.menteeid;
+  const mentorId = req.params.mentorid;
+
+  const connection = await Request.remove({
+    mentee: menteeId,
+    mentor: mentorId,
+    status: 2,
+  });
+
+  req.flash("success", "Connection has been successfully deleted.");
+  res.redirect("/admin/current-connections");
+};
+
+exports.deleteAll = async (req, res) => {
+  const deleted = await Request.remove({});
+
+  req.flash("success", "All connections have been successfully deleted.");
+  res.redirect("/admin/current-connections");
+};
+
 exports.addManualConnection = (req, res) => {
   res.render("manualConnection", { title: "Add Manual Connection" });
 };

@@ -3,6 +3,8 @@ extends layout
 block content
     h4.display-4.page-title Connections
     .container
+        form.mb-3(action="/admin/current-connections/delete-all" method="POST" onsubmit="return confirm('Are you sure you want to delete all of the connections? This cannot be undone.')")
+            button.btn.btn-danger(type="submit") Delete All
         table.table
             thead
                 tr
@@ -28,6 +30,6 @@ block content
                             a.email(href=`mailto: ${c.mentor.email}`) #{c.mentor.email}
                         td #{c.createdAt.toDateString()}
                         td.center
-                            form(action="/" method="POST")
+                            form(action=`/admin/current-connections/delete/${c.mentee._id}/${c.mentor._id}` method="POST" onsubmit="return confirm('Are you sure you want to delete this connection?')")
                                 button.transparent-btn(type="submit")
                                     i.fas.fa-trash-alt.remove

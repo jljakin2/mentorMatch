@@ -1,5 +1,6 @@
 # Fake mentee accounts
 
+test.guy@example.com: qwerty
 jeff.jakinovich@us.bosch.com: qwerty
 harry.potter@us.bosch.com: qwerty
 ginny.weasley@us.bosch.com: qwerty
